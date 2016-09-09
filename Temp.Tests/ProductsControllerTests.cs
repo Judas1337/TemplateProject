@@ -27,11 +27,11 @@ namespace Temp.Tests
         [TestMethod]
         public void GetProductOneMocked()
         {
-            var expectedProduct = new Product() {Category = "Mock Category LogicHandled", Id = -1, Name = "Mock Name", Price = 10};
+            var expectedProduct = new Product() {Category = "Mock Category", Id = -1, Name = "Mock Name", Price = 10};
 
             Mock<IProductRepository> productRepoMock = new Mock<IProductRepository>();
             productRepoMock.Setup(productRepository => productRepository.GetProduct(1))
-                .Returns(expectedProduct);
+                .Returns(new Product() { Category = "Mock Category", Id = -1, Name = "Mock Name", Price = 10 });
 
             ProductsController controller = new ProductsController(new ProductLogic(productRepoMock.Object));
 
@@ -39,7 +39,7 @@ namespace Temp.Tests
 
             Assert.AreEqual(expectedProduct.Id, actualProduct.Id, "Product Id");
             Assert.AreEqual(expectedProduct.Name, actualProduct.Name, "Product name");
-            Assert.AreEqual(expectedProduct.Category, actualProduct.Category, "Product Category");
+            Assert.AreEqual(expectedProduct.Category +" LogicHandled", actualProduct.Category, "Product Category");
             Assert.AreEqual(expectedProduct.Price, actualProduct.Price, "Product Price");
 
         }
