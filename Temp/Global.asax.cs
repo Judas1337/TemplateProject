@@ -38,6 +38,7 @@ namespace Temp
 
 
             // Register your Web API controller dependencies.
+            builder.RegisterType<ProductLogic>().As<IProductLogic>();
             builder.RegisterType<ProductRepository>().As<IProductRepository>();
             
             //Register a IDependencyResolver used by WebApi 

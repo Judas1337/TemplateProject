@@ -13,23 +13,23 @@ namespace Temp.Controllers
     [AutofacControllerConfiguration]
     public class ProductsController : ApiController
     {
-        private IProductRepository _productRepository;
+        private IProductLogic _productLogic;
 
-        public ProductsController(IProductRepository productRepository)
+        public ProductsController(IProductLogic productLogic)
         {
-            _productRepository = productRepository;
+            _productLogic = productLogic;
         }
 
         [HttpGet]
         public IEnumerable<Product> GetAllProducts()
         {
-            return _productRepository.GetAllProducts();
+            return _productLogic.GetAllProducts();
         }
 
         [HttpGet]
         public Product GetProduct(int id)
         {
-            return _productRepository.GetProduct(id);
+            return _productLogic.GetProduct(id);
         }
     }
 }
