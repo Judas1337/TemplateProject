@@ -11,6 +11,8 @@ using Autofac.Integration.WebApi;
 using Temp.Models;
 using Temp.Logic;
 using Temp.DataAccess;
+using System.Web.Http.ExceptionHandling;
+using Temp.Utilities;
 
 namespace Temp
 {
@@ -42,6 +44,12 @@ namespace Temp
             //Register a IDependencyResolver used by WebApi 
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+
+            //Register implementation of IExceptionHandler
+            config.Services.Replace(typeof(IExceptionHandler), new MyExceptionHandler());
+            
+            //Register implementation of IExceptionLogger
+            config.Services.Replace(typeof(IExceptionLogger), new MyExceptionLogger());
 
             //Ensure configuration 
             config.EnsureInitialized();

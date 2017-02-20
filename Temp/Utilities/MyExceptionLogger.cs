@@ -7,11 +7,11 @@ using System.Web.Http.ExceptionHandling;
 
 namespace Temp.Utilities
 {
-    public class ExceptionLogger : IExceptionLogger
+    public class MyExceptionLogger : ExceptionLogger
     {
-        public Task LogAsync(ExceptionLoggerContext context, CancellationToken cancellationToken)
+        public override Task LogAsync(ExceptionLoggerContext context, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return base.LogAsync(context, cancellationToken);
         }
     }
 }
