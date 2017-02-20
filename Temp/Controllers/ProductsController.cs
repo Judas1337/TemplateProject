@@ -30,6 +30,7 @@ namespace Temp.Controllers
         [HttpGet]
         public Product GetProduct(int id)
         {
+            if (id < 0) throw new ArgumentException("Value below zero");
             return _productLogic.GetProduct(id);
         }
     }
