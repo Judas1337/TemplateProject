@@ -29,6 +29,9 @@ namespace Temp
             // Register routing
             WebApiConfig.Register(config);
 
+            //Register swagger
+            SwaggerConfig.Register(config);
+
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());           
 
