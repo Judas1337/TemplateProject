@@ -37,7 +37,7 @@ namespace Temp
 
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
-
+            WebApiConfig.Register(config);
 
             // Register your Web API controller dependencies.
             builder.RegisterType<ProductLogic>().As<IProductLogic>();
@@ -46,6 +46,8 @@ namespace Temp
             //Register a IDependencyResolver used by WebApi 
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+
+            config.EnsureInitialized();
         }
     }
 }
