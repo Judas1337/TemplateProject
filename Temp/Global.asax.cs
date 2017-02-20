@@ -9,6 +9,8 @@ using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Temp.Models;
+using Temp.Logic;
+using Temp.DataAccess;
 
 namespace Temp
 {

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Temp.Models;
+using Temp.DataAccess;
 
-namespace Temp.Models
+namespace Temp.Logic
 {
     public class ProductLogic : IProductLogic
     {

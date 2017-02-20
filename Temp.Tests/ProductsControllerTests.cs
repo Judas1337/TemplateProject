@@ -4,6 +4,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Temp.Controllers;
 using Temp.Models;
 using Moq;
+using Temp.DataAccess;
+using Temp.Logic;
 
 namespace Temp.Tests
 {

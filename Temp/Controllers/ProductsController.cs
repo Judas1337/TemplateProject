@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Autofac.Integration.WebApi;
 using Temp.Models;
+using Temp.Logic;
 
 namespace Temp.Controllers
 {

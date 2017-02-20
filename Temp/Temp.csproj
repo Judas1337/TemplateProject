@@ -128,11 +128,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\IProductLogic.cs" />
-    <Compile Include="Models\IProductRepository.cs" />
+    <Compile Include="Logic\IProductLogic.cs" />
+    <Compile Include="DataAccess\IProductRepository.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\ProductLogic.cs" />
-    <Compile Include="Models\ProductRepository.cs" />
+    <Compile Include="Logic\ProductLogic.cs" />
+    <Compile Include="DataAccess\ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
