@@ -15,7 +15,7 @@ namespace WebApiTemplateProject.Api
             //Declare the project to return JSON instead of XML
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
-            // Register routing
+           // Register routing
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
             //Register swagger
