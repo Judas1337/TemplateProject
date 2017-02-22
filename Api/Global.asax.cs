@@ -12,32 +12,29 @@ namespace WebApiTemplateProject.Api
     {
         protected void Application_Start()
         {
-            //GlobalConfiguration.Configure(WebApiConfig.Register);
-            var config = GlobalConfiguration.Configuration;
-
             //Declare the project to return JSON instead of XML
-            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
             // Register routing
-            WebApiConfig.Register(config);
+            GlobalConfiguration.Configure(WebApiConfig.Register);
 
             //Register swagger
-            SwaggerConfig.Register(config);
+            GlobalConfiguration.Configure(SwaggerConfig.Register);
 
             //Configure Autofac Dependency container
-            AutofacConfig.Register(config);
+            GlobalConfiguration.Configure(AutofacConfig.Register);
 
             //Register implementation of IExceptionHandler
-            config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
+            GlobalConfiguration.Configuration.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
 
             //Register implementation of IExceptionLogger
-            config.Services.Replace(typeof(IExceptionLogger), new GlobalExceptionLogger());
+            GlobalConfiguration.Configuration.Services.Replace(typeof(IExceptionLogger), new GlobalExceptionLogger());
 
             //Register Global Filter for ModelValidation
-            config.Filters.Add(new ModelValidationFilter());
+            GlobalConfiguration.Configuration.Filters.Add(new ModelValidationFilter());
 
             //Ensure configuration 
-            config.EnsureInitialized();
+            GlobalConfiguration.Configuration.EnsureInitialized();
         }
     }
 }
