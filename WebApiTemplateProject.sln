@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Temp", "Temp\Temp.csproj", "{B2890FF9-9AB7-43DB-B86E-BBA2B2D1EC60}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\WebApiTemplateProject.Api.csproj", "{B2890FF9-9AB7-43DB-B86E-BBA2B2D1EC60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Temp.Tests", "Temp.Tests\Temp.Tests.csproj", "{2B3EF51E-65E3-4763-BD88-882B847AEF7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegressionsTest", "RegressionTest\WebApiTemplateProject.RegressionTest.csproj", "{2B3EF51E-65E3-4763-BD88-882B847AEF7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
