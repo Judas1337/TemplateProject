@@ -7,7 +7,6 @@ using WebApiTemplateProject.Utilities.Guard;
 
 namespace WebApiTemplateProject.Api.Controllers
 {
-    [AutofacControllerConfiguration]
     public class ProductsController : ApiController
     {
         private readonly IProductLogic _productLogic;
