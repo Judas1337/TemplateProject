@@ -11,7 +11,7 @@ using System.Web.Http.Results;
 
 namespace Temp.Utilities
 {
-    public class MyExceptionHandler : ExceptionHandler
+    public class GlobalExceptionHandler : ExceptionHandler
     {
         public override void Handle(ExceptionHandlerContext context)
         {
@@ -24,7 +24,7 @@ namespace Temp.Utilities
             context.Result = new TextPlainErrorResult
             {
                 Request = context.Request,
-                Content = context.Exception.Message,
+                ResponseMessage = context.Exception?.Message,
                 StatusCode = statusCode
             };
 
@@ -34,14 +34,14 @@ namespace Temp.Utilities
         {
             public HttpRequestMessage Request { get; set; }
 
-            public string Content { get; set; }
+            public string ResponseMessage { get; set; }
 
             public HttpStatusCode StatusCode { get; set; }
 
             public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
             {
-                HttpResponseMessage response = new HttpResponseMessage(StatusCode);
-                response.Content = new StringContent(Content);
+                var response = new HttpResponseMessage(StatusCode);
+                response.Content = new StringContent(ResponseMessage);
                 response.RequestMessage = Request;
                 return Task.FromResult(response);
             }

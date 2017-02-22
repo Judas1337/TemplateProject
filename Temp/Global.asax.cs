@@ -46,7 +46,7 @@ namespace Temp
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
             //Register implementation of IExceptionHandler
-            config.Services.Replace(typeof(IExceptionHandler), new MyExceptionHandler());
+            config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
             
             //Register implementation of IExceptionLogger
             config.Services.Replace(typeof(IExceptionLogger), new MyExceptionLogger());

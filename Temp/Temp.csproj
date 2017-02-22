@@ -149,7 +149,7 @@
     <Compile Include="Logic\ProductLogic.cs" />
     <Compile Include="DataAccess\ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\MyExceptionHandler.cs" />
+    <Compile Include="Utilities\GlobalExceptionHandler.cs" />
     <Compile Include="Utilities\MyExceptionLogger.cs" />
   </ItemGroup>
   <ItemGroup>
