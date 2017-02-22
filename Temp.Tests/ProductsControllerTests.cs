@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Temp.Controllers;
@@ -12,40 +15,112 @@ namespace Temp.Tests
     [TestClass]
     public class ProductsControllerTests
     {
-        [TestMethod]
-        public void GetProductOne()
+        private ProductsController _controller;
+        private Mock<IProductRepository> _productRepository;
+        private Product _expectedProduct;
+
+        [TestInitialize]
+        public void Initialize()
         {
-            var expectedProduct = new Product {Id = 1, Name = "Tomato Soup", Category = "Groceries LogicHandled", Price = 1};
+            _expectedProduct = CreateProduct();
+            _productRepository = new Mock<IProductRepository>();
+            _controller = new ProductsController(new ProductLogic(_productRepository.Object));
+        }
 
-            ProductsController controller = new ProductsController(new ProductLogic(new ProductRepository()));
-            var actualProduct = controller.GetProduct(1);
+        #region GetProduct()
 
-            Assert.AreEqual(expectedProduct.Id, actualProduct.Id, "Product Id");
-            Assert.AreEqual(expectedProduct.Name, actualProduct.Name, "Product name");
-            Assert.AreEqual(expectedProduct.Category, actualProduct.Category, "Product Category");
-            Assert.AreEqual(expectedProduct.Price, actualProduct.Price, "Product Price");
+        [TestMethod]
+        public void GetProduct()
+        {
+            _productRepository.Setup(mock => mock.GetProduct(_expectedProduct.Id)).Returns(_expectedProduct);
+            var actualProduct = _controller.GetProduct(_expectedProduct.Id);
+            AssertProductsAreEqual(_expectedProduct, actualProduct);
         }
 
         [TestMethod]
-        public void GetProductOneMocked()
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetProductNegativeId()
         {
-            var expectedProduct = new Product() {Category = "Mock Category", Id = -1, Name = "Mock Name", Price = 10};
+          _controller.GetProduct(-1);
+        }
+        #endregion
 
-            Mock<IProductRepository> productRepoMock = new Mock<IProductRepository>();
-            productRepoMock.Setup(productRepository => productRepository.GetProduct(1))
-                .Returns(new Product() { Category = "Mock Category", Id = -1, Name = "Mock Name", Price = 10 });
+        #region GetAllProduct()
+        [TestMethod]
+        public void GetAllProducts()
+        {
+            var expectedProducts = CreateProducts(3);
+            _productRepository.Setup(mockRepo => mockRepo.GetAllProducts()).Returns(expectedProducts);
+            var actualProducts = _controller.GetAllProducts();
+            AssertProductsAreEqual(expectedProducts, actualProducts);
+        }
+        #endregion
 
-            ProductsController controller = new ProductsController(new ProductLogic(productRepoMock.Object));
+        #region AddProduct()
+        [TestMethod]
+        public void AddProduct()
+        {
+            _productRepository.Setup(mockRepo => mockRepo.AddProduct(_expectedProduct)).Returns(_expectedProduct);
+            var actualProduct = _controller.AddProduct(_expectedProduct);
 
-            var actualProduct = controller.GetProduct(1);
+            AssertProductsAreEqual(_expectedProduct, actualProduct);
+        }
 
-            Assert.AreEqual(expectedProduct.Id, actualProduct.Id, "Product Id");
-            Assert.AreEqual(expectedProduct.Name, actualProduct.Name, "Product name");
-            Assert.AreEqual(expectedProduct.Category +" LogicHandled", actualProduct.Category, "Product Category");
-            Assert.AreEqual(expectedProduct.Price, actualProduct.Price, "Product Price");
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddProductNullInput()
+        {
+            _controller.AddProduct(null);
+        }
+        #endregion
 
+        #region PrivateMethods
+
+        #region AssertionMethods
+
+        private void AssertProductsAreEqual(IEnumerable<Product> expected, IEnumerable<Product> actual)
+        {
+            Assert.AreEqual(expected.Count(), expected.Count(), "Number of products");
+
+            for (int i = 0; i < expected.Count(); i++)
+            {
+                AssertProductsAreEqual(expected.ElementAt(i), actual.ElementAt(i));
+            }
+        }
+
+        private void AssertProductsAreEqual(Product expected, Product actual)
+        {
+            Assert.AreEqual(expected.Id, actual.Id, "Product Id");
+            Assert.AreEqual(expected.Name, actual.Name, "Product name");
+            Assert.AreEqual(expected.Category, actual.Category, "Product Category");
+            Assert.AreEqual(expected.Price, actual.Price, "Product Price");
+        }
+        #endregion
+
+        #region FactoryMethods
+
+        private IList<Product> CreateProducts(int numberOfProducts)
+        {
+            IList<Product> products = new List<Product>();
+            for (var i = 0; i < numberOfProducts; ++i)
+            {
+                products.Add(CreateProduct(i + 1));
+            }
+            return products;
         }
 
 
+        private Product CreateProduct(int id = 1, string name = "mock name", string category = "mock category", decimal price = 123)
+        {
+            return new Product
+            {
+                Id = id,
+                Name = name,
+                Category = category,
+                Price = price
+            };
+        }
+        #endregion
+        #endregion
     }
 }
