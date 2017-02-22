@@ -33,5 +33,12 @@ namespace Temp.Controllers
             if (id < 0) throw new ArgumentException("Value below zero");
             return _productLogic.GetProduct(id);
         }
+
+        [HttpPost]
+        public Product AddProduct(Product product)
+        {
+            if (product == null) throw new ArgumentNullException(nameof(product), "The value was null");
+            return _productLogic.AddProduct(product);
+        }
     }
 }

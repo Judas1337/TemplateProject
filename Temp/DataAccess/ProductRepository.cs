@@ -2,7 +2,10 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web;
+using System.Web.Http;
 using Temp.Models;
 
 namespace Temp.DataAccess
@@ -23,7 +26,19 @@ namespace Temp.DataAccess
 
         public Product GetProduct(int id)
         {
+            if (id == 500) throw new Exception();
+
             var product = products.FirstOrDefault((p) => p.Id == id);
+            if(product == null) throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+            {
+                Content = new StringContent($"Product with Id: {id} not found"),
+                ReasonPhrase = "NotFound"
+            });
+            return product;
+        }
+
+        public Product AddProduct(Product product)
+        {
             return product;
         }
 

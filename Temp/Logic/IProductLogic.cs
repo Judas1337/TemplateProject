@@ -11,5 +11,6 @@ namespace Temp.Logic
     {
         IEnumerable<Product> GetAllProducts();
         Product GetProduct(int id);
+        Product AddProduct(Product product);
     }
 }

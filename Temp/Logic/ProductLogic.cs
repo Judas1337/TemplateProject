@@ -27,5 +27,10 @@ namespace Temp.Logic
             product.Category += " LogicHandled";
             return product;
         }
+
+        public Product AddProduct(Product product)
+        {
+            return _productRepository.AddProduct(product);
+        }
     }
 }
