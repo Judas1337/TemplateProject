@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Temp.Models;
-using Temp.DataAccess;
+﻿using System.Collections.Generic;
+using Api.DataAccess;
+using Api.Models;
 
-namespace Temp.Logic
+namespace Api.Logic
 {
     public class ProductLogic : IProductLogic
     {

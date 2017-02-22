@@ -1,9 +1,7 @@
 using System.Web.Http;
-using WebActivatorEx;
-using Temp;
 using Swashbuckle.Application;
 
-namespace Temp
+namespace Api
 {
     public class SwaggerConfig
     {

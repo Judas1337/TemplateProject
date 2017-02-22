@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Temp.Models;
+using Api.Models;
 
-namespace Temp.DataAccess
+namespace Api.DataAccess
 {
     public interface IProductRepository : IDisposable
     {

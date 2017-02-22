@@ -150,6 +150,8 @@
     <Compile Include="DataAccess\ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\GlobalExceptionHandler.cs" />
+    <Compile Include="Utilities\InputGuard.cs" />
+    <Compile Include="Utilities\ModelValidationFilter.cs" />
     <Compile Include="Utilities\MyExceptionLogger.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Web.Http;
+using Api.Logic;
+using Api.Models;
+using Api.Utilities;
 using Autofac.Integration.WebApi;
-using Temp.Models;
-using Temp.Logic;
 
-namespace Temp.Controllers
+namespace Api.Controllers
 {
     [AutofacControllerConfiguration]
     public class ProductsController : ApiController
@@ -30,14 +26,14 @@ namespace Temp.Controllers
         [HttpGet]
         public Product GetProduct(int id)
         {
-            if (id < 0) throw new ArgumentException("Value below zero");
+            InputGuard.ThrowArgumentExceptionIfNegativeValue(nameof(id), id);
             return _productLogic.GetProduct(id);
         }
 
         [HttpPost]
         public Product AddProduct(Product product)
         {
-            if (product == null) throw new ArgumentNullException(nameof(product), "The value was null");
+            InputGuard.ThrowArgumentNullExceptionIfNull(nameof(product), product);
             return _productLogic.AddProduct(product);
         }
     }

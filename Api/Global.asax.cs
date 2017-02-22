@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Reflection;
-using System.Web;
 using System.Web.Http;
-using System.Web.Routing;
+using System.Web.Http.ExceptionHandling;
+using Api.DataAccess;
+using Api.Logic;
+using Api.Utilities;
 using Autofac;
 using Autofac.Integration.WebApi;
-using Temp.Models;
-using Temp.Logic;
-using Temp.DataAccess;
-using System.Web.Http.ExceptionHandling;
-using Temp.Utilities;
 
-namespace Temp
+namespace Api
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
@@ -50,6 +44,10 @@ namespace Temp
             
             //Register implementation of IExceptionLogger
             config.Services.Replace(typeof(IExceptionLogger), new MyExceptionLogger());
+
+            config.Filters.Add(new ModelValidationFilter());
+
+            
 
             //Ensure configuration 
             config.EnsureInitialized();

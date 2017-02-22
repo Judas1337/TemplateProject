@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Temp.Models
+namespace Api.Models
 {
     public class Product
     {
-        [Required]
+        [Required(ErrorMessage = "Product must have an Id")]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Product must have a Name")]
         public string Name { get; set; }
 
+        //[Required(ErrorMessage = "Product must have a Category")]
         [Required]
+        [StringLength(10)]
         public string Category { get; set; }
       
-        [Required]
+        [Required(ErrorMessage = "Product must have a Price")]
         public decimal Price { get; set; }
     }
 }
