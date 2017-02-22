@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using Autofac.Integration.WebApi;
 using WebApiTemplateProject.Api.Logic;
 using WebApiTemplateProject.Api.Models;
 using WebApiTemplateProject.Utilities.Guard;
 
 namespace WebApiTemplateProject.Api.Controllers
 {
+    [RoutePrefix("api/v1/Products")]
     public class ProductsController : ApiController
     {
         private readonly IProductLogic _productLogic;
@@ -17,12 +17,14 @@ namespace WebApiTemplateProject.Api.Controllers
         }
 
         [HttpGet]
+        [Route("")]
         public IEnumerable<Product> GetAllProducts()
         {
             return _productLogic.GetAllProducts();
         }
 
         [HttpGet]
+        [Route("{id}")]
         public Product GetProduct(int id)
         {
             InputGuard.ThrowArgumentExceptionIfNegativeValue(nameof(id), id);
@@ -30,6 +32,7 @@ namespace WebApiTemplateProject.Api.Controllers
         }
 
         [HttpPost]
+        [Route("")]
         public Product AddProduct(Product product)
         {
             InputGuard.ThrowArgumentNullExceptionIfNull(nameof(product), product);
