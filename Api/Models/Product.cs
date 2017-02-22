@@ -20,5 +20,8 @@ namespace Api.Models
         [Required]
         [Range(0, Double.MaxValue , ErrorMessage = "Price must be a positive value")]
         public decimal Price { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime DateAdded { get; set; }
     }
 }

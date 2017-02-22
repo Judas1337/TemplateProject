@@ -92,6 +92,7 @@ namespace RegressionTest
             Assert.AreEqual(expected.Name, actual.Name, "Product name");
             Assert.AreEqual(expected.Category, actual.Category, "Product Category");
             Assert.AreEqual(expected.Price, actual.Price, "Product Price");
+            Assert.AreEqual(expected.DateAdded, actual.DateAdded, "Product DateAdded");
         }
         #endregion
 
@@ -115,7 +116,8 @@ namespace RegressionTest
                 Id = id,
                 Name = name,
                 Category = category,
-                Price = price
+                Price = price,
+                DateAdded = new DateTime(2017, 02, 22)
             };
         }
         #endregion
