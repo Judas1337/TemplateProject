@@ -45,9 +45,8 @@ namespace Api
             //Register implementation of IExceptionLogger
             config.Services.Replace(typeof(IExceptionLogger), new MyExceptionLogger());
 
+            //Register Global Filter for ModelValidation
             config.Filters.Add(new ModelValidationFilter());
-
-            
 
             //Ensure configuration 
             config.EnsureInitialized();
