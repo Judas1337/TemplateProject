@@ -35,7 +35,7 @@ namespace WebApiTemplateProject.Api.DataAccess
             return product;
         }
 
-        public Product AddProduct(Product product)
+        public Product CreateProduct(Product product)
         {
             return product;
         }

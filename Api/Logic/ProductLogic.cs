@@ -25,9 +25,9 @@ namespace WebApiTemplateProject.Api.Logic
             return product;
         }
 
-        public Product AddProduct(Product product)
+        public Product CreateProduct(Product product)
         {
-            return _productRepository.AddProduct(product);
+            return _productRepository.CreateProduct(product);
         }
     }
 }

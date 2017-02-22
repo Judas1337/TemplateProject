@@ -20,7 +20,7 @@ namespace WebApiTemplateProject.RegressionTest
         [TestInitialize]
         public void Initialize()
         {
-            _expectedProduct = CreateProduct();
+            _expectedProduct = GenerateProduct();
             _productRepository = new Mock<IProductRepository>();
             _controller = new ProductsController(new ProductLogic(_productRepository.Object));
         }
@@ -47,28 +47,28 @@ namespace WebApiTemplateProject.RegressionTest
         [TestMethod]
         public void GetAllProducts()
         {
-            var expectedProducts = CreateProducts(3);
+            var expectedProducts = GenerateProducts(3);
             _productRepository.Setup(mockRepo => mockRepo.GetAllProducts()).Returns(expectedProducts);
             var actualProducts = _controller.GetAllProducts();
             AssertProductsAreEqual(expectedProducts.ToList(), actualProducts.ToList());
         }
         #endregion
 
-        #region AddProduct()
+        #region CreateProduct()
         [TestMethod]
-        public void AddProduct()
+        public void CreateProduct()
         {
-            _productRepository.Setup(mockRepo => mockRepo.AddProduct(_expectedProduct)).Returns(_expectedProduct);
-            var actualProduct = _controller.AddProduct(_expectedProduct);
+            _productRepository.Setup(mockRepo => mockRepo.CreateProduct(_expectedProduct)).Returns(_expectedProduct);
+            var actualProduct = _controller.CreateProduct(_expectedProduct);
 
             AssertProductsAreEqual(_expectedProduct, actualProduct);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void AddProductNullInput()
+        public void CreateProductNullInput()
         {
-            _controller.AddProduct(null);
+            _controller.CreateProduct(null);
         }
         #endregion
 
@@ -101,18 +101,18 @@ namespace WebApiTemplateProject.RegressionTest
 
         #region FactoryMethods
 
-        private IList<Product> CreateProducts(int numberOfProducts)
+        private IList<Product> GenerateProducts(int numberOfProducts)
         {
             IList<Product> products = new List<Product>();
             for (var i = 0; i < numberOfProducts; ++i)
             {
-                products.Add(CreateProduct(i + 1));
+                products.Add(GenerateProduct(i + 1));
             }
             return products;
         }
 
 
-        private Product CreateProduct(int id = 1, string name = "mock name", string category = "mock category", decimal price = 123)
+        private static Product GenerateProduct(int id = 1, string name = "mock name", string category = "mock category", decimal price = 123)
         {
             return new Product
             {

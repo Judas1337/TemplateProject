@@ -7,6 +7,6 @@ namespace WebApiTemplateProject.Api.Logic
     {
         IEnumerable<Product> GetAllProducts();
         Product GetProduct(int id);
-        Product AddProduct(Product product);
+        Product CreateProduct(Product product);
     }
 }

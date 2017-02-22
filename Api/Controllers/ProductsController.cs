@@ -33,10 +33,10 @@ namespace WebApiTemplateProject.Api.Controllers
 
         [HttpPost]
         [Route("")]
-        public Product AddProduct(Product product)
+        public Product CreateProduct(Product product)
         {
             InputGuard.ThrowArgumentNullExceptionIfNull(nameof(product), product);
-            return _productLogic.AddProduct(product);
+            return _productLogic.CreateProduct(product);
         }
     }
 }
