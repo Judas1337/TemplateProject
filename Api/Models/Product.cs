@@ -10,9 +10,11 @@ namespace Api.Models
         public int Id { get; set; }
 
         [Required]
+        [RegularExpression("[a-zA-Z]+")]
         public string Name { get; set; }
 
         [Required]
+        [RegularExpression("[a-zA-Z]+")]
         public string Category { get; set; }
       
         [Required]
