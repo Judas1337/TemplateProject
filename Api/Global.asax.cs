@@ -2,7 +2,9 @@
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 using WebApiTemplateProject.Api.App_Start;
-using WebApiTemplateProject.Api.Utilities;
+using WebApiTemplateProject.Utilities.ExceptionHandler;
+using WebApiTemplateProject.Utilities.Filter;
+using WebApiTemplateProject.Utilities.Logger;
 
 namespace WebApiTemplateProject.Api
 {
@@ -29,7 +31,7 @@ namespace WebApiTemplateProject.Api
             config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
 
             //Register implementation of IExceptionLogger
-            config.Services.Replace(typeof(IExceptionLogger), new MyExceptionLogger());
+            config.Services.Replace(typeof(IExceptionLogger), new GlobalExceptionLogger());
 
             //Register Global Filter for ModelValidation
             config.Filters.Add(new ModelValidationFilter());

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace WebApiTemplateProject.Api.Utilities
+namespace WebApiTemplateProject.Utilities.Guard
 {
     public static class InputGuard
     {

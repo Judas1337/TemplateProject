@@ -150,10 +150,6 @@
     <Compile Include="Logic\ProductLogic.cs" />
     <Compile Include="DataAccess\ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\GlobalExceptionHandler.cs" />
-    <Compile Include="Utilities\InputGuard.cs" />
-    <Compile Include="Utilities\ModelValidationFilter.cs" />
-    <Compile Include="Utilities\MyExceptionLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -169,6 +165,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utilities\WebApiTemplateProject.Utilities.csproj">
+      <Project>{3ca46015-eb3b-452d-80eb-ae6cfd519bd7}</Project>
+      <Name>WebApiTemplateProject.Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -3,7 +3,7 @@ using System.Web.Http;
 using Autofac.Integration.WebApi;
 using WebApiTemplateProject.Api.Logic;
 using WebApiTemplateProject.Api.Models;
-using WebApiTemplateProject.Api.Utilities;
+using WebApiTemplateProject.Utilities.Guard;
 
 namespace WebApiTemplateProject.Api.Controllers
 {

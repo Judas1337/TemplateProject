@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using System.Web.Http.ExceptionHandling;
 
-namespace WebApiTemplateProject.Api.Utilities
+namespace WebApiTemplateProject.Utilities.Logger
 {
-    public class MyExceptionLogger : ExceptionLogger
+    public class GlobalExceptionLogger : ExceptionLogger
     {
         public override Task LogAsync(ExceptionLoggerContext context, CancellationToken cancellationToken)
         {
