@@ -7,6 +7,7 @@ using Api.Logic;
 using Api.Utilities;
 using Autofac;
 using Autofac.Integration.WebApi;
+using Api.App_Start;
 
 namespace Api
 {
@@ -14,34 +15,24 @@ namespace Api
     {
         protected void Application_Start()
         {
-            var builder = new ContainerBuilder();
-
             //GlobalConfiguration.Configure(WebApiConfig.Register);
             var config = GlobalConfiguration.Configuration;
 
             //Declare the project to return JSON instead of XML
-            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));           
-           
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+
             // Register routing
             WebApiConfig.Register(config);
 
             //Register swagger
             SwaggerConfig.Register(config);
 
-            // Register your Web API controllers.
-            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());           
-
-            // Register your Web API controller dependencies.
-            builder.RegisterType<ProductLogic>().As<IProductLogic>();
-            builder.RegisterType<ProductRepository>().As<IProductRepository>();
-            
-            //Register a IDependencyResolver used by WebApi 
-            var container = builder.Build();
-            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+            //Configure Autofac Dependency container
+            AutofacConfig.Register(config);
 
             //Register implementation of IExceptionHandler
             config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
-            
+
             //Register implementation of IExceptionLogger
             config.Services.Replace(typeof(IExceptionLogger), new MyExceptionLogger());
 
