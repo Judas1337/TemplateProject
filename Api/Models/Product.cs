@@ -1,21 +1,23 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Api.Models
 {
     public class Product
     {
-        [Required(ErrorMessage = "Product must have an Id")]
+        [Required]
+        [Range(0, Double.MaxValue, ErrorMessage = "Id must be a positive value")]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Product must have a Name")]
+        [Required]
         public string Name { get; set; }
 
-        //[Required(ErrorMessage = "Product must have a Category")]
+       
         [Required]
-        [StringLength(10)]
         public string Category { get; set; }
       
-        [Required(ErrorMessage = "Product must have a Price")]
+        [Required]
+        [Range(0, Double.MaxValue , ErrorMessage = "Price must be a positive value")]
         public decimal Price { get; set; }
     }
 }
