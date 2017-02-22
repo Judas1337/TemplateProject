@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Api.Models;
+using WebApiTemplateProject.Api.Models;
 
-namespace Api.DataAccess
+namespace WebApiTemplateProject.Api.DataAccess
 {
     public interface IProductRepository : IDisposable
     {

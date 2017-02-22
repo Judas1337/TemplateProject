@@ -1,15 +1,10 @@
 ﻿using System.Net.Http.Headers;
-using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
-using Api.DataAccess;
-using Api.Logic;
-using Api.Utilities;
-using Autofac;
-using Autofac.Integration.WebApi;
-using Api.App_Start;
+using WebApiTemplateProject.Api.App_Start;
+using WebApiTemplateProject.Api.Utilities;
 
-namespace Api
+namespace WebApiTemplateProject.Api
 {
     public class WebApiApplication : System.Web.HttpApplication
     {

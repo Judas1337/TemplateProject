@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 
-namespace Api.Utilities
+namespace WebApiTemplateProject.Api.Utilities
 {
     public class GlobalExceptionHandler : ExceptionHandler
     {

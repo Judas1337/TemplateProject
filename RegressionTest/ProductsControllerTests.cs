@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Api.Controllers;
-using Api.DataAccess;
-using Api.Logic;
-using Api.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using WebApiTemplateProject.Api.Controllers;
+using WebApiTemplateProject.Api.DataAccess;
+using WebApiTemplateProject.Api.Logic;
+using WebApiTemplateProject.Api.Models;
 
-namespace RegressionTest
+namespace WebApiTemplateProject.RegressionTest
 {
     [TestClass]
     public class ProductsControllerTests

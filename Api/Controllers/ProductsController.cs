@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using Api.Logic;
-using Api.Models;
-using Api.Utilities;
 using Autofac.Integration.WebApi;
+using WebApiTemplateProject.Api.Logic;
+using WebApiTemplateProject.Api.Models;
+using WebApiTemplateProject.Api.Utilities;
 
-namespace Api.Controllers
+namespace WebApiTemplateProject.Api.Controllers
 {
     [AutofacControllerConfiguration]
     public class ProductsController : ApiController

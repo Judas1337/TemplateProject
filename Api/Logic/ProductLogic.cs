@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Api.DataAccess;
-using Api.Models;
+using WebApiTemplateProject.Api.DataAccess;
+using WebApiTemplateProject.Api.Models;
 
-namespace Api.Logic
+namespace WebApiTemplateProject.Api.Logic
 {
     public class ProductLogic : IProductLogic
     {

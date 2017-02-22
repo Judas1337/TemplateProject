@@ -4,9 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Api.Models;
+using WebApiTemplateProject.Api.Models;
 
-namespace Api.DataAccess
+namespace WebApiTemplateProject.Api.DataAccess
 {
     public class ProductRepository : IProductRepository
     {

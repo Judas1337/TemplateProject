@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Web.Http.ExceptionHandling;
 
-namespace Api.Utilities
+namespace WebApiTemplateProject.Api.Utilities
 {
     public class MyExceptionLogger : ExceptionLogger
     {

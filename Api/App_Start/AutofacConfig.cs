@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using System.Web.Http;
-using Api.DataAccess;
-using Api.Logic;
 using Autofac;
 using Autofac.Integration.WebApi;
+using WebApiTemplateProject.Api.DataAccess;
+using WebApiTemplateProject.Api.Logic;
 
-namespace Api.App_Start
+namespace WebApiTemplateProject.Api.App_Start
 {
     public class AutofacConfig
     {

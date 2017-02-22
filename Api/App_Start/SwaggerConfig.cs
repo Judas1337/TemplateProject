@@ -1,7 +1,7 @@
 using System.Web.Http;
 using Swashbuckle.Application;
 
-namespace Api.App_Start
+namespace WebApiTemplateProject.Api.App_Start
 {
     public class SwaggerConfig
     {

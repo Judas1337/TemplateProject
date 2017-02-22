@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Api.Models;
+using WebApiTemplateProject.Api.Models;
 
-namespace Api.Logic
+namespace WebApiTemplateProject.Api.Logic
 {
     public interface IProductLogic
     {
