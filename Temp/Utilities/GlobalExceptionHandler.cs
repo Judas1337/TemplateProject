@@ -21,7 +21,7 @@ namespace Temp.Utilities
             else statusCode = HttpStatusCode.InternalServerError;
 
 
-            context.Result = new TextPlainErrorResult
+            context.Result = new PlainTextErrorResult
             {
                 Request = context.Request,
                 ResponseMessage = context.Exception?.Message,
@@ -30,7 +30,7 @@ namespace Temp.Utilities
 
         }
 
-        private class TextPlainErrorResult : IHttpActionResult
+        private class PlainTextErrorResult : IHttpActionResult
         {
             public HttpRequestMessage Request { get; set; }
 
