@@ -10,7 +10,7 @@ namespace WebApiTemplateProject.Api.Controllers
     [AutofacControllerConfiguration]
     public class ProductsController : ApiController
     {
-        private IProductLogic _productLogic;
+        private readonly IProductLogic _productLogic;
 
         public ProductsController(IProductLogic productLogic)
         {

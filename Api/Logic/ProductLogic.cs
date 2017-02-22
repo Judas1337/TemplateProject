@@ -6,7 +6,7 @@ namespace WebApiTemplateProject.Api.Logic
 {
     public class ProductLogic : IProductLogic
     {
-        private IProductRepository _productRepository;
+        private readonly IProductRepository _productRepository;
 
         public ProductLogic(IProductRepository productRepository)
         {

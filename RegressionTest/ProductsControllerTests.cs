@@ -50,7 +50,7 @@ namespace WebApiTemplateProject.RegressionTest
             var expectedProducts = CreateProducts(3);
             _productRepository.Setup(mockRepo => mockRepo.GetAllProducts()).Returns(expectedProducts);
             var actualProducts = _controller.GetAllProducts();
-            AssertProductsAreEqual(expectedProducts, actualProducts);
+            AssertProductsAreEqual(expectedProducts.ToList(), actualProducts.ToList());
         }
         #endregion
 
@@ -76,11 +76,14 @@ namespace WebApiTemplateProject.RegressionTest
 
         #region AssertionMethods
 
-        private void AssertProductsAreEqual(IEnumerable<Product> expected, IEnumerable<Product> actual)
+        private void AssertProductsAreEqual(IList<Product> expected, IList<Product> actual)
         {
-            Assert.AreEqual(expected.Count(), expected.Count(), "Number of products");
+            if (expected == null) throw new ArgumentNullException(nameof(expected));
+            if (actual == null) throw new ArgumentNullException(nameof(actual));
 
-            for (int i = 0; i < expected.Count(); i++)
+            Assert.AreEqual(expected.Count, expected.Count, "Number of products");
+
+            for (var i = 0; i < expected.Count; i++)
             {
                 AssertProductsAreEqual(expected.ElementAt(i), actual.ElementAt(i));
             }

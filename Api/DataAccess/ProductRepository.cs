@@ -10,7 +10,7 @@ namespace WebApiTemplateProject.Api.DataAccess
 {
     public class ProductRepository : IProductRepository
     {
-        Product[] products = new Product[]
+        private Product[] _products = new Product[]
           {
             new Product { Id = 1, Name = "Tomato Soup", Category = "Groceries", Price = 1 },
             new Product { Id = 2, Name = "Yo-yo", Category = "Toys", Price = 3.75M },
@@ -19,14 +19,14 @@ namespace WebApiTemplateProject.Api.DataAccess
 
         public IEnumerable<Product> GetAllProducts()
         {
-            return products;
+            return _products;
         }
 
         public Product GetProduct(int id)
         {
             if (id == 500) throw new Exception();
 
-            var product = products.FirstOrDefault((p) => p.Id == id);
+            var product = _products.FirstOrDefault((p) => p.Id == id);
             if(product == null) throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
             {
                 Content = new StringContent($"Product with Id: {id} not found"),
@@ -42,7 +42,7 @@ namespace WebApiTemplateProject.Api.DataAccess
 
         public void Dispose()
         {
-            products = null;
+            _products = null;
         }
     }
 }

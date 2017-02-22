@@ -14,7 +14,7 @@ namespace WebApiTemplateProject.Api.Utilities
         {
             HttpStatusCode statusCode;
             if(context.Exception is ArgumentException) statusCode = HttpStatusCode.BadRequest;
-            else if (context.Exception is HttpResponseException) statusCode = (context.Exception as HttpResponseException).Response.StatusCode;
+            else if (context.Exception is HttpResponseException) statusCode = ((HttpResponseException) context.Exception).Response.StatusCode;
             else statusCode = HttpStatusCode.InternalServerError;
 
 
@@ -29,17 +29,19 @@ namespace WebApiTemplateProject.Api.Utilities
 
         private class PlainTextErrorResult : IHttpActionResult
         {
-            public HttpRequestMessage Request { get; set; }
+            public HttpRequestMessage Request { private get; set; }
 
-            public string ResponseMessage { get; set; }
+            public string ResponseMessage { private get; set; }
 
-            public HttpStatusCode StatusCode { get; set; }
+            public HttpStatusCode StatusCode { private get; set; }
 
             public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
             {
-                var response = new HttpResponseMessage(StatusCode);
-                response.Content = new StringContent(ResponseMessage);
-                response.RequestMessage = Request;
+                var response = new HttpResponseMessage(StatusCode)
+                {
+                    Content = new StringContent(ResponseMessage),
+                    RequestMessage = Request
+                };
                 return Task.FromResult(response);
             }
         }
