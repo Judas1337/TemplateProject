@@ -4,6 +4,7 @@ using System.Web.Http.ExceptionHandling;
 using WebApiTemplateProject.Api.App_Start;
 using WebApiTemplateProject.Utilities.ExceptionHandler;
 using WebApiTemplateProject.Utilities.Filter;
+using WebApiTemplateProject.Utilities.HttpMessageHandler;
 using WebApiTemplateProject.Utilities.Logger;
 
 namespace WebApiTemplateProject.Api
@@ -32,6 +33,9 @@ namespace WebApiTemplateProject.Api
 
             //Register Global Filter for ModelValidation
             GlobalConfiguration.Configuration.Filters.Add(new ModelValidationFilter());
+
+            //Register MessageHandlers
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new CorrelationHandler());
 
             //Ensure configuration 
             GlobalConfiguration.Configuration.EnsureInitialized();
