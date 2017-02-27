@@ -10,7 +10,7 @@ namespace WebApiTemplateProject.Utilities.ExceptionHandler
 {
     public class GlobalExceptionHandler : System.Web.Http.ExceptionHandling.ExceptionHandler
     {
-        public override void Handle(ExceptionHandlerContext context)
+        public override Task HandleAsync(ExceptionHandlerContext context, CancellationToken cancellationToken)
         {
             HttpStatusCode statusCode;
             if(context.Exception is ArgumentException) statusCode = HttpStatusCode.BadRequest;
@@ -25,6 +25,7 @@ namespace WebApiTemplateProject.Utilities.ExceptionHandler
                 StatusCode = statusCode
             };
 
+            return base.HandleAsync(context, cancellationToken);
         }
 
         private class PlainTextErrorResult : IHttpActionResult
