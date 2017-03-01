@@ -4,9 +4,8 @@ using System.ComponentModel.DataAnnotations;
 namespace WebApiTemplateProject.Api.Models
 {
     public class Product
-    {
-        [Required]
-        [Range(0, Double.MaxValue, ErrorMessage = "Id must be a positive value")]
+    {     
+        [Range(0, int.MaxValue, ErrorMessage = "Id must be a positive value")]
         public int Id { get; set; }
 
         [Required]
@@ -18,7 +17,7 @@ namespace WebApiTemplateProject.Api.Models
         public string Category { get; set; }
       
         [Required]
-        [Range(0, Double.MaxValue , ErrorMessage = "Price must be a positive value")]
+        [Range(0, int.MaxValue, ErrorMessage = "Id must be a positive value")]
         public decimal Price { get; set; }
         
         public DateTime DateAdded { get; set; }
