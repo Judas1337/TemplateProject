@@ -1,121 +1,114 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
+using System.Web.Http.Description;
 
 namespace WebApiTemplateProject.Utilities.Guard
 {
     public static class InputGuard
     {
-        public static void ThrowArgumentExceptionIfNegativeValue(string parameterName, int value)
+        public static void ThrowExceptionIfNegativeValue<TException>(string parametername, int parameter) where TException : Exception
         {
-            ThrowArgumentExceptionIf(parameterName, value, (param) => param < 0);
+            ThrowExceptionIf<int, TException>(parametername, parameter, (param) => param < 0);
         }
 
-        public static void ThrowArgumentExceptionIfInvalidString(string parameterName, string str)
+        public static void ThrowExceptionIfNull<TParam, TException>(string parametername, TParam parameter) where TException : Exception
         {
-            Expression<Func<string, bool>> validationExpression = (param) => string.IsNullOrWhiteSpace(param);
-
-            string exceptionMessage;
-            if (ParamIsInvalid(parameterName, str, validationExpression, out exceptionMessage))
-            {
-                throw new ArgumentException(exceptionMessage);
-            }
+            ThrowExceptionIf<TParam, TException>(parametername, parameter, (param)=> param == null);
         }
 
-        public static void ThrowArgumentExceptionIfInvalidGuid(string parameterName, string guidAsString)
-        {
-            Expression<Func<string, bool>> validationExpression = (param) => string.IsNullOrWhiteSpace(param);
-
-            string exceptionMessage;
-            if (ParamIsInvalid(parameterName, guidAsString, validationExpression, out exceptionMessage))
-            {
-                throw new ArgumentException(exceptionMessage);
-            }
-            else if (ParamIsInvalid(parameterName, guidAsString, (param) => IsInvalidGuid(param), out exceptionMessage))
-            {
-                throw new ArgumentException(exceptionMessage);
-            }
-
-        }
-
-        public static void ThrowArgumentExceptionIfInvalidDate(string parametername, string dateAsString)
-        {
-            ThrowArgumentExceptionIf(parametername, dateAsString, (param) => IsInvalidDate(param));
-        }
-
-        public static void ThrowArgumentExceptionIfInvalidDateInterval(string fromDateParametername,
-            string toDateParametername, string fromDateAsString, string toDateAsString)
-        {
-            ThrowArgumentExceptionIfInvalidDate(fromDateParametername, fromDateAsString);
-
-            if (toDateAsString == null) return;
-            ThrowArgumentExceptionIfInvalidDate(toDateParametername, toDateAsString);
-
-            var fromDate = DateTime.Parse(fromDateAsString);
-            var toDate = DateTime.Parse(toDateAsString);
-            if (fromDate > toDate)
-            {
-                var condition = $"{fromDateAsString} > {toDateAsString}";
-                var exceptionMessage = GenerateExceptionMessge(fromDateParametername, fromDateAsString, condition);
-                throw new ArgumentException(exceptionMessage);
-            }
-        }
-
-        public static void ThrowArgumentNullExceptionIfNull<T>(string parametername, T param)
-        {
-            if (param == null)
-            {
-                throw new ArgumentNullException(parametername);
-            }
-        }
         /// <summary>
-        /// 
+        /// Throws an exception of the type specified by <typeparamref name="TException"/> if the expression <paramref name="parameterValidator"/> evaluates to true.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TParam">The type of the variable that's being validated</typeparam>
+        /// <typeparam name="TException">The type of exception to be thrown if expression evaluates to true. </typeparam>
         /// <param name="parametername">The name of the variable that's being validated</param>
         /// <param name="parameter">The parameter used in the validation</param>
         /// <param name="parameterValidator">A expression containing a function that will return true if the parameter is invalid</param>
-        public static void ThrowArgumentExceptionIf<T>(string parametername, T parameter, Expression<Func<T, bool>> parameterValidator)
+        public static void ThrowExceptionIf<TParam, TException>(string parametername, TParam parameter, Expression<Func<TParam, bool>> parameterValidator) where TException : Exception 
         {
-            string exceptionMessage;
-            if (ParamIsInvalid(parametername, parameter, parameterValidator, out exceptionMessage))
+            if (!ParamIsInvalid(parameter, parameterValidator)) return;
+            var exception = GenerateException<TParam, TException>(parametername, parameter, parameterValidator);
+            throw exception;
+        }
+
+        #region Helper methods
+        /// <summary>
+        /// Evalutes the expression and returns true if the expression evaluates to true
+        /// </summary>
+        /// <typeparam name="TParam"></typeparam>
+        /// <param name="param"></param>
+        /// <param name="paramInvalidator"></param>
+        /// <returns></returns>
+        private static bool ParamIsInvalid<TParam>(TParam param, Expression<Func<TParam, bool>> paramInvalidator)
+        {
+            return paramInvalidator.Compile()(param);
+        }
+
+        /// <summary>
+        /// Generates an Exception of the specified <typeparamref name="TException"/> 
+        /// </summary>
+        /// <typeparam name="TException">The type of exception that is to be generated. </typeparam>
+        /// <typeparam name="TParam"></typeparam>
+        /// <param name="parameterName">The name of <paramref name="parameter"/></param>
+        /// <param name="parameter">The parameter under validation</param>
+        /// <param name="parameterValidator">The variable name of <paramref name="parameter"/></param>
+        /// <returns>The generated exception of type <typeparamref name="TException"/></returns>
+        private static TException GenerateException<TParam, TException>(string parameterName, TParam parameter, Expression<Func<TParam, bool>> parameterValidator) where TException : Exception
+        {
+            var exceptionconstructorWithMessageParameter = GetExceptionConstructorWithMessageParameter<TException>();
+
+            var exceptionMessage = GenerateExceptionMessage(parameterName, parameter, parameterValidator);
+            var exception = (TException)exceptionconstructorWithMessageParameter.Invoke(new object[] {exceptionMessage});
+
+            return exception;
+        }
+
+        /// <summary>
+        /// Tries to retrieve a constructor for exception subclass <typeparamref name="TException"/> that has one parameter called "message"
+        /// </summary>
+        /// <typeparam name="TException">A subclass of Exception which must obey Microsofts design guideliens:https://msdn.microsoft.com/en-us/library/seyhszts(v=vs.110).aspx
+        /// and thereby have a constructor that takes a single parameter called "message" </typeparam>
+        /// <returns>A constructor with a single parameter called "message"</returns>
+        private static ConstructorInfo GetExceptionConstructorWithMessageParameter<TException>() where TException : Exception
+        {
+            const string messageParameter = "message";
+
+            ConstructorInfo exceptionMessageConstructor = null;
+            foreach (var constructorInfo in typeof(TException).GetConstructors())
             {
-                throw new ArgumentException(exceptionMessage);
+                var parameters = constructorInfo.GetParameters();
+                if (parameters.Any() == false) continue;
+                if (parameters.Length == 1 && parameters.First().Name == messageParameter)
+                {
+                    exceptionMessageConstructor = constructorInfo;
+                }
             }
+
+            if (exceptionMessageConstructor == null)
+                throw new Exception($"Failed to generate exception of type {typeof(TException).Name}. {typeof(TException).Name} does not have a constructor that accepts {messageParameter} as it's only parameter");
+
+            return exceptionMessageConstructor;
         }
 
-        private static bool ParamIsInvalid<T>(string parametername, T param, Expression<Func<T, bool>> paramInvalidator, out string message)
-        {
-            message = null;
-            if (!paramInvalidator.Compile()(param)) return false;
-            message = GenerateInvalidParamMessage(parametername, param, paramInvalidator);
-            return true;
-        }
-
-        private static string GenerateInvalidParamMessage<T>(string parametername, T param, Expression<Func<T, bool>> paramInvalidator)
+        /// <summary>
+        /// Generates an exception message from a expression 
+        /// </summary>
+        /// <typeparam name="TParam">The type of the <paramref name="param"/></typeparam>
+        /// <param name="parametername">The name of the <paramref name="param"/> which is used to replace the actual value of <paramref name="param"/> and replace the value with its name</param>
+        /// <param name="param">The parameter being validated</param>
+        /// <param name="paramInvalidator">The expression that is going to be converted to an exceptionmessage</param>
+        /// <returns></returns>
+        private static string GenerateExceptionMessage<TParam>(string parametername, TParam param, Expression<Func<TParam, bool>> paramInvalidator)
         {
             var condition = paramInvalidator.ToString();
             var localparameter = condition.Substring(0, condition.IndexOf("=>", StringComparison.Ordinal)).Trim();
             condition = paramInvalidator.Body.ToString();
             condition = condition.Replace(localparameter, parametername);
-            var message = GenerateExceptionMessge(parametername, param, condition);
-            return message;
-        }
 
-        private static string GenerateExceptionMessge<T>(string parametername, T param, string condition)
-        {
             return $"Parameter '{parametername}' with value '{param}' is not valid due to condition: {condition}";
         }
-        private static bool IsInvalidGuid(string guidAsString)
-        {
-            Guid guid;
-            return !Guid.TryParse(guidAsString, out guid);
-        }
-        private static bool IsInvalidDate(string dateAsString)
-        {
-            DateTime date;
-            var validDate = DateTime.TryParse(dateAsString, out date);
-            return !validDate;
-        }
-
+        #endregion
     }
 }

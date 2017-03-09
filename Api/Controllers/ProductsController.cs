@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using WebApiTemplateProject.Api.Logic;
 using WebApiTemplateProject.Api.Models;
@@ -27,7 +28,7 @@ namespace WebApiTemplateProject.Api.Controllers
         [Route("{id}")]
         public Product GetProduct(int id)
         {
-            InputGuard.ThrowArgumentExceptionIfNegativeValue(nameof(id), id);
+            InputGuard.ThrowExceptionIfNegativeValue<ArgumentException>(nameof(id), id);
             return _productLogic.GetProduct(id);
         }
 
@@ -35,7 +36,7 @@ namespace WebApiTemplateProject.Api.Controllers
         [Route("")]
         public Product CreateProduct(Product product)
         {
-            InputGuard.ThrowArgumentNullExceptionIfNull(nameof(product), product);
+            InputGuard.ThrowExceptionIfNull<Product, ArgumentException>(nameof(product), product);
             return _productLogic.CreateProduct(product);
         }
     }
