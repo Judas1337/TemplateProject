@@ -6,11 +6,21 @@ using System.Web.Http.Description;
 
 namespace WebApiTemplateProject.Utilities.Guard
 {
-    public static class InputGuard
+    /// <summary>
+    /// Used to perform input validations and generate specified exceptions upon validation failure.
+    /// </summary>
+    /// <remarks>Can generate any exception that obeys Microsofts design guidelines for custom exceptions: https://msdn.microsoft.com/en-us/library/seyhszts(v=vs.110).aspx,
+    ///  and thereby any exception that has a constructor that takes a single parameter called message</remarks>
+    public static class GenericInputGuard
     {
         public static void ThrowExceptionIfStringIsNullOrWhitespace<TException>(string parametername, string parameter) where TException : Exception
         {
             ThrowExceptionIf<string, TException>(parametername, parameter, (param) => string.IsNullOrWhiteSpace(param));
+        }
+
+        public static void ThrowExceptionIfNull<TParam, TException>(string parametername, TParam parameter) where TException : Exception
+        {
+            ThrowExceptionIf<TParam, TException>(parametername, parameter, (param) => param == null);
         }
 
         public static void ThrowExceptionIfNegativeValue<TException>(string parametername, int parameter) where TException : Exception
@@ -18,9 +28,9 @@ namespace WebApiTemplateProject.Utilities.Guard
             ThrowExceptionIf<int, TException>(parametername, parameter, (param) => param < 0);
         }
 
-        public static void ThrowExceptionIfNull<TParam, TException>(string parametername, TParam parameter) where TException : Exception
+        public static void ThrowExceptionIfDefaultGuid<TException>(string parametername, Guid parameter) where TException : Exception
         {
-            ThrowExceptionIf<TParam, TException>(parametername, parameter, (param)=> param == null);
+            ThrowExceptionIf<Guid, TException>(parametername, parameter, (param) => param == Guid.Empty);
         }
 
         /// <summary>
@@ -73,8 +83,7 @@ namespace WebApiTemplateProject.Utilities.Guard
         /// <summary>
         /// Tries to retrieve a constructor for exception subclass <typeparamref name="TException"/> that has one parameter called "message"
         /// </summary>
-        /// <typeparam name="TException">A subclass of Exception which must obey Microsofts design guideliens:https://msdn.microsoft.com/en-us/library/seyhszts(v=vs.110).aspx
-        /// and thereby have a constructor that takes a single parameter called "message" </typeparam>
+        /// <typeparam name="TException">A subclass of Exception which must obey Microsofts design guideliens</typeparam>
         /// <returns>A constructor with a single parameter called "message"</returns>
         private static ConstructorInfo GetExceptionConstructorWithMessageParameter<TException>() where TException : Exception
         {
