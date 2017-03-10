@@ -8,6 +8,11 @@ namespace WebApiTemplateProject.Utilities.Guard
 {
     public static class InputGuard
     {
+        public static void ThrowExceptionIfStringIsNullOrWhitespace<TException>(string parametername, string parameter) where TException : Exception
+        {
+            ThrowExceptionIf<string, TException>(parametername, parameter, (param) => string.IsNullOrWhiteSpace(param));
+        }
+
         public static void ThrowExceptionIfNegativeValue<TException>(string parametername, int parameter) where TException : Exception
         {
             ThrowExceptionIf<int, TException>(parametername, parameter, (param) => param < 0);
@@ -87,7 +92,7 @@ namespace WebApiTemplateProject.Utilities.Guard
             }
 
             if (exceptionMessageConstructor == null)
-                throw new Exception($"Failed to generate exception of type {typeof(TException).Name}. {typeof(TException).Name} does not have a constructor that accepts {messageParameter} as it's only parameter");
+                throw new NotSupportedException($"Failed to generate exception of type {typeof(TException).Name}. {typeof(TException).Name} does not have a constructor that accepts {messageParameter} as it's only parameter");
 
             return exceptionMessageConstructor;
         }
@@ -102,11 +107,9 @@ namespace WebApiTemplateProject.Utilities.Guard
         /// <returns></returns>
         private static string GenerateExceptionMessage<TParam>(string parametername, TParam param, Expression<Func<TParam, bool>> paramInvalidator)
         {
-            var condition = paramInvalidator.ToString();
-            var localparameter = condition.Substring(0, condition.IndexOf("=>", StringComparison.Ordinal)).Trim();
-            condition = paramInvalidator.Body.ToString();
-            condition = condition.Replace(localparameter, parametername);
-
+            var condition = paramInvalidator.Body.ToString();
+            condition = condition.Replace(paramInvalidator.Parameters.First().Name, parametername);
+           
             return $"Parameter '{parametername}' with value '{param}' is not valid due to condition: {condition}";
         }
         #endregion
