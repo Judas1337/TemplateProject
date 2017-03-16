@@ -14,10 +14,12 @@ namespace WebApiTemplateProject.Utilities.HttpMessageHandler
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            var requestCorrelationId = request.GetCorrelationId().ToString();
-            request.Headers.Add(CorrelationIdHeaderName, requestCorrelationId);
+            bool correlationHeaderValueExists = request.Headers.TryGetValues(CorrelationIdHeaderName, out IEnumerable<string> correlationIds);
+            if (correlationHeaderValueExists == false) correlationIds = new List<string>() { Guid.NewGuid().ToString() };
+            request.Headers.Add(CorrelationIdHeaderName, correlationIds);
+
             var response = await base.SendAsync(request, cancellationToken);
-            response.Headers.Add(CorrelationIdHeaderName, requestCorrelationId);
+            response.Headers.Add(CorrelationIdHeaderName, correlationIds);
             return response;
         }
     }
