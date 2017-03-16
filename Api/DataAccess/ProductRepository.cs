@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using WebApiTemplateProject.Api.Models;
+using WebApiTemplateProject.Utilities.Guard;
 
 namespace WebApiTemplateProject.Api.DataAccess
 {
@@ -24,7 +25,7 @@ namespace WebApiTemplateProject.Api.DataAccess
 
         public Product GetProduct(int id)
         {
-            if (id == 500) throw new Exception();
+            GenericInputGuard.ThrowExceptionIf<int,Exception>(nameof(id), id, (param)=> param == 500);
 
             var product = _products.FirstOrDefault((p) => p.Id == id);
             if(product == null) throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
