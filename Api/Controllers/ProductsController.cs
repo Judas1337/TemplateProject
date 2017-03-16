@@ -28,7 +28,7 @@ namespace WebApiTemplateProject.Api.Controllers
         [Route("{id}")]
         public Product GetProduct(int id)
         {
-            GenericInputGuard.ThrowExceptionIfNegativeValue<ArgumentException>(nameof(id), id);
+            NetInputGuard.ThrowArgumentExceptionIfNegativeValue(nameof(id), id);
             return _productLogic.GetProduct(id);
         }
 
@@ -36,7 +36,7 @@ namespace WebApiTemplateProject.Api.Controllers
         [Route("")]
         public Product CreateProduct(Product product)
         {
-            GenericInputGuard.ThrowExceptionIfNull<Product, ArgumentException>(nameof(product), product);
+            NetInputGuard.ThrowArgumentNullExceptionIfNull(nameof(product), product);
             return _productLogic.CreateProduct(product);
         }
     }

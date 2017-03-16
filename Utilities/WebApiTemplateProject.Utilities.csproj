@@ -55,6 +55,7 @@
     <Compile Include="ExceptionHandler\GlobalExceptionHandler.cs" />
     <Compile Include="Filter\ModelValidationFilter.cs" />
     <Compile Include="Guard\GenericInputGuard.cs" />
+    <Compile Include="Guard\NetInputGuard.cs" />
     <Compile Include="HttpMessageHandler\CorrelationHandler.cs" />
     <Compile Include="Logger\GlobalExceptionLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

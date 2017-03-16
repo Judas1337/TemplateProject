@@ -65,7 +65,7 @@ namespace WebApiTemplateProject.RegressionTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void CreateProductNullInput()
         {
             _controller.CreateProduct(null);
