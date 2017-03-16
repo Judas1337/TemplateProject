@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using WebApiTemplateProject.Api.Logic;
 using WebApiTemplateProject.Api.Models;
