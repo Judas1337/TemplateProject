@@ -5,8 +5,8 @@ using WebApiTemplateProject.Api.App_Start;
 using WebApiTemplateProject.Utilities.Concurrency;
 using WebApiTemplateProject.Utilities.ExceptionHandler;
 using WebApiTemplateProject.Utilities.Filter;
-using WebApiTemplateProject.Utilities.HttpMessageHandler;
 using WebApiTemplateProject.Utilities.Logger;
+using WebApiTemplateProject.Utilities.MessageHandler;
 
 namespace WebApiTemplateProject.Api
 {
