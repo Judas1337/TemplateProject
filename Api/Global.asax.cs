@@ -1,12 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Web.Http;
-using System.Web.Http.ExceptionHandling;
 using WebApiTemplateProject.Api.App_Start;
-using WebApiTemplateProject.Utilities.Concurrency;
-using WebApiTemplateProject.Utilities.ExceptionHandler;
-using WebApiTemplateProject.Utilities.Filter;
-using WebApiTemplateProject.Utilities.Logger;
-using WebApiTemplateProject.Utilities.MessageHandler;
 
 namespace WebApiTemplateProject.Api
 {
@@ -16,29 +10,11 @@ namespace WebApiTemplateProject.Api
         {
             //Declare the project to return JSON instead of XML
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
-
-           // Register routing
+          
             GlobalConfiguration.Configure(WebApiConfig.Register);
-
-            //Register swagger
             GlobalConfiguration.Configure(SwaggerConfig.Register);
-
-            //Configure Autofac Dependency container
             GlobalConfiguration.Configure(AutofacConfig.Register);
 
-            //Register implementation of IExceptionHandler
-            GlobalConfiguration.Configuration.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
-
-            //Register implementation of IExceptionLogger
-            GlobalConfiguration.Configuration.Services.Replace(typeof(IExceptionLogger), new GlobalExceptionLogger());
-
-            //Register Global Filter for ModelValidation
-            GlobalConfiguration.Configuration.Filters.Add(new ModelValidationFilter());
-
-            //Register MessageHandlers
-            GlobalConfiguration.Configuration.MessageHandlers.Add(new CorrelationHandler(new ExecutionContextValueProvider()));
-
-            //Ensure configuration 
             GlobalConfiguration.Configuration.EnsureInitialized();
         }
     }
