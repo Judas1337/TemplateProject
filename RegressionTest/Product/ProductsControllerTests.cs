@@ -7,6 +7,7 @@ using WebApiTemplateProject.Api.Controllers;
 using WebApiTemplateProject.Api.DataAccess;
 using WebApiTemplateProject.Api.Logic;
 using WebApiTemplateProject.Api.Models;
+using WebApiTemplateProject.RegressionTest.Helpers;
 
 namespace WebApiTemplateProject.RegressionTest
 {
@@ -59,6 +60,7 @@ namespace WebApiTemplateProject.RegressionTest
         public void CreateProduct()
         {
             _productRepository.Setup(mockRepo => mockRepo.CreateProduct(_expectedProduct)).Returns(_expectedProduct);
+            ModelStateValidator.AssertModelIsValid(_expectedProduct);
             var actualProduct = _controller.CreateProduct(_expectedProduct);
 
             AssertProductsAreEqual(_expectedProduct, actualProduct);
@@ -69,6 +71,31 @@ namespace WebApiTemplateProject.RegressionTest
         public void CreateProductNullInput()
         {
             _controller.CreateProduct(null);
+        }
+
+
+        [TestMethod]
+        public void CreateProductNegativePrice()
+        {
+            _expectedProduct.Price = -1;
+          
+            ModelStateValidator.AssertFieldIsInvalid(_expectedProduct, "Price");
+        }
+
+        [TestMethod]
+        public void CreateProductNameWithNumbers()
+        {
+            _expectedProduct.Name = _expectedProduct.Name+-1;
+
+            ModelStateValidator.AssertFieldIsInvalid(_expectedProduct, "Name");
+        }
+
+        [TestMethod]
+        public void CreateProductCategoryNameWithNumbers()
+        {
+            _expectedProduct.Category = _expectedProduct.Category + -1;
+
+            ModelStateValidator.AssertFieldIsInvalid(_expectedProduct, "Category");
         }
         #endregion
 
@@ -112,7 +139,7 @@ namespace WebApiTemplateProject.RegressionTest
         }
 
 
-        private static Product GenerateProduct(int id = 1, string name = "mock name", string category = "mock category", decimal price = 123)
+        private static Product GenerateProduct(int id = 1, string name = "mockName", string category = "mockCategory", decimal price = 123)
         {
             return new Product
             {

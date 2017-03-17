@@ -73,7 +73,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProductsControllerTests.cs" />
+    <Compile Include="Helpers\ModelStateValidator.cs" />
+    <Compile Include="Product\ProductsControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
