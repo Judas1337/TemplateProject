@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Net.Http.Headers;
+using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 using WebApiTemplateProject.Utilities.Concurrency;
 using WebApiTemplateProject.Utilities.ExceptionHandler;
@@ -12,7 +13,10 @@ namespace WebApiTemplateProject.Api.App_Start
     {
         public static void Register(HttpConfiguration config)
         {
-            config.MapHttpAttributeRoutes();  //Routing will be correspond to the specified Route attribute for each method
+            //Routing will be correspond to the specified Route attribute for each method
+            config.MapHttpAttributeRoutes();
+            //Declare the project to return JSON instead of XML
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));  
             RegisterServices(config);
             RegisterFilters(config);
             RegisterMessageHandlers(config);
