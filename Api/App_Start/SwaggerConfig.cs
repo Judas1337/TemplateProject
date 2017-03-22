@@ -6,7 +6,10 @@ namespace WebApiTemplateProject.Api.App_Start
     public class SwaggerConfig
     {
         public static void Register(HttpConfiguration config)
-        {        
+        {
+            var currentAssembly = System.Reflection.Assembly.GetExecutingAssembly();
+            var assemblyName = currentAssembly.GetName().Name;
+            var assemblyMajorVersion = currentAssembly.GetName().Version.Major.ToString();
 
             config
                 .EnableSwagger(c =>
@@ -26,8 +29,7 @@ namespace WebApiTemplateProject.Api.App_Start
                         // Use "SingleApiVersion" to describe a single version API. Swagger 2.0 includes an "Info" object to
                         // hold additional metadata for an API. Version and title are required but you can also provide
                         // additional fields by chaining methods off SingleApiVersion.
-                        //
-                        c.SingleApiVersion("v1", "WebApiTemplateProject");
+                        c.SingleApiVersion($"v{assemblyMajorVersion}", assemblyName);
 
                         // If your API has multiple versions, use "MultipleApiVersions" instead of "SingleApiVersion".
                         // In this case, you must provide a lambda that tells Swashbuckle which actions should be
@@ -198,7 +200,7 @@ namespace WebApiTemplateProject.Api.App_Start
                         // It can be set to "None" (default), "List" (shows operations for each resource),
                         // or "Full" (fully expanded: shows operations and their details).
                         //
-                        //c.DocExpansion(DocExpansion.List);
+                        //c.DocExpansion(DocExpansion.Full);
 
                         // Specify which HTTP operations will have the 'Try it out!' option. An empty paramter list disables
                         // it for all operations.
