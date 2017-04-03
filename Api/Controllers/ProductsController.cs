@@ -6,11 +6,18 @@ using WebApiTemplateProject.Utilities.Guard;
 
 namespace WebApiTemplateProject.Api.Controllers
 {
+    /// <summary>
+    /// ApiController for Product that does inputcontrol. Logic is separated into another layer. 
+    /// </summary>
     [RoutePrefix("api/v1/Products")]
     public class ProductsController : ApiController
     {
         private readonly IProductLogic _productLogic;
 
+        /// <summary>
+        /// Constructor that takes a logic layer for product. 
+        /// </summary>
+        /// <param name="productLogic">Dependency injected logic layer</param>
         public ProductsController(IProductLogic productLogic)
         {
             _productLogic = productLogic;
