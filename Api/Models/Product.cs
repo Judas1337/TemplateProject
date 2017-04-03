@@ -19,6 +19,7 @@ namespace WebApiTemplateProject.Api.Models
         [Range(1, int.MaxValue)]
         public decimal Price { get; set; }
         
+        [Required]
         public DateTime DateAdded { get; set; }
     }
 }
