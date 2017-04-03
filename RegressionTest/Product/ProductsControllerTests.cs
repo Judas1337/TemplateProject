@@ -6,17 +6,16 @@ using Moq;
 using WebApiTemplateProject.Api.Controllers;
 using WebApiTemplateProject.Api.DataAccess;
 using WebApiTemplateProject.Api.Logic;
-using WebApiTemplateProject.Api.Models;
 using WebApiTemplateProject.RegressionTest.Helpers;
 
-namespace WebApiTemplateProject.RegressionTest
+namespace WebApiTemplateProject.RegressionTest.Product
 {
     [TestClass]
     public class ProductsControllerTests
     {
         private ProductsController _controller;
         private Mock<IProductRepository> _productRepository;
-        private Product _expectedProduct;
+        private Api.Models.Product _expectedProduct;
 
         [TestInitialize]
         public void Initialize()
@@ -103,7 +102,7 @@ namespace WebApiTemplateProject.RegressionTest
 
         #region AssertionMethods
 
-        private void AssertProductsAreEqual(IList<Product> expected, IList<Product> actual)
+        private void AssertProductsAreEqual(IList<Api.Models.Product> expected, IList<Api.Models.Product> actual)
         {
             if (expected == null) throw new ArgumentNullException(nameof(expected));
             if (actual == null) throw new ArgumentNullException(nameof(actual));
@@ -116,7 +115,7 @@ namespace WebApiTemplateProject.RegressionTest
             }
         }
 
-        private void AssertProductsAreEqual(Product expected, Product actual)
+        private void AssertProductsAreEqual(Api.Models.Product expected, Api.Models.Product actual)
         {
             Assert.AreEqual(expected.Id, actual.Id, "Product Id");
             Assert.AreEqual(expected.Name, actual.Name, "Product name");
@@ -128,9 +127,9 @@ namespace WebApiTemplateProject.RegressionTest
 
         #region FactoryMethods
 
-        private IList<Product> GenerateProducts(int numberOfProducts)
+        private IList<Api.Models.Product> GenerateProducts(int numberOfProducts)
         {
-            IList<Product> products = new List<Product>();
+            IList<Api.Models.Product> products = new List<Api.Models.Product>();
             for (var i = 0; i < numberOfProducts; ++i)
             {
                 products.Add(GenerateProduct(i + 1));
@@ -139,9 +138,9 @@ namespace WebApiTemplateProject.RegressionTest
         }
 
 
-        private static Product GenerateProduct(int id = 1, string name = "mockName", string category = "mockCategory", decimal price = 123)
+        private static Api.Models.Product GenerateProduct(int id = 1, string name = "mockName", string category = "mockCategory", decimal price = 123)
         {
-            return new Product
+            return new Api.Models.Product
             {
                 Id = id,
                 Name = name,
