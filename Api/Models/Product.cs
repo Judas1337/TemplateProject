@@ -18,7 +18,7 @@ namespace WebApiTemplateProject.Api.Models
         public string Category { get; set; }
       
         [Required]
-        [Range(0.5, Double.PositiveInfinity)]
+        [Range(0.5, double.PositiveInfinity)]
         public decimal Price { get; set; }
         
         [Required]
