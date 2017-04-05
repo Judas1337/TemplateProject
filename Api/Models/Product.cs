@@ -4,7 +4,8 @@ using System.ComponentModel.DataAnnotations;
 namespace WebApiTemplateProject.Api.Models
 {
     public class Product
-    {           
+    {
+        [Range(1, int.MaxValue)]
         public int Id { get; set; }
 
         [Required]
