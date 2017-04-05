@@ -29,5 +29,15 @@ namespace WebApiTemplateProject.Api.Logic
         {
             return _productRepository.CreateProduct(product);
         }
+
+        public Product UpdateProduct(Product product)
+        {
+            return _productRepository.UpdateProduct(product);
+        }
+
+        public Product DeleteProduct(int id)
+        {
+            return _productRepository.DeleteProduct(id);
+        }
     }
 }

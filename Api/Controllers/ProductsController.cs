@@ -65,5 +65,36 @@ namespace WebApiTemplateProject.Api.Controllers
             NetInputGuard.ThrowArgumentNullExceptionIfNull(nameof(product), product);
             return _productLogic.CreateProduct(product);
         }
+
+        /// <summary>
+        /// Updates a Product with the values specified in <paramref name="product"/>
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns>The product that was updated</returns>
+        /// <response code="400">Bad request</response>
+        /// <response code="404">Product with specified id in <paramref name="product"/> not found</response>
+        /// <response code="500">Internal Server Error</response>
+        [HttpPut]
+        [Route("")]
+        public Product UpdateProduct(Product product)
+        {
+            NetInputGuard.ThrowArgumentNullExceptionIfNull(nameof(product), product);
+            return _productLogic.UpdateProduct(product);
+        }
+
+        /// <summary>
+        /// Deletes the Product with the specified <paramref name="id"/>
+        /// </summary>
+        /// <param name="id">The id of the Product that is supposed to be deleted</param>
+        /// <returns>The product that was deleted</returns>
+        /// <response code="400">Bad request</response>
+        /// <response code="404">Product with <paramref name="id"/> not found</response>
+        /// <response code="500">Internal Server Error</response>
+        [HttpDelete]
+        [Route("")]
+        public Product DeleteProduct(int id)
+        {
+            return _productLogic.DeleteProduct(id);
+        }
     }
 }

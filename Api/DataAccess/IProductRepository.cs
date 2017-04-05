@@ -9,5 +9,7 @@ namespace WebApiTemplateProject.Api.DataAccess
         IEnumerable<Product> GetAllProducts();
         Product GetProduct(int id);
         Product CreateProduct(Product product);
+        Product UpdateProduct(Product product);
+        Product DeleteProduct(int id);
     }
 }

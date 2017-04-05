@@ -26,24 +26,55 @@ namespace WebApiTemplateProject.Api.DataAccess
         public Product GetProduct(int id)
         {
             GenericInputGuard.ThrowExceptionIf<int,Exception>(nameof(id), id, (param)=> param == 500);
+            var product = GetProductOrThrowHttpNotFound(id);
 
-            var product = _products.FirstOrDefault((p) => p.Id == id);
-            if(product == null) throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
-            {
-                Content = new StringContent($"Product with Id: {id} not found"),
-                ReasonPhrase = "NotFound"
-            });
             return product;
         }
 
         public Product CreateProduct(Product product)
         {
+            ThrowHttpBadRequestIfProductWithIdExists(product.Id);
             return product;
+        }
+
+        public Product UpdateProduct(Product product)
+        {
+            GetProductOrThrowHttpNotFound(product.Id);
+            return product;
+        }
+
+        public Product DeleteProduct(int id)
+        {
+            return GetProductOrThrowHttpNotFound(id);
         }
 
         public void Dispose()
         {
             _products = null;
         }
+
+        #region HelperMethods
+        private Product GetProductOrThrowHttpNotFound(int productId)
+        {
+            var product = _products.FirstOrDefault((p) => p.Id == productId);
+            if (product == null) throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+            {
+                Content = new StringContent($"Product with Id: {productId} not found"),
+                ReasonPhrase = "NotFound"
+            });
+
+            return product;
+        }
+
+        private void ThrowHttpBadRequestIfProductWithIdExists(int productId)
+        {
+            var product = _products.FirstOrDefault((p) => p.Id == productId);
+            if (product != null) throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.BadRequest)
+            {
+                Content = new StringContent($"Product with Id: {productId} already exists"),
+                ReasonPhrase = "Bad request"
+            });
+        }
+        #endregion
     }
 }
