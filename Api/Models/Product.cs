@@ -5,6 +5,7 @@ namespace WebApiTemplateProject.Api.Models
 {
     public class Product
     {
+        [Required]
         [Range(1, int.MaxValue)]
         public int Id { get; set; }
 
@@ -17,7 +18,7 @@ namespace WebApiTemplateProject.Api.Models
         public string Category { get; set; }
       
         [Required]
-        [Range(1, int.MaxValue)]
+        [Range(0.5, Double.PositiveInfinity)]
         public decimal Price { get; set; }
         
         [Required]
