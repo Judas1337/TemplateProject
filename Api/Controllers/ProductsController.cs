@@ -48,7 +48,6 @@ namespace WebApiTemplateProject.Api.Controllers
         [Route("{id}")]
         public Product GetProduct(int id)
         {
-            NetInputGuard.ThrowArgumentExceptionIfNegativeValue(nameof(id), id);
             return _productLogic.GetProduct(id);
         }
 
