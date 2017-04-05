@@ -26,20 +26,12 @@ namespace WebApiTemplateProject.RegressionTest.Product
         }
 
         #region GetProduct()
-
         [TestMethod]
         public void GetProduct()
         {
             _productRepository.Setup(mock => mock.GetProduct(_expectedProduct.Id)).Returns(_expectedProduct);
             var actualProduct = _controller.GetProduct(_expectedProduct.Id);
             AssertProductsAreEqual(_expectedProduct, actualProduct);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void GetProductNegativeId()
-        {
-          _controller.GetProduct(-1);
         }
         #endregion
 
@@ -51,6 +43,25 @@ namespace WebApiTemplateProject.RegressionTest.Product
             _productRepository.Setup(mockRepo => mockRepo.GetAllProducts()).Returns(expectedProducts);
             var actualProducts = _controller.GetAllProducts();
             AssertProductsAreEqual(expectedProducts.ToList(), actualProducts.ToList());
+        }
+        #endregion
+
+        #region UpdateProduct()
+        [TestMethod]
+        public void UpdateProduct()
+        {
+            _productRepository.Setup(mockRepo => mockRepo.UpdateProduct(_expectedProduct)).Returns(_expectedProduct);
+            ModelStateValidator.AssertModelIsValid(_expectedProduct);
+            var actualProduct = _controller.UpdateProduct(_expectedProduct);
+
+            AssertProductsAreEqual(_expectedProduct, actualProduct);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void UpdateProductNullInput()
+        {
+            _controller.CreateProduct(null);
         }
         #endregion
 
@@ -71,29 +82,44 @@ namespace WebApiTemplateProject.RegressionTest.Product
         {
             _controller.CreateProduct(null);
         }
+        #endregion
 
+        #region DeleteProduct
+        [TestMethod]
+        public void DeleteProduct()
+        {
+            _productRepository.Setup(mock => mock.DeleteProduct(_expectedProduct.Id)).Returns(_expectedProduct);
+            var actualProduct = _controller.DeleteProduct(_expectedProduct.Id);
+            AssertProductsAreEqual(_expectedProduct, actualProduct);
+        }
+        #endregion
+
+        #region ProductValidationTests
+        [TestMethod]
+        public void ProductNegativeId()
+        {
+            _expectedProduct.Id = -1;
+            ModelStateValidator.AssertFieldIsInvalid(_expectedProduct, "Id");
+        }
 
         [TestMethod]
-        public void CreateProductNegativePrice()
+        public void ProductNegativePrice()
         {
             _expectedProduct.Price = -1;
-          
             ModelStateValidator.AssertFieldIsInvalid(_expectedProduct, "Price");
         }
 
         [TestMethod]
-        public void CreateProductNameWithNumbers()
+        public void ProductNameWithNumbers()
         {
-            _expectedProduct.Name = _expectedProduct.Name+-1;
-
+            _expectedProduct.Name = _expectedProduct.Name + -1;
             ModelStateValidator.AssertFieldIsInvalid(_expectedProduct, "Name");
         }
 
         [TestMethod]
-        public void CreateProductCategoryNameWithNumbers()
+        public void ProductCategoryNameWithNumbers()
         {
             _expectedProduct.Category = _expectedProduct.Category + -1;
-
             ModelStateValidator.AssertFieldIsInvalid(_expectedProduct, "Category");
         }
         #endregion
