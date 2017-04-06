@@ -20,7 +20,7 @@ namespace WebApiTemplateProject.RegressionTest.Product
         [TestInitialize]
         public void Initialize()
         {
-            _expectedProduct = GenerateProduct();
+            _expectedProduct = ProductFactory.CreateProduct();
             _productRepository = new Mock<IProductRepository>();
             _controller = new ProductsController(new ProductLogic(_productRepository.Object));
         }
@@ -39,7 +39,7 @@ namespace WebApiTemplateProject.RegressionTest.Product
         [TestMethod]
         public void GetAllProducts()
         {
-            var expectedProducts = GenerateProducts(3);
+            var expectedProducts = ProductFactory.CreateProducts(3);
             _productRepository.Setup(mockRepo => mockRepo.GetAllProducts()).Returns(expectedProducts);
             var actualProducts = _controller.GetAllProducts();
             AssertProductsAreEqual(expectedProducts.ToList(), actualProducts.ToList());
@@ -94,38 +94,6 @@ namespace WebApiTemplateProject.RegressionTest.Product
         }
         #endregion
 
-        #region ProductValidationTests
-        [TestMethod]
-        public void ProductNegativeId()
-        {
-            _expectedProduct.Id = -1;
-            ModelStateValidator.AssertFieldIsInvalid(_expectedProduct, "Id");
-        }
-
-        [TestMethod]
-        public void ProductNegativePrice()
-        {
-            _expectedProduct.Price = -1;
-            ModelStateValidator.AssertFieldIsInvalid(_expectedProduct, "Price");
-        }
-
-        [TestMethod]
-        public void ProductNameWithNumbers()
-        {
-            _expectedProduct.Name = _expectedProduct.Name + -1;
-            ModelStateValidator.AssertFieldIsInvalid(_expectedProduct, "Name");
-        }
-
-        [TestMethod]
-        public void ProductCategoryNameWithNumbers()
-        {
-            _expectedProduct.Category = _expectedProduct.Category + -1;
-            ModelStateValidator.AssertFieldIsInvalid(_expectedProduct, "Category");
-        }
-        #endregion
-
-        #region PrivateMethods
-
         #region AssertionMethods
 
         private void AssertProductsAreEqual(IList<Api.Models.Product> expected, IList<Api.Models.Product> actual)
@@ -149,33 +117,6 @@ namespace WebApiTemplateProject.RegressionTest.Product
             Assert.AreEqual(expected.Price, actual.Price, "Product Price");
             Assert.AreEqual(expected.DateAdded, actual.DateAdded, "Product DateAdded");
         }
-        #endregion
-
-        #region FactoryMethods
-
-        private IList<Api.Models.Product> GenerateProducts(int numberOfProducts)
-        {
-            IList<Api.Models.Product> products = new List<Api.Models.Product>();
-            for (var i = 0; i < numberOfProducts; ++i)
-            {
-                products.Add(GenerateProduct(i + 1));
-            }
-            return products;
-        }
-
-
-        private static Api.Models.Product GenerateProduct(int id = 1, string name = "mockName", string category = "mockCategory", decimal price = 123)
-        {
-            return new Api.Models.Product
-            {
-                Id = id,
-                Name = name,
-                Category = category,
-                Price = price,
-                DateAdded = new DateTime(2017, 02, 22)
-            };
-        }
-        #endregion
         #endregion
     }
 }
