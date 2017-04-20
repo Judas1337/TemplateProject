@@ -23,18 +23,19 @@ namespace WebApiTemplateProject.Utilities.Guard
         {
             ThrowExceptionIf<TParam, TException>(parametername, parameter, (param) => param == null);
         }
-
-        public static void ThrowExceptionIfNegativeValue<TException>(string parametername, int parameter) 
-            where TException : Exception
-        {
-            ThrowExceptionIf<int, TException>(parametername, parameter, (param) => param < 0);
-        }
-
+        
         public static void ThrowExceptionIfDefaultValue<TParam, TException>(string parametername, TParam parameter) 
             where TException : Exception
             where TParam : IEquatable<TParam>
         {
            ThrowExceptionIf<TParam, TException>(parametername, parameter, (param) => param.Equals(default(TParam)));
+        }
+
+        /// <remarks>double is used as a parameter type since almost all numeric types(except decimal) can be implicitly converted to double</remarks>
+        public static void ThrowExceptionIfNegativeValue<TException>(string parametername, double parameter)
+            where TException : Exception
+        {
+            ThrowExceptionIf<double, TException>(parametername, parameter, (param) => param < 0);
         }
 
         /// <summary>

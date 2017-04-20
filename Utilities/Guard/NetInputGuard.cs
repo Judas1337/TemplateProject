@@ -18,7 +18,7 @@ namespace WebApiTemplateProject.Utilities.Guard
             GenericInputGuard.ThrowExceptionIfStringIsNullOrWhitespace<ArgumentException>(parametername, parameter);
         }
 
-        public static void ThrowArgumentExceptionIfNegativeValue(string parametername, int parameter)
+        public static void ThrowArgumentExceptionIfNegativeValue(string parametername, double parameter)
         {
             GenericInputGuard.ThrowExceptionIfNegativeValue<ArgumentException>(parametername, parameter);
         }
