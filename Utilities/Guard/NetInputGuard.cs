@@ -29,6 +29,12 @@ namespace WebApiTemplateProject.Utilities.Guard
             GenericInputGuard.ThrowExceptionIfDefaultValue<TParam, ArgumentException>(parametername, parameter);
         }
 
+        public static void ThrowArgumentExceptionIfNotDefaultValue<TParam>(string parametername, TParam parameter)
+        where TParam : IEquatable<TParam>
+        {
+            GenericInputGuard.ThrowExceptionIfNotDefaultValue<TParam, ArgumentException>(parametername, parameter);
+        }
+
         public static void ThrowArgumentExceptionIf<TParam>(string parametername, TParam parameter, Expression<Func<TParam, bool>> parameterValidator)
         {
             GenericInputGuard.ThrowExceptionIf<TParam, ArgumentException>(parametername, parameter, parameterValidator);

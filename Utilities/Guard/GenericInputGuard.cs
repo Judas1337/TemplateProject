@@ -23,7 +23,14 @@ namespace WebApiTemplateProject.Utilities.Guard
         {
             ThrowExceptionIf<TParam, TException>(parametername, parameter, (param) => param == null);
         }
-        
+
+        public static void ThrowExceptionIfNotDefaultValue<TParam, TException>(string parametername, TParam parameter)
+          where TException : Exception
+          where TParam : IEquatable<TParam>
+        {
+            ThrowExceptionIf<TParam, TException>(parametername, parameter, (param) => !param.Equals(default(TParam)));
+        }
+
         public static void ThrowExceptionIfDefaultValue<TParam, TException>(string parametername, TParam parameter) 
             where TException : Exception
             where TParam : IEquatable<TParam>
