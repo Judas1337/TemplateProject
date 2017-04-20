@@ -12,24 +12,29 @@ namespace WebApiTemplateProject.Utilities.Guard
     ///  and thereby any exception that has a constructor that takes a single parameter called message</remarks>
     public static class GenericInputGuard
     {
-        public static void ThrowExceptionIfStringIsNullOrWhitespace<TException>(string parametername, string parameter) where TException : Exception
+        public static void ThrowExceptionIfStringIsNullOrWhitespace<TException>(string parametername, string parameter) 
+            where TException : Exception
         {
             ThrowExceptionIf<string, TException>(parametername, parameter, (param) => string.IsNullOrWhiteSpace(param));
         }
 
-        public static void ThrowExceptionIfNull<TParam, TException>(string parametername, TParam parameter) where TException : Exception
+        public static void ThrowExceptionIfNull<TParam, TException>(string parametername, TParam parameter) 
+            where TException : Exception
         {
             ThrowExceptionIf<TParam, TException>(parametername, parameter, (param) => param == null);
         }
 
-        public static void ThrowExceptionIfNegativeValue<TException>(string parametername, int parameter) where TException : Exception
+        public static void ThrowExceptionIfNegativeValue<TException>(string parametername, int parameter) 
+            where TException : Exception
         {
             ThrowExceptionIf<int, TException>(parametername, parameter, (param) => param < 0);
         }
 
-        public static void ThrowExceptionIfDefaultGuid<TException>(string parametername, Guid parameter) where TException : Exception
+        public static void ThrowExceptionIfDefaultValue<TParam, TException>(string parametername, TParam parameter) 
+            where TException : Exception
+            where TParam : IEquatable<TParam>
         {
-            ThrowExceptionIf<Guid, TException>(parametername, parameter, (param) => param == Guid.Empty);
+           ThrowExceptionIf<TParam, TException>(parametername, parameter, (param) => param.Equals(default(TParam)));
         }
 
         /// <summary>
@@ -40,7 +45,8 @@ namespace WebApiTemplateProject.Utilities.Guard
         /// <param name="parametername">The name of the variable that's being validated</param>
         /// <param name="parameter">The parameter used in the validation</param>
         /// <param name="parameterValidator">A expression containing a function that will return true if the parameter is invalid</param>
-        public static void ThrowExceptionIf<TParam, TException>(string parametername, TParam parameter, Expression<Func<TParam, bool>> parameterValidator) where TException : Exception 
+        public static void ThrowExceptionIf<TParam, TException>(string parametername, TParam parameter, Expression<Func<TParam, bool>> parameterValidator)
+            where TException : Exception 
         {
             if (!ParamIsInvalid(parameter, parameterValidator)) return;
             var exception = GenerateException<TParam, TException>(parametername, parameter, parameterValidator);
