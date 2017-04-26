@@ -60,6 +60,7 @@
     <Compile Include="Guard\NetInputGuard.cs" />
     <Compile Include="MessageHandler\CorrelationHandler.cs" />
     <Compile Include="Logger\GlobalExceptionLogger.cs" />
+    <Compile Include="MessageHandler\MessageLoggingHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
