@@ -9,7 +9,7 @@ namespace WebApiTemplateProject.Utilities.Concurrency
         public string GetCorrelationId()
         {
             object correlationId = CallContext.LogicalGetData(_correlationIdKey);
-            return correlationId.ToString();
+            return correlationId?.ToString();
         }
 
         public void SetCorrelationId(string correlationId)
