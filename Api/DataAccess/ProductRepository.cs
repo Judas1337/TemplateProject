@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using WebApiTemplateProject.Api.Models;
 using WebApiTemplateProject.Utilities.Guard;
@@ -18,34 +19,34 @@ namespace WebApiTemplateProject.Api.DataAccess
             new Product { Id = 3, Name = "Hammer", Category = "Hardware", Price = 16.99M,  DateAdded = new DateTime(2017,1,17)}
           };
 
-        public IEnumerable<Product> GetAllProducts()
+        public Task<IEnumerable<Product>> GetAllProducts()
         {
-            return _products;
+            return Task.FromResult<IEnumerable<Product>>(_products);
         }
 
-        public Product GetProduct(int id)
+        public Task<Product> GetProduct(int id)
         {
             GenericInputGuard.ThrowExceptionIf<int,Exception>(nameof(id), id, (param)=> param == 500);
             var product = GetProductOrThrowHttpNotFound(id);
 
-            return product;
+            return Task.FromResult(product);
         }
 
-        public Product CreateProduct(Product product)
+        public Task<Product> CreateProduct(Product product)
         {
             ThrowHttpBadRequestIfProductWithIdExists(product.Id);
-            return product;
+            return Task.FromResult(product);
         }
 
-        public Product UpdateProduct(Product product)
+        public Task<Product> UpdateProduct(Product product)
         {
             GetProductOrThrowHttpNotFound(product.Id);
-            return product;
+            return Task.FromResult(product);
         }
 
-        public Product DeleteProduct(int id)
+        public Task<Product> DeleteProduct(int id)
         {
-            return GetProductOrThrowHttpNotFound(id);
+            return Task.FromResult(GetProductOrThrowHttpNotFound(id));
         }
 
         public void Dispose()

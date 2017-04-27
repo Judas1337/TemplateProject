@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using WebApiTemplateProject.Api.Controllers;
@@ -27,69 +28,69 @@ namespace WebApiTemplateProject.RegressionTest.Product
 
         #region GetProduct()
         [TestMethod]
-        public void GetProduct()
+        public async Task GetProduct()
         {
-            _productRepository.Setup(mock => mock.GetProduct(_expectedProduct.Id)).Returns(_expectedProduct);
-            var actualProduct = _controller.GetProduct(_expectedProduct.Id);
+            _productRepository.Setup(mock => mock.GetProduct(_expectedProduct.Id)).ReturnsAsync(_expectedProduct);
+            var actualProduct = await _controller.GetProduct(_expectedProduct.Id);
             AssertProductsAreEqual(_expectedProduct, actualProduct);
         }
         #endregion
 
         #region GetAllProduct()
         [TestMethod]
-        public void GetAllProducts()
+        public async Task GetAllProducts()
         {
             var expectedProducts = ProductFactory.CreateProducts(3);
-            _productRepository.Setup(mockRepo => mockRepo.GetAllProducts()).Returns(expectedProducts);
-            var actualProducts = _controller.GetAllProducts();
+            _productRepository.Setup(mockRepo => mockRepo.GetAllProducts()).ReturnsAsync(expectedProducts);
+            var actualProducts = await _controller.GetAllProducts();
             AssertProductsAreEqual(expectedProducts.ToList(), actualProducts.ToList());
         }
         #endregion
 
         #region UpdateProduct()
         [TestMethod]
-        public void UpdateProduct()
+        public async Task UpdateProduct()
         {
-            _productRepository.Setup(mockRepo => mockRepo.UpdateProduct(_expectedProduct)).Returns(_expectedProduct);
+            _productRepository.Setup(mockRepo => mockRepo.UpdateProduct(_expectedProduct)).ReturnsAsync(_expectedProduct);
             ModelStateValidator.AssertModelIsValid(_expectedProduct);
-            var actualProduct = _controller.UpdateProduct(_expectedProduct);
+            var actualProduct = await _controller.UpdateProduct(_expectedProduct);
 
             AssertProductsAreEqual(_expectedProduct, actualProduct);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void UpdateProductNullInput()
+        public async Task UpdateProductNullInput()
         {
-            _controller.CreateProduct(null);
+            await _controller.CreateProduct(null);
         }
         #endregion
 
         #region CreateProduct()
         [TestMethod]
-        public void CreateProduct()
+        public async Task CreateProduct()
         {
-            _productRepository.Setup(mockRepo => mockRepo.CreateProduct(_expectedProduct)).Returns(_expectedProduct);
+            _productRepository.Setup(mockRepo => mockRepo.CreateProduct(_expectedProduct)).ReturnsAsync(_expectedProduct);
             ModelStateValidator.AssertModelIsValid(_expectedProduct);
-            var actualProduct = _controller.CreateProduct(_expectedProduct);
+            var actualProduct = await _controller.CreateProduct(_expectedProduct);
 
             AssertProductsAreEqual(_expectedProduct, actualProduct);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void CreateProductNullInput()
+        public async Task CreateProductNullInput()
         {
-            _controller.CreateProduct(null);
+            await _controller.CreateProduct(null);
         }
         #endregion
 
         #region DeleteProduct
         [TestMethod]
-        public void DeleteProduct()
+        public async Task DeleteProduct()
         {
-            _productRepository.Setup(mock => mock.DeleteProduct(_expectedProduct.Id)).Returns(_expectedProduct);
-            var actualProduct = _controller.DeleteProduct(_expectedProduct.Id);
+            _productRepository.Setup(mock => mock.DeleteProduct(_expectedProduct.Id)).ReturnsAsync(_expectedProduct);
+            var actualProduct = await _controller.DeleteProduct(_expectedProduct.Id);
             AssertProductsAreEqual(_expectedProduct, actualProduct);
         }
         #endregion

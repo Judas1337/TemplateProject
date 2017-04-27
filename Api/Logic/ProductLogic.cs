@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using WebApiTemplateProject.Api.DataAccess;
 using WebApiTemplateProject.Api.Models;
 
@@ -13,31 +14,31 @@ namespace WebApiTemplateProject.Api.Logic
             _productRepository = productRepository;
         }
 
-        public IEnumerable<Product> GetAllProducts()
+        public async Task<IEnumerable<Product>> GetAllProducts()
         {
-            return _productRepository.GetAllProducts();
+            return await _productRepository.GetAllProducts();
         }
 
-        public Product GetProduct(int id)
+        public async Task<Product> GetProduct(int id)
         {
-            var product =_productRepository.GetProduct(id);
+            var product = await _productRepository.GetProduct(id);
             product.Category += " LogicHandled";
             return product;
         }
 
-        public Product CreateProduct(Product product)
+        public async Task<Product> CreateProduct(Product product)
         {
-            return _productRepository.CreateProduct(product);
+            return await _productRepository.CreateProduct(product);
         }
 
-        public Product UpdateProduct(Product product)
+        public async Task<Product> UpdateProduct(Product product)
         {
-            return _productRepository.UpdateProduct(product);
+            return await _productRepository.UpdateProduct(product);
         }
 
-        public Product DeleteProduct(int id)
+        public async Task<Product> DeleteProduct(int id)
         {
-            return _productRepository.DeleteProduct(id);
+            return await _productRepository.DeleteProduct(id);
         }
     }
 }

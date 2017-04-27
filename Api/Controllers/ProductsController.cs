@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 using WebApiTemplateProject.Api.Logic;
 using WebApiTemplateProject.Api.Models;
@@ -31,9 +32,9 @@ namespace WebApiTemplateProject.Api.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpGet]
         [Route("")]
-        public IEnumerable<Product> GetAllProducts()
+        public async Task<IEnumerable<Product>> GetAllProducts()
         {
-            return _productLogic.GetAllProducts();
+            return await _productLogic.GetAllProducts().ConfigureAwait(false);
         }
 
         /// <summary>
@@ -46,9 +47,9 @@ namespace WebApiTemplateProject.Api.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpGet]
         [Route("{id}")]
-        public Product GetProduct(int id)
+        public async Task<Product> GetProduct(int id)
         {
-            return _productLogic.GetProduct(id);
+            return await _productLogic.GetProduct(id).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -60,10 +61,10 @@ namespace WebApiTemplateProject.Api.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpPost]
         [Route("")]
-        public Product CreateProduct(Product product)
+        public async Task<Product> CreateProduct(Product product)
         {
             NetInputGuard.ThrowArgumentNullExceptionIfNull(nameof(product), product);
-            return _productLogic.CreateProduct(product);
+            return await _productLogic.CreateProduct(product).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -76,10 +77,10 @@ namespace WebApiTemplateProject.Api.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpPut]
         [Route("")]
-        public Product UpdateProduct(Product product)
+        public async Task<Product> UpdateProduct(Product product)
         {
             NetInputGuard.ThrowArgumentNullExceptionIfNull(nameof(product), product);
-            return _productLogic.UpdateProduct(product);
+            return await _productLogic.UpdateProduct(product).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -92,9 +93,9 @@ namespace WebApiTemplateProject.Api.Controllers
         /// <response code="500">Internal Server Error</response>
         [HttpDelete]
         [Route("")]
-        public Product DeleteProduct(int id)
+        public async Task<Product> DeleteProduct(int id)
         {
-            return _productLogic.DeleteProduct(id);
+            return await _productLogic.DeleteProduct(id).ConfigureAwait(false);
         }
     }
 }
