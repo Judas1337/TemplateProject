@@ -39,6 +39,8 @@ namespace WebApiTemplateProject.Utilities.MessageHandler
             if (content == null) return null;
             await content.LoadIntoBufferAsync();
             var text = await content.ReadAsStringAsync();
+            text = text.Replace(Environment.NewLine, "");
+            text = text.Replace("\n", "");
             return text;
         }
     }
