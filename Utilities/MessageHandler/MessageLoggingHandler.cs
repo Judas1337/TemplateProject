@@ -29,7 +29,7 @@ namespace WebApiTemplateProject.Utilities.MessageHandler
             var response = await base.SendAsync(request, cancellationToken);
 
             var responseContent = await HttpContentToString(response.Content);
-            Debug.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} RESPONSE [CorrelationId: {_executionContextValueProvider.GetCorrelationId()}] {response.StatusCode} {responseContent}\n");
+            Debug.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} RESPONSE [CorrelationId: {_executionContextValueProvider.GetCorrelationId()}] {response.StatusCode} {responseContent}");
 
             return response;
         }
