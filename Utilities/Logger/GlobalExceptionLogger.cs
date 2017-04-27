@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.ExceptionHandling;
@@ -17,7 +18,7 @@ namespace WebApiTemplateProject.Utilities.Logger
         public override Task LogAsync(ExceptionLoggerContext context, CancellationToken cancellationToken)
         {
             var correlationId = _executionContextValueProvider.GetCorrelationId();
-            Debug.WriteLine($"ERROR_RESPONSE [CorrelationId: {correlationId}] {context.Exception.Message}");
+            Debug.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} ERROR_RESPONSE [CorrelationId: {correlationId}] {context.Exception.Message}\n");
             return base.LogAsync(context, cancellationToken);
         }
     }
