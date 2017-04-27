@@ -34,7 +34,7 @@ namespace WebApiTemplateProject.Api.Controllers
         [Route("")]
         public async Task<IEnumerable<Product>> GetAllProducts()
         {
-            return await _productLogic.GetAllProducts().ConfigureAwait(false);
+            return await _productLogic.GetAllProducts();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace WebApiTemplateProject.Api.Controllers
         [Route("{id}")]
         public async Task<Product> GetProduct(int id)
         {
-            return await _productLogic.GetProduct(id).ConfigureAwait(false);
+            return await _productLogic.GetProduct(id);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace WebApiTemplateProject.Api.Controllers
         public async Task<Product> CreateProduct(Product product)
         {
             NetInputGuard.ThrowArgumentNullExceptionIfNull(nameof(product), product);
-            return await _productLogic.CreateProduct(product).ConfigureAwait(false);
+            return await _productLogic.CreateProduct(product);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace WebApiTemplateProject.Api.Controllers
         public async Task<Product> UpdateProduct(Product product)
         {
             NetInputGuard.ThrowArgumentNullExceptionIfNull(nameof(product), product);
-            return await _productLogic.UpdateProduct(product).ConfigureAwait(false);
+            return await _productLogic.UpdateProduct(product);
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace WebApiTemplateProject.Api.Controllers
         [Route("")]
         public async Task<Product> DeleteProduct(int id)
         {
-            return await _productLogic.DeleteProduct(id).ConfigureAwait(false);
+            return await _productLogic.DeleteProduct(id);
         }
     }
 }
