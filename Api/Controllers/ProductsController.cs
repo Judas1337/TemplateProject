@@ -28,6 +28,7 @@ namespace WebApiTemplateProject.Api.Controllers
         /// Retrieves all products that exists.
         /// </summary>
         /// <returns>All products</returns>
+        /// <response code="200">OK</response>
         /// <response code="400">Bad request</response>
         /// <response code="500">Internal Server Error</response>
         [HttpGet]
@@ -42,6 +43,7 @@ namespace WebApiTemplateProject.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>The product with the specified <paramref name="id"/></returns>
+        /// <response code="200">OK</response>
         /// <response code="400">Bad request</response>
         /// <response code="404">Product with the specified <paramref name="id"/> not found</response>
         /// <response code="500">Internal Server Error</response>
@@ -57,6 +59,7 @@ namespace WebApiTemplateProject.Api.Controllers
         /// </summary>
         /// <param name="product"></param>
         /// <returns>The product that was created</returns>
+        /// <response code="200">OK</response>
         /// <response code="400">Bad request</response>
         /// <response code="500">Internal Server Error</response>
         [HttpPost]
@@ -72,6 +75,7 @@ namespace WebApiTemplateProject.Api.Controllers
         /// </summary>
         /// <param name="product"></param>
         /// <returns>The product that was updated</returns>
+        /// <response code="200">OK</response>
         /// <response code="400">Bad request</response>
         /// <response code="404">Product with specified id in <paramref name="product"/> not found</response>
         /// <response code="500">Internal Server Error</response>
