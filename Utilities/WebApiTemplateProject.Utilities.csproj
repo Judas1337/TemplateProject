@@ -62,6 +62,7 @@
     <Compile Include="Filter\ModelValidationFilter.cs" />
     <Compile Include="Guard\GenericInputGuard.cs" />
     <Compile Include="Guard\NetInputGuard.cs" />
+    <Compile Include="Mapper\ExceptionToHttpResponse.cs" />
     <Compile Include="MessageHandler\CorrelationHandler.cs" />
     <Compile Include="Logger\GlobalExceptionLogger.cs" />
     <Compile Include="MessageHandler\MessageLoggingHandler.cs" />
