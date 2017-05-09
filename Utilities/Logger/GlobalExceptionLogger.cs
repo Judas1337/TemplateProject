@@ -15,10 +15,10 @@ namespace WebApiTemplateProject.Utilities.Logger
         {
             _executionContextValueProvider = executionContextValueProvider;
         }
+       
         public override Task LogAsync(ExceptionLoggerContext context, CancellationToken cancellationToken)
         {
-            var correlationId = _executionContextValueProvider.GetCorrelationId();
-            Debug.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} ERROR_RESPONSE [CorrelationId: {correlationId}] {context.Exception.Message}");
+            Debug.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} [CorrelationId: {_executionContextValueProvider.GetCorrelationId()}] UNHANDLED EXCEPTION {context.Exception.Message}");
             return base.LogAsync(context, cancellationToken);
         }
     }

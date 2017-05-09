@@ -24,12 +24,12 @@ namespace WebApiTemplateProject.Utilities.MessageHandler
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var requestContent = await HttpContentToString(request.Content);
-            Debug.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} REQUEST [CorrelationId: {_executionContextValueProvider.GetCorrelationId()}] {request.Method} {request.RequestUri.OriginalString} {requestContent}");
+            Debug.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} [CorrelationId: {_executionContextValueProvider.GetCorrelationId()}] REQUEST {request.Method} {request.RequestUri.OriginalString} {requestContent}");
 
             var response = await base.SendAsync(request, cancellationToken);
 
             var responseContent = await HttpContentToString(response.Content);
-            Debug.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} RESPONSE [CorrelationId: {_executionContextValueProvider.GetCorrelationId()}] {response.StatusCode} {responseContent}");
+            Debug.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} [CorrelationId: {_executionContextValueProvider.GetCorrelationId()}] RESPONSE {response.StatusCode} {responseContent}");
 
             return response;
         }
