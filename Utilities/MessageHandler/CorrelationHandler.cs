@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using WebApiTemplateProject.Utilities.Concurrency;
@@ -19,21 +20,19 @@ namespace WebApiTemplateProject.Utilities.MessageHandler
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            var correlationIds = GetOrCreateCorrelationIds(request);
-            request.Headers.Add(CorrelationIdHeaderName, correlationIds);
+            IEnumerable<string> correlationIds;
+            bool correlationHeaderValueExists = request.Headers.TryGetValues(CorrelationIdHeaderName, out correlationIds);
+            if (correlationHeaderValueExists == false)
+            {
+               correlationIds = new List<string>() { Guid.NewGuid().ToString() };
+               request.Headers.Add(CorrelationIdHeaderName, correlationIds);
+            }
+          
             _executionContextValueProvider.SetCorrelationId(string.Join(",", correlationIds));
 
             var response = await base.SendAsync(request, cancellationToken);
             response.Headers.Add(CorrelationIdHeaderName, correlationIds);
             return response;
-        }
-
-        private IEnumerable<string> GetOrCreateCorrelationIds(HttpRequestMessage request)
-        {
-            IEnumerable<string> correlationIds;
-            bool correlationHeaderValueExists = request.Headers.TryGetValues(CorrelationIdHeaderName, out correlationIds);
-            if (correlationHeaderValueExists == false) correlationIds = new List<string>() { Guid.NewGuid().ToString() };
-            return correlationIds;
         }
     }
 }
