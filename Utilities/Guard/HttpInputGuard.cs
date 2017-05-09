@@ -10,6 +10,10 @@ using System.Web.Http;
 
 namespace WebApiTemplateProject.Utilities.Guard
 {
+    /// <summary>
+    /// In WebApi, all uncaught exceptions except HttpResponseException are caught by the ExceptionLoggingHandler and ExceptionHandler.
+    /// If this is not the intention a HttpResponseException, which is the only exception who will not be caught should be thrown. 
+    /// </summary>
     public static class HttpInputGuard
     {
         public static void ThrowBadRequestIfNull<TParam>(string parametername, TParam parameter)
