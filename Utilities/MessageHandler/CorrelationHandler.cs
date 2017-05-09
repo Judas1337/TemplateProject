@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using WebApiTemplateProject.Utilities.Concurrency;
@@ -32,6 +31,7 @@ namespace WebApiTemplateProject.Utilities.MessageHandler
 
             var response = await base.SendAsync(request, cancellationToken);
             response.Headers.Add(CorrelationIdHeaderName, correlationIds);
+
             return response;
         }
     }
