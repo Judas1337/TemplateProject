@@ -13,7 +13,8 @@ namespace WebApiTemplateProject.Utilities.ExceptionHandler
         public override Task HandleAsync(ExceptionHandlerContext context, CancellationToken cancellationToken)
         {
             HttpStatusCode statusCode;
-            if(context.Exception is ArgumentException) statusCode = HttpStatusCode.BadRequest;
+            if(context.Exception is ArgumentException) statusCode = HttpStatusCode.BadRequest;          
+            else if (context.Exception is NotImplementedException) statusCode = HttpStatusCode.NotImplemented;
             else if (context.Exception is HttpResponseException) statusCode = ((HttpResponseException) context.Exception).Response.StatusCode;
             else statusCode = HttpStatusCode.InternalServerError;
 
