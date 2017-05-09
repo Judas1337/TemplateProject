@@ -56,24 +56,12 @@ namespace WebApiTemplateProject.Utilities.Guard
         public static void ThrowExceptionIf<TParam, TException>(string parametername, TParam parameter, Expression<Func<TParam, bool>> parameterValidator)
             where TException : Exception 
         {
-            if (!ParamIsInvalid(parameter, parameterValidator)) return;
+            if (!GuardUtilities.ParamIsInvalid(parameter, parameterValidator)) return;
             var exception = GenerateException<TParam, TException>(parametername, parameter, parameterValidator);
             throw exception;
         }
 
         #region Helper methods
-        /// <summary>
-        /// Evalutes the expression and returns true if the expression evaluates to true
-        /// </summary>
-        /// <typeparam name="TParam"></typeparam>
-        /// <param name="param"></param>
-        /// <param name="paramInvalidator"></param>
-        /// <returns></returns>
-        private static bool ParamIsInvalid<TParam>(TParam param, Expression<Func<TParam, bool>> paramInvalidator)
-        {
-            return paramInvalidator.Compile()(param);
-        }
-
         /// <summary>
         /// Generates an Exception of the specified <typeparamref name="TException"/> 
         /// </summary>
@@ -87,7 +75,7 @@ namespace WebApiTemplateProject.Utilities.Guard
         {
             var exceptionconstructorWithMessageParameter = GetExceptionConstructorWithMessageParameter<TException>();
 
-            var exceptionMessage = GenerateExceptionMessage(parameterName, parameter, parameterValidator);
+            var exceptionMessage = GuardUtilities.GenerateExceptionMessage(parameterName, parameter, parameterValidator);
             var exception = (TException)exceptionconstructorWithMessageParameter.Invoke(new object[] {exceptionMessage});
 
             return exception;
@@ -117,22 +105,6 @@ namespace WebApiTemplateProject.Utilities.Guard
                 throw new NotSupportedException($"Failed to generate exception of type {typeof(TException).Name}. {typeof(TException).Name} does not have a constructor that accepts {messageParameter} as it's only parameter");
 
             return exceptionMessageConstructor;
-        }
-
-        /// <summary>
-        /// Generates an exception message from a expression 
-        /// </summary>
-        /// <typeparam name="TParam">The type of the <paramref name="param"/></typeparam>
-        /// <param name="parametername">The name of the <paramref name="param"/> which is used to replace the actual value of <paramref name="param"/> and replace the value with its name</param>
-        /// <param name="param">The parameter being validated</param>
-        /// <param name="paramInvalidator">The expression that is going to be converted to an exceptionmessage</param>
-        /// <returns></returns>
-        private static string GenerateExceptionMessage<TParam>(string parametername, TParam param, Expression<Func<TParam, bool>> paramInvalidator)
-        {
-            var condition = paramInvalidator.Body.ToString();
-            condition = condition.Replace(paramInvalidator.Parameters.First().Name, parametername);
-           
-            return $"Parameter '{parametername}' with value '{param}' is not valid due to condition: {condition}";
         }
         #endregion
     }
