@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Microsoft.Rest;
 using WebApiTemplateProject.Api.Models;
 using WebApiTemplateProject.Utilities.Guard;
 
@@ -58,11 +59,10 @@ namespace WebApiTemplateProject.Api.DataAccess
         private Product GetProductOrThrowHttpNotFound(int productId)
         {
             var product = _products.FirstOrDefault((p) => p.Id == productId);
-            if (product == null) throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
+            if (product == null) throw new HttpOperationException
             {
-                Content = new StringContent($"Product with Id: {productId} not found"),
-                ReasonPhrase = "NotFound"
-            });
+                Response = new HttpResponseMessageWrapper(new HttpResponseMessage(HttpStatusCode.NotFound), $"Product with Id: {productId} not found"),
+            };
 
             return product;
         }
@@ -70,11 +70,12 @@ namespace WebApiTemplateProject.Api.DataAccess
         private void ThrowHttpBadRequestIfProductWithIdExists(int productId)
         {
             var product = _products.FirstOrDefault((p) => p.Id == productId);
-            if (product != null) throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.BadRequest)
+
+
+            if (product != null) throw new HttpOperationException
             {
-                Content = new StringContent($"Product with Id: {productId} already exists"),
-                ReasonPhrase = "Bad request"
-            });
+                Response = new HttpResponseMessageWrapper(new HttpResponseMessage(HttpStatusCode.BadRequest), $"Product with Id: {productId} already exists"),
+            };
         }
         #endregion
     }
