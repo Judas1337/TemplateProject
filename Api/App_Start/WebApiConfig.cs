@@ -20,7 +20,7 @@ namespace WebApiTemplateProject.Api.App_Start
             //Routing will be correspond to the specified Route attribute for each method
             config.MapHttpAttributeRoutes();
             //Declare the project to return JSON instead of XML
-            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));  
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
             var executionContextValueProvider = new ExecutionContextValueProvider();
 
@@ -33,7 +33,7 @@ namespace WebApiTemplateProject.Api.App_Start
         private static void RegisterServices(HttpConfiguration config, IExecutionContextValueProvider executionContextValueProvider)
         {
             //Register implementation of IExceptionHandler
-            config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
+            config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler(executionContextValueProvider));
 
             //Register implementation of IExceptionLogger
             config.Services.Add(typeof(IExceptionLogger), new GlobalExceptionLogger(executionContextValueProvider));
