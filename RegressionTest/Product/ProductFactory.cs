@@ -5,9 +5,9 @@ namespace WebApiTemplateProject.RegressionTest.Product
 {
     internal static class ProductFactory
     {
-        public static IList<Api.Models.Product> CreateProducts(int numberOfProducts)
+        public static IList<Sl.WebApi.Model.Product> CreateProducts(int numberOfProducts)
         {
-            IList<Api.Models.Product> products = new List<Api.Models.Product>();
+            IList<Sl.WebApi.Model.Product> products = new List<Sl.WebApi.Model.Product>();
             for (var i = 0; i < numberOfProducts; ++i)
             {
                 products.Add(CreateProduct(i + 1));
@@ -15,9 +15,9 @@ namespace WebApiTemplateProject.RegressionTest.Product
             return products;
         }
 
-        public static Api.Models.Product CreateProduct(int id = 1, string name = "mockName", string category = "mockCategory", decimal price = 123)
+        public static Sl.WebApi.Model.Product CreateProduct(int id = 1, string name = "mockName", string category = "mockCategory", decimal price = 123)
         {
-            return new Api.Models.Product
+            return new Sl.WebApi.Model.Product
             {
                 Id = id,
                 Name = name,

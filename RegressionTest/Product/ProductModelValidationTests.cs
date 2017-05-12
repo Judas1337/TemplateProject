@@ -6,7 +6,7 @@ namespace WebApiTemplateProject.RegressionTest.Product
     [TestClass]
     public class ProductModelValidationTests
     {
-        private Api.Models.Product _expectedProduct;
+        private Sl.WebApi.Model.Product _expectedProduct;
 
         [TestInitialize]
         public void Initialize()
