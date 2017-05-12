@@ -42,12 +42,10 @@
   <ItemGroup>
     <Compile Include="Contract\Bll\Interface\IProductLogic.cs" />
     <Compile Include="Contract\Bll\Model\Product.cs" />
-    <Compile Include="Contract\Dal\Interface\IProductRepository.cs" />
+    <Compile Include="Contract\Dal\IProductRepository.cs" />
     <Compile Include="ProductLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Contract\Dal\Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

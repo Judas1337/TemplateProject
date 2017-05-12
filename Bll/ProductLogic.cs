@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using TemplateProject.Bll.Contract.Bll.Interface;
 using TemplateProject.Bll.Contract.Bll.Model;
-using TemplateProject.Bll.Contract.Dal.Interface;
+using TemplateProject.Bll.Contract.Dal;
 
 namespace TemplateProject.Bll
 {

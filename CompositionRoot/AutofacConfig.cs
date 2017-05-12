@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using TemplateProject.Bll;
 using TemplateProject.Bll.Contract.Bll.Interface;
-using TemplateProject.Bll.Contract.Dal.Interface;
+using TemplateProject.Bll.Contract.Dal;
 using TemplateProject.Dal.WebApi;
 
 

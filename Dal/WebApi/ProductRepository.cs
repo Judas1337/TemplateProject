@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Rest;
 using TemplateProject.Bll.Contract.Bll.Model;
-using TemplateProject.Bll.Contract.Dal.Interface;
+using TemplateProject.Bll.Contract.Dal;
 using TemplateProject.Utilities.Guard;
 
 namespace TemplateProject.Dal.WebApi

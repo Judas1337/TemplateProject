@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TemplateProject.Bll.Contract.Bll.Model;
 
-namespace TemplateProject.Bll.Contract.Dal.Interface
+namespace TemplateProject.Bll.Contract.Dal
 {
     public interface IProductRepository : IDisposable
     {

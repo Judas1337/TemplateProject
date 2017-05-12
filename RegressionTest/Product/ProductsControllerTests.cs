@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using TemplateProject.Bll;
-using TemplateProject.Bll.Contract.Dal.Interface;
+using TemplateProject.Bll.Contract.Dal;
 using TemplateProject.RegressionTest.Helpers;
 using TemplateProject.Sl.WebApi.App_Start;
 using TemplateProject.Sl.WebApi.Controllers;
