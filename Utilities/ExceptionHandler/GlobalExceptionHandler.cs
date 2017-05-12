@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,11 +16,11 @@ namespace WebApiTemplateProject.Utilities.ExceptionHandler
     /// </summary>
     public class GlobalExceptionHandler : System.Web.Http.ExceptionHandling.ExceptionHandler
     {
-        private readonly IExecutionContextValueProvider _executionContextValueProvider;
+        private readonly ICorrelationIdValueProvider<Guid?> _correlationIdValueProvider;
 
-        public GlobalExceptionHandler(IExecutionContextValueProvider executionContextValueProvider)
+        public GlobalExceptionHandler(ICorrelationIdValueProvider<Guid?> correlationIdValueProvider)
         {
-            _executionContextValueProvider = executionContextValueProvider;
+            _correlationIdValueProvider = correlationIdValueProvider;
         }
 
         public override Task HandleAsync(ExceptionHandlerContext context, CancellationToken cancellationToken)
@@ -28,7 +29,7 @@ namespace WebApiTemplateProject.Utilities.ExceptionHandler
 
             context.Result = new PlainTextErrorResult
             {
-                CorrelationIds = _executionContextValueProvider.GetCorrelationId(),
+                CorrelationIds = _correlationIdValueProvider.GetCorrelationId()?.ToString(),
                 Request = context.Request,
                 ResponseMessage = responseMessage
             };

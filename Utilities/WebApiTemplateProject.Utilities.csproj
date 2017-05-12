@@ -56,8 +56,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Concurrency\ExecutionContextValueProvider.cs" />
-    <Compile Include="Concurrency\IExecutionContextValueProvider.cs" />
+    <Compile Include="Concurrency\CorrelationIdValueProvider.cs" />
+    <Compile Include="Concurrency\ICorrelationIdValueProvider.cs" />
     <Compile Include="ExceptionHandler\GlobalExceptionHandler.cs" />
     <Compile Include="Exceptions\SemanticException.cs" />
     <Compile Include="Filter\ModelValidationFilter.cs" />

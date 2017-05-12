@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,11 +11,11 @@ namespace WebApiTemplateProject.Utilities.MessageHandler
     public class CorrelationHandler : DelegatingHandler
     {
         private const string CorrelationIdHeaderName = "X-Correlation-ID";
-        private readonly IExecutionContextValueProvider _executionContextValueProvider;
+        private readonly ICorrelationIdValueProvider<Guid?> _correlationIdValueProvider;
 
-        public CorrelationHandler(IExecutionContextValueProvider executionContextValueProvider)
+        public CorrelationHandler(ICorrelationIdValueProvider<Guid?> correlationIdValueProvider)
         {
-            _executionContextValueProvider = executionContextValueProvider;
+            _correlationIdValueProvider = correlationIdValueProvider;
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
@@ -26,11 +27,12 @@ namespace WebApiTemplateProject.Utilities.MessageHandler
                correlationIds = new List<string>() { Guid.NewGuid().ToString() };
                request.Headers.Add(CorrelationIdHeaderName, correlationIds);
             }
-          
-            _executionContextValueProvider.SetCorrelationId(string.Join(",", correlationIds));
+
+            var correlationId = new Guid(correlationIds.First());
+            _correlationIdValueProvider.SetCorrelationId(correlationId);
 
             var response = await base.SendAsync(request, cancellationToken);
-            response.Headers.Add(CorrelationIdHeaderName, correlationIds);
+            response.Headers.Add(CorrelationIdHeaderName, correlationIds.First());
 
             return response;
         }
