@@ -5,15 +5,15 @@ VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplateProject.RegressionTest", "RegressionTest\WebApiTemplateProject.RegressionTest.csproj", "{2B3EF51E-65E3-4763-BD88-882B847AEF7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplateProject.Sl.WebApi", "Sl\WebApiTemplateProject.Sl.WebApi\WebApiTemplateProject.Sl.WebApi.csproj", "{54C014CC-5F86-4E4B-B437-8F80BD5D2FE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplateProject.Sl.WebApi", "Sl\WebApiTemplateProject.Sl.WebApi.csproj", "{54C014CC-5F86-4E4B-B437-8F80BD5D2FE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplateProject.Bll", "Bll\WebApiTemplateProject.Bll\WebApiTemplateProject.Bll.csproj", "{79BE6A98-3047-4A03-96D5-2754F025FEFD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplateProject.Bll", "Bll\WebApiTemplateProject.Bll.csproj", "{79BE6A98-3047-4A03-96D5-2754F025FEFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplateProject.Dal.WebApi", "Dal\WebApiTemplateProject.Dal.WebApi\WebApiTemplateProject.Dal.WebApi.csproj", "{C221D19B-C05A-4435-AF1C-776310ECF92A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplateProject.Dal.WebApi", "Dal\WebApi\WebApiTemplateProject.Dal.WebApi.csproj", "{C221D19B-C05A-4435-AF1C-776310ECF92A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplateProject.CompositionRoot", "WebApiTemplateProject.CompositionRoot\WebApiTemplateProject.CompositionRoot.csproj", "{245CEBDA-A74B-4DBD-9AD6-5AD67F604D36}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplateProject.CompositionRoot", "CompositionRoot\WebApiTemplateProject.CompositionRoot.csproj", "{245CEBDA-A74B-4DBD-9AD6-5AD67F604D36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplateProject.Utilities", "WebApiTemplateProject.Utilities\WebApiTemplateProject.Utilities.csproj", "{694C1C59-F4AB-465E-9294-732B9D962AE7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplateProject.Utilities", "Utilities\WebApiTemplateProject.Utilities.csproj", "{694C1C59-F4AB-465E-9294-732B9D962AE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

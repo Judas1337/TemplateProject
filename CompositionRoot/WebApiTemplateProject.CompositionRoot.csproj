@@ -50,11 +50,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bll\WebApiTemplateProject.Bll\WebApiTemplateProject.Bll.csproj">
+    <ProjectReference Include="..\Bll\WebApiTemplateProject.Bll.csproj">
       <Project>{79be6a98-3047-4a03-96d5-2754f025fefd}</Project>
       <Name>WebApiTemplateProject.Bll</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dal\WebApiTemplateProject.Dal.WebApi\WebApiTemplateProject.Dal.WebApi.csproj">
+    <ProjectReference Include="..\Dal\WebApi\WebApiTemplateProject.Dal.WebApi.csproj">
       <Project>{c221d19b-c05a-4435-af1c-776310ecf92a}</Project>
       <Name>WebApiTemplateProject.Dal.WebApi</Name>
     </ProjectReference>

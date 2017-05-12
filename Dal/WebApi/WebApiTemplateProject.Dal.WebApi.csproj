@@ -50,11 +50,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Bll\WebApiTemplateProject.Bll\WebApiTemplateProject.Bll.csproj">
+    <ProjectReference Include="..\..\Bll\WebApiTemplateProject.Bll.csproj">
       <Project>{79be6a98-3047-4a03-96d5-2754f025fefd}</Project>
       <Name>WebApiTemplateProject.Bll</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\WebApiTemplateProject.Utilities\WebApiTemplateProject.Utilities.csproj">
+    <ProjectReference Include="..\..\Utilities\WebApiTemplateProject.Utilities.csproj">
       <Project>{694c1c59-f4ab-465e-9294-732b9d962ae7}</Project>
       <Name>WebApiTemplateProject.Utilities</Name>
     </ProjectReference>
