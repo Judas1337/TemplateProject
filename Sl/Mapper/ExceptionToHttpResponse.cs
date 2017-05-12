@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Http;
 using Microsoft.Rest;
 
-namespace WebApiTemplateProject.Sl.WebApi.Mapper
+namespace TemplateProject.Sl.WebApi.Mapper
 {
     public static class ExceptionToHttpResponse
     {

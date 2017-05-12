@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace WebApiTemplateProject.RegressionTest.Helpers
+namespace TemplateProject.RegressionTest.Helpers
 {
     internal static class ModelStateValidator
     {

@@ -3,9 +3,9 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.ExceptionHandling;
-using WebApiTemplateProject.Utilities.Concurrency;
+using TemplateProject.Utilities.Concurrency;
 
-namespace WebApiTemplateProject.Sl.WebApi.Logger
+namespace TemplateProject.Sl.WebApi.Logger
 {
     public class GlobalExceptionLogger : ExceptionLogger
     {

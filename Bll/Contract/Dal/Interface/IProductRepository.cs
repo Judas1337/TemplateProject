@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using WebApiTemplateProject.Bll.Contract.Bll.Model;
+using TemplateProject.Bll.Contract.Bll.Model;
 
-namespace WebApiTemplateProject.Bll.Contract.Dal.Interface
+namespace TemplateProject.Bll.Contract.Dal.Interface
 {
     public interface IProductRepository : IDisposable
     {

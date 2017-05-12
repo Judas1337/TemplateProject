@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WebApiTemplateProject.RegressionTest.Helpers;
+using TemplateProject.RegressionTest.Helpers;
 
-namespace WebApiTemplateProject.RegressionTest.Product
+namespace TemplateProject.RegressionTest.Product
 {
     [TestClass]
     public class ProductModelValidationTests

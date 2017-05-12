@@ -3,7 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace WebApiTemplateProject.Utilities.Guard
+namespace TemplateProject.Utilities.Guard
 {
     /// <summary>
     /// Used to perform input validations and generate specified exceptions upon validation failure.

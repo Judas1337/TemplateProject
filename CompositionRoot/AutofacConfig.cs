@@ -1,11 +1,11 @@
 ﻿using Autofac;
-using WebApiTemplateProject.Bll;
-using WebApiTemplateProject.Bll.Contract.Bll.Interface;
-using WebApiTemplateProject.Bll.Contract.Dal.Interface;
-using WebApiTemplateProject.Dal.WebApi;
+using TemplateProject.Bll;
+using TemplateProject.Bll.Contract.Bll.Interface;
+using TemplateProject.Bll.Contract.Dal.Interface;
+using TemplateProject.Dal.WebApi;
 
 
-namespace WebApiTemplateProject.CompositionRoot
+namespace TemplateProject.CompositionRoot
 {
     /// <summary>
     /// Register all dependencies for Bll and Dal layers

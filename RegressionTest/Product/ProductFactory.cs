@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebApiTemplateProject.RegressionTest.Product
+namespace TemplateProject.RegressionTest.Product
 {
     internal static class ProductFactory
     {

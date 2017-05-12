@@ -4,14 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using WebApiTemplateProject.Bll;
-using WebApiTemplateProject.Bll.Contract.Dal.Interface;
-using WebApiTemplateProject.RegressionTest.Helpers;
-using WebApiTemplateProject.Sl.WebApi.App_Start;
-using WebApiTemplateProject.Sl.WebApi.Controllers;
+using TemplateProject.Bll;
+using TemplateProject.Bll.Contract.Dal.Interface;
+using TemplateProject.RegressionTest.Helpers;
+using TemplateProject.Sl.WebApi.App_Start;
+using TemplateProject.Sl.WebApi.Controllers;
 
 
-namespace WebApiTemplateProject.RegressionTest.Product
+namespace TemplateProject.RegressionTest.Product
 {
     [TestClass]
     public class ProductsControllerTests

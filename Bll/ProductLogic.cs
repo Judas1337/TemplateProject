@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using WebApiTemplateProject.Bll.Contract.Bll.Interface;
-using WebApiTemplateProject.Bll.Contract.Bll.Model;
-using WebApiTemplateProject.Bll.Contract.Dal.Interface;
+using TemplateProject.Bll.Contract.Bll.Interface;
+using TemplateProject.Bll.Contract.Bll.Model;
+using TemplateProject.Bll.Contract.Dal.Interface;
 
-namespace WebApiTemplateProject.Bll
+namespace TemplateProject.Bll
 {
     public class ProductLogic : IProductLogic
     {

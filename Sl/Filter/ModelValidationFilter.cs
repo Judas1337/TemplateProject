@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 
-namespace WebApiTemplateProject.Sl.WebApi.Filter
+namespace TemplateProject.Sl.WebApi.Filter
 {
     public class ModelValidationFilter : ActionFilterAttribute
     {

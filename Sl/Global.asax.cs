@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
-using WebApiTemplateProject.Sl.WebApi.App_Start;
+using TemplateProject.Sl.WebApi.App_Start;
 
-namespace WebApiTemplateProject.Sl.WebApi
+namespace TemplateProject.Sl.WebApi
 {
     public class WebApiApplication : System.Web.HttpApplication
     {

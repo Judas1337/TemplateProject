@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace WebApiTemplateProject.Utilities.Guard
+namespace TemplateProject.Utilities.Guard
 {
     /// <summary>
     /// Used to perform input validations and generate .NET exceptions upon validation failure.

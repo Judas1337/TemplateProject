@@ -1,6 +1,6 @@
-﻿using WebApiTemplateProject.Sl.WebApi.Model;
+﻿using TemplateProject.Sl.WebApi.Model;
 
-namespace WebApiTemplateProject.Sl.WebApi.App_Start
+namespace TemplateProject.Sl.WebApi.App_Start
 {
     public class AutomapperConfig
     {

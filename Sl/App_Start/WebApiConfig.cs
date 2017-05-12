@@ -2,13 +2,13 @@
 using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
-using WebApiTemplateProject.Sl.WebApi.ExceptionHandler;
-using WebApiTemplateProject.Sl.WebApi.Filter;
-using WebApiTemplateProject.Sl.WebApi.Logger;
-using WebApiTemplateProject.Sl.WebApi.MessageHandler;
-using WebApiTemplateProject.Utilities.Concurrency;
+using TemplateProject.Sl.WebApi.ExceptionHandler;
+using TemplateProject.Sl.WebApi.Filter;
+using TemplateProject.Sl.WebApi.Logger;
+using TemplateProject.Sl.WebApi.MessageHandler;
+using TemplateProject.Utilities.Concurrency;
 
-namespace WebApiTemplateProject.Sl.WebApi.App_Start
+namespace TemplateProject.Sl.WebApi.App_Start
 {
     /// <summary>
     /// Configuration class responsible for WebApi specific configurations.

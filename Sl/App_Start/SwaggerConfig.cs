@@ -1,7 +1,7 @@
 using System.Web.Http;
 using Swashbuckle.Application;
 
-namespace WebApiTemplateProject.Sl.WebApi.App_Start
+namespace TemplateProject.Sl.WebApi.App_Start
 {
     public class SwaggerConfig
     {
@@ -242,7 +242,7 @@ namespace WebApiTemplateProject.Sl.WebApi.App_Start
 
         private static string GetXmlCommentsPath()
         {
-            return System.String.Format(@"{0}\bin\WebApiTemplateProject.Sl.WebApi.XML", System.AppDomain.CurrentDomain.BaseDirectory);
+            return System.String.Format(@"{0}\bin\TemplateProject.Sl.WebApi.XML", System.AppDomain.CurrentDomain.BaseDirectory);
         }
     }
 }

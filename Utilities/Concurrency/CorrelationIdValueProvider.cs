@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Remoting.Messaging;
 
-namespace WebApiTemplateProject.Utilities.Concurrency
+namespace TemplateProject.Utilities.Concurrency
 {
     /// <summary>
     /// Used to store and provide access to a CorrelationId in the execution context which is unaffected by asynchronous code that switches threads or context. 

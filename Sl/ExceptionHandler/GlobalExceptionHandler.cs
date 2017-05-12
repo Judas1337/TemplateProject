@@ -5,10 +5,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
-using WebApiTemplateProject.Sl.WebApi.Mapper;
-using WebApiTemplateProject.Utilities.Concurrency;
+using TemplateProject.Sl.WebApi.Mapper;
+using TemplateProject.Utilities.Concurrency;
 
-namespace WebApiTemplateProject.Sl.WebApi.ExceptionHandler
+namespace TemplateProject.Sl.WebApi.ExceptionHandler
 {
     /// <summary>
     /// When registrered as an ExceptionHandler in Global.asax using Httpconfiguration.Services.Replace(typeof(IExceptionHandler), *ExceptionHandler*) 

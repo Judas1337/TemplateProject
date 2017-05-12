@@ -3,7 +3,7 @@ using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 
-namespace WebApiTemplateProject.Sl.WebApi.App_Start
+namespace TemplateProject.Sl.WebApi.App_Start
 {
     public class AutofacConfig
     {

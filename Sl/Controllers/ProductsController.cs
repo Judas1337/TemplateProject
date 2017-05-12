@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
-using WebApiTemplateProject.Bll.Contract.Bll.Interface;
-using WebApiTemplateProject.Sl.WebApi.Model;
-using WebApiTemplateProject.Utilities.Guard;
+using TemplateProject.Bll.Contract.Bll.Interface;
+using TemplateProject.Sl.WebApi.Model;
+using TemplateProject.Utilities.Guard;
 
-namespace WebApiTemplateProject.Sl.WebApi.Controllers
+namespace TemplateProject.Sl.WebApi.Controllers
 {
     /// <summary>
     /// ApiController for Product that does inputcontrol. Logic is separated into another layer. 

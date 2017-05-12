@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WebApiTemplateProject.Bll.Contract.Bll.Model
+namespace TemplateProject.Bll.Contract.Bll.Model
 {
     public class Product
     {

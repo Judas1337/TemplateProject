@@ -5,11 +5,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Rest;
-using WebApiTemplateProject.Bll.Contract.Bll.Model;
-using WebApiTemplateProject.Bll.Contract.Dal.Interface;
-using WebApiTemplateProject.Utilities.Guard;
+using TemplateProject.Bll.Contract.Bll.Model;
+using TemplateProject.Bll.Contract.Dal.Interface;
+using TemplateProject.Utilities.Guard;
 
-namespace WebApiTemplateProject.Dal.WebApi
+namespace TemplateProject.Dal.WebApi
 {
     public class ProductRepository : IProductRepository
     {

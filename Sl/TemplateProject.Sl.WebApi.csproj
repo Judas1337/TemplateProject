@@ -12,8 +12,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebApiTemplateProject.Sl.WebApi</RootNamespace>
-    <AssemblyName>WebApiTemplateProject.Sl.WebApi</AssemblyName>
+    <RootNamespace>TemplateProject.Sl.WebApi</RootNamespace>
+    <AssemblyName>TemplateProject.Sl.WebApi</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -32,7 +32,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\WebApiTemplateProject.Sl.WebApi.xml</DocumentationFile>
+    <DocumentationFile>bin\TemplateProject.Sl.WebApi.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -137,17 +137,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bll\WebApiTemplateProject.Bll.csproj">
+    <ProjectReference Include="..\Bll\TemplateProject.Bll.csproj">
       <Project>{79be6a98-3047-4a03-96d5-2754f025fefd}</Project>
-      <Name>WebApiTemplateProject.Bll</Name>
+      <Name>TemplateProject.Bll</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CompositionRoot\WebApiTemplateProject.CompositionRoot.csproj">
+    <ProjectReference Include="..\CompositionRoot\TemplateProject.CompositionRoot.csproj">
       <Project>{245cebda-a74b-4dbd-9ad6-5ad67f604d36}</Project>
-      <Name>WebApiTemplateProject.CompositionRoot</Name>
+      <Name>TemplateProject.CompositionRoot</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utilities\WebApiTemplateProject.Utilities.csproj">
+    <ProjectReference Include="..\Utilities\TemplateProject.Utilities.csproj">
       <Project>{694c1c59-f4ab-465e-9294-732b9d962ae7}</Project>
-      <Name>WebApiTemplateProject.Utilities</Name>
+      <Name>TemplateProject.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

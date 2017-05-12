@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace WebApiTemplateProject.Utilities.Guard
+namespace TemplateProject.Utilities.Guard
 {
     public static class GuardUtilities
     {

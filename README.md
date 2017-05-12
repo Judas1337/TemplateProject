@@ -1,2 +1,2 @@
-# WebApiTemplateProject
-Basic WebApi Project for demonstration/test purposes
+# TemplateProject
+Basic project for demonstration/test purposes

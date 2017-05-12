@@ -4,9 +4,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using WebApiTemplateProject.Utilities.Concurrency;
+using TemplateProject.Utilities.Concurrency;
 
-namespace WebApiTemplateProject.Sl.WebApi.MessageHandler
+namespace TemplateProject.Sl.WebApi.MessageHandler
 {
     public class CorrelationHandler : DelegatingHandler
     {

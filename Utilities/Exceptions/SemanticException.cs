@@ -1,4 +1,4 @@
-﻿namespace WebApiTemplateProject.Utilities.Exceptions
+﻿namespace TemplateProject.Utilities.Exceptions
 {
     public abstract class SemanticException : System.Exception
     {

@@ -7,8 +7,8 @@
     <ProjectGuid>{79BE6A98-3047-4A03-96D5-2754F025FEFD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebApiTemplateProject.Bll</RootNamespace>
-    <AssemblyName>WebApiTemplateProject.Bll</AssemblyName>
+    <RootNamespace>TemplateProject.Bll</RootNamespace>
+    <AssemblyName>TemplateProject.Bll</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

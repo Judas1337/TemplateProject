@@ -1,4 +1,4 @@
-﻿namespace WebApiTemplateProject.Utilities.Concurrency
+﻿namespace TemplateProject.Utilities.Concurrency
 {
     public interface ICorrelationIdValueProvider<T>
     {
