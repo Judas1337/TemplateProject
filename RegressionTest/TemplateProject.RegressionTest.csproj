@@ -91,7 +91,7 @@
       <Project>{79be6a98-3047-4a03-96d5-2754f025fefd}</Project>
       <Name>TemplateProject.Bll</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sl\TemplateProject.Sl.WebApi.csproj">
+    <ProjectReference Include="..\Sl\WebApi\TemplateProject.Sl.WebApi.csproj">
       <Project>{54c014cc-5f86-4e4b-b437-8f80bd5d2fe0}</Project>
       <Name>TemplateProject.Sl.WebApi</Name>
     </ProjectReference>

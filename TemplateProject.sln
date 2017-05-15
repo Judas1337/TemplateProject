@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateProject.RegressionTest", "RegressionTest\TemplateProject.RegressionTest.csproj", "{2B3EF51E-65E3-4763-BD88-882B847AEF7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateProject.Sl.WebApi", "Sl\TemplateProject.Sl.WebApi.csproj", "{54C014CC-5F86-4E4B-B437-8F80BD5D2FE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateProject.Sl.WebApi", "Sl\WebApi\TemplateProject.Sl.WebApi.csproj", "{54C014CC-5F86-4E4B-B437-8F80BD5D2FE0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateProject.Bll", "Bll\TemplateProject.Bll.csproj", "{79BE6A98-3047-4A03-96D5-2754F025FEFD}"
 EndProject
