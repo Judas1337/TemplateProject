@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
-using TemplateProject.Sl.WebApi.Mapper;
 using TemplateProject.Utilities.Concurrency;
 using TemplateProject.Utilities.Exceptions;
 
