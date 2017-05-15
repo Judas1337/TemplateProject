@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Web.Http;
 using TemplateProject.Bll.Contract.Bll.Interface;
+using TemplateProject.Sl.WebApi.Guard;
 using TemplateProject.Sl.WebApi.Model;
 using TemplateProject.Utilities.Guard;
 
@@ -35,8 +36,8 @@ namespace TemplateProject.Sl.WebApi.Controllers
         [Route("")]
         public async Task<IEnumerable<Product>> GetAllProducts()
         {
-            var domainModelProduct = await _productLogic.GetAllProducts();
-            var result = AutoMapper.Mapper.Map<IEnumerable<Product>>(domainModelProduct);
+            var domainModelProducts = await _productLogic.GetAllProducts();
+            var result = AutoMapper.Mapper.Map<IEnumerable<Product>>(domainModelProducts);
 
             return result;
         }
@@ -72,7 +73,7 @@ namespace TemplateProject.Sl.WebApi.Controllers
         [Route("")]
         public async Task<Product> CreateProduct(Product product)
         {
-            NetInputGuard.ThrowArgumentNullExceptionIfNull(nameof(product), product);
+            HttpInputGuard.ThrowBadRequestIfNull(nameof(product), product);
 
             var domainModelProduct = AutoMapper.Mapper.Map<Bll.Contract.Bll.Model.Product>(product);
             domainModelProduct = await _productLogic.CreateProduct(domainModelProduct);
@@ -94,7 +95,7 @@ namespace TemplateProject.Sl.WebApi.Controllers
         [Route("")]
         public async Task<Product> UpdateProduct(Product product)
         {
-            NetInputGuard.ThrowArgumentNullExceptionIfNull(nameof(product), product);
+            HttpInputGuard.ThrowBadRequestIfNull(nameof(product), product);
 
             var domainModelProduct = AutoMapper.Mapper.Map<Bll.Contract.Bll.Model.Product>(product);
             domainModelProduct = await _productLogic.UpdateProduct(domainModelProduct);
