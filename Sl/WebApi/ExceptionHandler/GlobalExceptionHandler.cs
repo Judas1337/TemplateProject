@@ -47,7 +47,6 @@ namespace TemplateProject.Sl.WebApi.ExceptionHandler
             else if (exception is InputException) statusCode = HttpStatusCode.BadRequest;
             else if (exception is NotFoundException) statusCode = HttpStatusCode.NotFound;
             else if (exception is UnauthorizedException) statusCode = HttpStatusCode.Unauthorized;
-            else if (exception is NotImplementedException) statusCode = HttpStatusCode.NotImplemented;
             else statusCode = HttpStatusCode.InternalServerError;
 
             return statusCode;
