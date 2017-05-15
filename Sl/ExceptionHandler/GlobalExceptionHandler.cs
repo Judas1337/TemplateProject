@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 using TemplateProject.Sl.WebApi.Mapper;
 using TemplateProject.Utilities.Concurrency;
+using TemplateProject.Utilities.Exceptions;
 
 namespace TemplateProject.Sl.WebApi.ExceptionHandler
 {
@@ -25,31 +27,54 @@ namespace TemplateProject.Sl.WebApi.ExceptionHandler
 
         public override Task HandleAsync(ExceptionHandlerContext context, CancellationToken cancellationToken)
         {
-            var responseMessage = ExceptionToHttpResponse.ToHttpResponseMessage(context.Exception);
+            var statusCode = MapExceptionToHttpStatusCode(context.Exception);
 
             context.Result = new PlainTextErrorResult
             {
                 CorrelationIds = _correlationIdValueProvider.GetCorrelationId()?.ToString(),
                 Request = context.Request,
-                ResponseMessage = responseMessage
+                ResponseMessage = context.Exception.Message,
+                ResponseStatusCode = statusCode
             };
 
             return base.HandleAsync(context, cancellationToken);
+        }
+
+        #region Private Helpers
+        private static HttpStatusCode MapExceptionToHttpStatusCode(Exception exception)
+        {
+            HttpStatusCode statusCode;
+            if (exception is ConflictException) statusCode = HttpStatusCode.Conflict;
+            else if (exception is InputException) statusCode = HttpStatusCode.BadRequest;
+            else if (exception is NotFoundException) statusCode = HttpStatusCode.NotFound;
+            else if (exception is UnauthorizedException) statusCode = HttpStatusCode.Unauthorized;
+            else if (exception is NotImplementedException) statusCode = HttpStatusCode.NotImplemented;
+            else statusCode = HttpStatusCode.InternalServerError;
+
+            return statusCode;
         }
 
         private class PlainTextErrorResult : IHttpActionResult
         {
             public string CorrelationIds { private get; set; }
             public HttpRequestMessage Request { private get; set; }
-            public HttpResponseMessage ResponseMessage { private get; set; }
+            public string ResponseMessage { private get; set; }
+            public HttpStatusCode ResponseStatusCode { private get; set; }
 
             public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
             {
-                ResponseMessage.Headers.Add("X-Correlation-ID", new List<string> { CorrelationIds });
-                ResponseMessage.RequestMessage = Request;
+                var response = new HttpResponseMessage(ResponseStatusCode)
+                {
+                    Content = new StringContent(ResponseMessage),
+                    RequestMessage = Request
+                };
 
-                return Task.FromResult(ResponseMessage);
+                response.Headers.Add("X-Correlation-ID", new List<string> { CorrelationIds });
+                response.RequestMessage = Request;
+
+                return Task.FromResult(response);
             }
         }
+        #endregion
     }
 }

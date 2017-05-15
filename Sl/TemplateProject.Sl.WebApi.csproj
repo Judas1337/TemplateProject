@@ -116,8 +116,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Guard\HttpInputGuard.cs" />
     <Compile Include="Logger\GlobalExceptionLogger.cs" />
-    <Compile Include="Mapper\ExceptionToHttpResponse.cs" />
     <Compile Include="MessageHandler\CorrelationHandler.cs" />
     <Compile Include="MessageHandler\MessageLoggingHandler.cs" />
     <Compile Include="Model\Product.cs" />
