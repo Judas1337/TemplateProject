@@ -9,22 +9,22 @@ namespace TemplateProject.Sl.WebApi.MessageHandler
 {
     public class MessageLoggingHandler : DelegatingHandler
     {
-        private readonly ICorrelationIdValueProvider<Guid?> _correlationIdValueProvider;
+        private readonly ICorrelationIdProvider<Guid?> _correlationIdProvider;
 
-        public MessageLoggingHandler(ICorrelationIdValueProvider<Guid?> correlationIdValueProvider)
+        public MessageLoggingHandler(ICorrelationIdProvider<Guid?> correlationIdProvider)
         {
-            _correlationIdValueProvider = correlationIdValueProvider;
+            _correlationIdProvider = correlationIdProvider;
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var requestContent = await HttpContentToString(request.Content);
-            Debug.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} [CorrelationId: {_correlationIdValueProvider.GetCorrelationId()}] REQUEST {request.Method} {request.RequestUri.OriginalString} {requestContent}");
+            Debug.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} [CorrelationId: {_correlationIdProvider.GetCorrelationId()}] REQUEST {request.Method} {request.RequestUri.OriginalString} {requestContent}");
 
             var response = await base.SendAsync(request, cancellationToken);
 
             var responseContent = await HttpContentToString(response.Content);
-            Debug.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} [CorrelationId: {_correlationIdValueProvider.GetCorrelationId()}] RESPONSE {response.StatusCode} {responseContent}");
+            Debug.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} [CorrelationId: {_correlationIdProvider.GetCorrelationId()}] RESPONSE {response.StatusCode} {responseContent}");
 
             return response;
         }

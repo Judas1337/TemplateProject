@@ -9,16 +9,16 @@ namespace TemplateProject.Sl.WebApi.Logger
 {
     public class GlobalExceptionLogger : ExceptionLogger
     {
-        private readonly ICorrelationIdValueProvider<Guid?> _correlationIdValueProvider;
+        private readonly ICorrelationIdProvider<Guid?> _correlationIdProvider;
 
-        public GlobalExceptionLogger(ICorrelationIdValueProvider<Guid?> correlationIdValueProvider)
+        public GlobalExceptionLogger(ICorrelationIdProvider<Guid?> correlationIdProvider)
         {
-            _correlationIdValueProvider = correlationIdValueProvider;
+            _correlationIdProvider = correlationIdProvider;
         }
        
         public override Task LogAsync(ExceptionLoggerContext context, CancellationToken cancellationToken)
         {
-            Debug.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} [CorrelationId: {_correlationIdValueProvider.GetCorrelationId()}] UNHANDLED EXCEPTION {context.Exception.Message}");
+            Debug.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} [CorrelationId: {_correlationIdProvider.GetCorrelationId()}] UNHANDLED EXCEPTION {context.Exception.Message}");
             return base.LogAsync(context, cancellationToken);
         }
     }

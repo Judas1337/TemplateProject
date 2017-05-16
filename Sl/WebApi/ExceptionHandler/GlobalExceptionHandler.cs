@@ -17,11 +17,11 @@ namespace TemplateProject.Sl.WebApi.ExceptionHandler
     /// </summary>
     public class GlobalExceptionHandler : System.Web.Http.ExceptionHandling.ExceptionHandler
     {
-        private readonly ICorrelationIdValueProvider<Guid?> _correlationIdValueProvider;
+        private readonly ICorrelationIdProvider<Guid?> _correlationIdProvider;
 
-        public GlobalExceptionHandler(ICorrelationIdValueProvider<Guid?> correlationIdValueProvider)
+        public GlobalExceptionHandler(ICorrelationIdProvider<Guid?> correlationIdProvider)
         {
-            _correlationIdValueProvider = correlationIdValueProvider;
+            _correlationIdProvider = correlationIdProvider;
         }
 
         public override Task HandleAsync(ExceptionHandlerContext context, CancellationToken cancellationToken)
@@ -30,7 +30,7 @@ namespace TemplateProject.Sl.WebApi.ExceptionHandler
 
             context.Result = new PlainTextErrorResult
             {
-                CorrelationIds = _correlationIdValueProvider.GetCorrelationId()?.ToString(),
+                CorrelationIds = _correlationIdProvider.GetCorrelationId()?.ToString(),
                 Request = context.Request,
                 ResponseMessage = context.Exception.Message,
                 ResponseStatusCode = statusCode

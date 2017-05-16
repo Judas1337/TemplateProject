@@ -1,6 +1,6 @@
 ﻿namespace TemplateProject.Utilities.Concurrency
 {
-    public interface ICorrelationIdValueProvider<T>
+    public interface ICorrelationIdProvider<T>
     {
         T GetCorrelationId();
         void SetCorrelationId(T correlationId);

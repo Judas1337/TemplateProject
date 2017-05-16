@@ -26,7 +26,7 @@ namespace TemplateProject.Sl.WebApi.App_Start
             //Declare the project to return JSON instead of XML
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
-            var correlationIdValueProvider = CorrelationIdValueProvider.Instance;
+            var correlationIdValueProvider = CorrelationIdProvider.Instance;
 
             RegisterServices(config, correlationIdValueProvider);
             RegisterFilters(config);
@@ -34,13 +34,13 @@ namespace TemplateProject.Sl.WebApi.App_Start
         }
 
         #region Registration Methods
-        private static void RegisterServices(HttpConfiguration config, ICorrelationIdValueProvider<Guid?> correlationIdValueProvider)
+        private static void RegisterServices(HttpConfiguration config, ICorrelationIdProvider<Guid?> correlationIdProvider)
         {
             //Register implementation of IExceptionHandler
-            config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler(correlationIdValueProvider));
+            config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler(correlationIdProvider));
 
             //Register implementation of IExceptionLogger
-            config.Services.Add(typeof(IExceptionLogger), new GlobalExceptionLogger(correlationIdValueProvider));
+            config.Services.Add(typeof(IExceptionLogger), new GlobalExceptionLogger(correlationIdProvider));
         }
 
         private static void RegisterFilters(HttpConfiguration config)
@@ -49,10 +49,10 @@ namespace TemplateProject.Sl.WebApi.App_Start
             config.Filters.Add(new ModelValidationFilter());
         }
 
-        private static void RegisterMessageHandlers(HttpConfiguration config, ICorrelationIdValueProvider<Guid?> correlationIdValueProvider)
+        private static void RegisterMessageHandlers(HttpConfiguration config, ICorrelationIdProvider<Guid?> correlationIdProvider)
         {
-            config.MessageHandlers.Add(new CorrelationHandler(correlationIdValueProvider));
-            config.MessageHandlers.Add(new MessageLoggingHandler(correlationIdValueProvider));
+            config.MessageHandlers.Add(new CorrelationHandler(correlationIdProvider));
+            config.MessageHandlers.Add(new MessageLoggingHandler(correlationIdProvider));
         }
         #endregion
     }

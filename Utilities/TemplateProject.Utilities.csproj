@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Concurrency\CorrelationIdValueProvider.cs" />
-    <Compile Include="Concurrency\ICorrelationIdValueProvider.cs" />
+    <Compile Include="Concurrency\CorrelationIdProvider.cs" />
+    <Compile Include="Concurrency\ICorrelationIdProvider.cs" />
     <Compile Include="Exceptions\ConflictException.cs" />
     <Compile Include="Exceptions\InputException.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
