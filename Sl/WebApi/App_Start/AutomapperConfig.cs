@@ -8,8 +8,7 @@ namespace TemplateProject.Sl.WebApi.App_Start
         {
             AutoMapper.Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Product, Bll.Contract.Bll.Model.Product>();
-                cfg.CreateMap<Bll.Contract.Bll.Model.Product, Product>();
+                cfg.CreateMap<Product, Bll.Contract.Bll.Model.Product>().ReverseMap();
             });
 
             AutoMapper.Mapper.AssertConfigurationIsValid();
