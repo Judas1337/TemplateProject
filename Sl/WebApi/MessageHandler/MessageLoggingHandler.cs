@@ -7,11 +7,14 @@ using TemplateProject.Utilities.Concurrency;
 
 namespace TemplateProject.Sl.WebApi.MessageHandler
 {
+    /// <summary>
+    /// Logs incoming requests and outgoing responses.
+    /// </summary>
     public class MessageLoggingHandler : DelegatingHandler
     {
-        private readonly ICorrelationIdProvider<Guid?> _correlationIdProvider;
+        private readonly ICorrelationIdProvider _correlationIdProvider;
 
-        public MessageLoggingHandler(ICorrelationIdProvider<Guid?> correlationIdProvider)
+        public MessageLoggingHandler(ICorrelationIdProvider correlationIdProvider)
         {
             _correlationIdProvider = correlationIdProvider;
         }

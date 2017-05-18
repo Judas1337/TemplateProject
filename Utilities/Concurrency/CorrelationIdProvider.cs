@@ -9,7 +9,7 @@ namespace TemplateProject.Utilities.Concurrency
     /// <remarks>Parent/sibling threads/contexts are unaffected by modificaitons made to the CorrelationId. 
     /// This is due to the fact that the execution context is inherited by copying the context to child threads/contexts</remarks>
     /// <remarks>Thread safe</remarks>
-    public class CorrelationIdProvider : ICorrelationIdProvider<Guid?>
+    public class CorrelationIdProvider : ICorrelationIdProvider
     {
         private static readonly string CorrelationIdKey = Guid.NewGuid().ToString();
         private static volatile CorrelationIdProvider _instance;
@@ -37,13 +37,13 @@ namespace TemplateProject.Utilities.Concurrency
             }
         }
 
-        public Guid? GetCorrelationId()
+        public string GetCorrelationId()
         {
-            var result = CallContext.LogicalGetData(CorrelationIdKey) as Guid?;
+            var result = CallContext.LogicalGetData(CorrelationIdKey) as string;
             return result;
         }
 
-        public void SetCorrelationId(Guid? correlationId)
+        public void SetCorrelationId(string correlationId)
         {
             lock (CorrelationIdKey)
             {

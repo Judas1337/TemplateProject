@@ -1,10 +1,8 @@
-﻿using System;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 using TemplateProject.Sl.WebApi.ExceptionHandler;
 using TemplateProject.Sl.WebApi.Filter;
-using TemplateProject.Sl.WebApi.Logger;
 using TemplateProject.Sl.WebApi.MessageHandler;
 using TemplateProject.Utilities.Concurrency;
 
@@ -27,20 +25,17 @@ namespace TemplateProject.Sl.WebApi.App_Start
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
             var correlationIdValueProvider = CorrelationIdProvider.Instance;
-
-            RegisterServices(config, correlationIdValueProvider);
+           
             RegisterFilters(config);
+            RegisterServices(config);
             RegisterMessageHandlers(config, correlationIdValueProvider);
         }
 
         #region Registration Methods
-        private static void RegisterServices(HttpConfiguration config, ICorrelationIdProvider<Guid?> correlationIdProvider)
+        private static void RegisterServices(HttpConfiguration config)
         {
             //Register implementation of IExceptionHandler
-            config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler(correlationIdProvider));
-
-            //Register implementation of IExceptionLogger
-            config.Services.Add(typeof(IExceptionLogger), new GlobalExceptionLogger(correlationIdProvider));
+            config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
         }
 
         private static void RegisterFilters(HttpConfiguration config)
@@ -49,7 +44,7 @@ namespace TemplateProject.Sl.WebApi.App_Start
             config.Filters.Add(new ModelValidationFilter());
         }
 
-        private static void RegisterMessageHandlers(HttpConfiguration config, ICorrelationIdProvider<Guid?> correlationIdProvider)
+        private static void RegisterMessageHandlers(HttpConfiguration config, ICorrelationIdProvider correlationIdProvider)
         {
             config.MessageHandlers.Add(new CorrelationHandler(correlationIdProvider));
             config.MessageHandlers.Add(new MessageLoggingHandler(correlationIdProvider));
