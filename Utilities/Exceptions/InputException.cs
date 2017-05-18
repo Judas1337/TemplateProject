@@ -4,8 +4,8 @@ namespace TemplateProject.Utilities.Exceptions
 {
     public class InputException : SemanticException
     {
-        protected InputException() : base() { }
-        protected InputException(string message) : base(message) { }
-        protected InputException(string message, Exception innerException) : base(message, innerException) { }
+        public InputException() : base() { }
+        public InputException(string message) : base(message) { }
+        public InputException(string message, Exception innerException) : base(message, innerException) { }
     }
 }

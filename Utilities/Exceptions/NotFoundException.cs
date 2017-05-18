@@ -4,8 +4,8 @@ namespace TemplateProject.Utilities.Exceptions
 {
     public class NotFoundException : SemanticException
     {
-        protected NotFoundException() : base() { }
-        protected NotFoundException(string message) : base(message) { }
-        protected NotFoundException(string message, Exception innerException) : base(message, innerException) { }
+        public NotFoundException() : base() { }
+        public NotFoundException(string message) : base(message) { }
+        public NotFoundException(string message, Exception innerException) : base(message, innerException) { }
     }
 }

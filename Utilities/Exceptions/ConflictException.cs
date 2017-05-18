@@ -4,8 +4,8 @@ namespace TemplateProject.Utilities.Exceptions
 {
     public class ConflictException : SemanticException
     {
-        protected ConflictException() : base() { }
-        protected ConflictException(string message) : base(message) { }
-        protected ConflictException(string message, Exception innerException) : base(message, innerException) { }
+        public ConflictException() : base() { }
+        public ConflictException(string message) : base(message) { }
+        public ConflictException(string message, Exception innerException) : base(message, innerException) { }
     }
 }
