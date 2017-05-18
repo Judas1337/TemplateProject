@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using TemplateProject.Bll;
@@ -71,10 +73,18 @@ namespace TemplateProject.RegressionTest.Product
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(HttpResponseException))]
         public async Task UpdateProductNullInput()
         {
-            await _controller.CreateProduct(null);
+            try
+            {
+                await _controller.CreateProduct(null);
+            }
+            catch (HttpResponseException exception)
+            {
+                Assert.AreEqual(HttpStatusCode.BadRequest, exception.Response.StatusCode, "Incorrect Httpstatuscode");
+                throw;
+            }
         }
         #endregion
 
@@ -90,10 +100,18 @@ namespace TemplateProject.RegressionTest.Product
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(HttpResponseException))]
         public async Task CreateProductNullInput()
         {
-            await _controller.CreateProduct(null);
+            try
+            {
+                await _controller.CreateProduct(null);
+            }
+            catch (HttpResponseException exception)
+            {
+                Assert.AreEqual(HttpStatusCode.BadRequest, exception.Response.StatusCode, "Incorrect Httpstatuscode");
+                throw;
+            }
         }
         #endregion
 
