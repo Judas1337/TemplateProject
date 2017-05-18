@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Rest;
 using TemplateProject.Bll.Contract.Bll.Model;
 using TemplateProject.Bll.Contract.Dal;
+using TemplateProject.Utilities.Exceptions;
 using TemplateProject.Utilities.Guard;
 
 namespace TemplateProject.Dal.WebApi
@@ -28,26 +29,53 @@ namespace TemplateProject.Dal.WebApi
         public Task<Product> GetProduct(int id)
         {
             GenericInputGuard.ThrowExceptionIf<int, Exception>(nameof(id), id, (param) => param == 500);
-            var product = GetProductOrThrowHttpNotFound(id);
-
-            return Task.FromResult(product);
+            try
+            {
+                var product = GetProductOrThrowHttpNotFound(id);
+                return Task.FromResult(product);
+            }
+            catch (HttpOperationException exception) when (exception.Response.StatusCode == HttpStatusCode.NotFound)
+            {
+                throw new NotFoundException(exception.Message);
+            }
         }
 
         public Task<Product> CreateProduct(Product product)
         {
-            ThrowHttpBadRequestIfProductWithIdExists(product.Id);
-            return Task.FromResult(product);
+            try
+            {
+                ThrowHttpConflictIfProductWithIdExists(product.Id);
+                return Task.FromResult(product);
+            }
+            catch (HttpOperationException exception) when (exception.Response.StatusCode == HttpStatusCode.Conflict)
+            {
+                throw new ConflictException(exception.Message);
+            }
         }
 
         public Task<Product> UpdateProduct(Product product)
         {
-            GetProductOrThrowHttpNotFound(product.Id);
+            try
+            {
+                GetProductOrThrowHttpNotFound(product.Id);
+            }
+            catch (HttpOperationException exception) when (exception.Response.StatusCode == HttpStatusCode.NotFound)
+            {
+                throw new NotFoundException(exception.Message);
+            }
             return Task.FromResult(product);
         }
 
         public Task<Product> DeleteProduct(int id)
         {
-            return Task.FromResult(GetProductOrThrowHttpNotFound(id));
+            try
+            {
+                return Task.FromResult(GetProductOrThrowHttpNotFound(id));
+            }
+            catch (HttpOperationException exception) when (exception.Response.StatusCode == HttpStatusCode.NotFound)
+            {
+                throw new NotFoundException(exception.Message);
+            }
         }
 
         public void Dispose()
@@ -67,14 +95,14 @@ namespace TemplateProject.Dal.WebApi
             return product;
         }
 
-        private void ThrowHttpBadRequestIfProductWithIdExists(int productId)
+        private void ThrowHttpConflictIfProductWithIdExists(int productId)
         {
             var product = _products.FirstOrDefault((p) => p.Id == productId);
 
 
             if (product != null) throw new HttpOperationException
             {
-                Response = new HttpResponseMessageWrapper(new HttpResponseMessage(HttpStatusCode.BadRequest), $"Product with Id: {productId} already exists"),
+                Response = new HttpResponseMessageWrapper(new HttpResponseMessage(HttpStatusCode.Conflict), $"Product with Id: {productId} already exists"),
             };
         }
         #endregion
