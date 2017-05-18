@@ -4,7 +4,6 @@ using System.Web.Http;
 using TemplateProject.Bll.Contract.Bll.Interface;
 using TemplateProject.Sl.WebApi.Guard;
 using TemplateProject.Sl.WebApi.Model;
-using TemplateProject.Utilities.Guard;
 
 namespace TemplateProject.Sl.WebApi.Controllers
 {
