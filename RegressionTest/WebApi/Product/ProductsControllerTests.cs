@@ -7,6 +7,7 @@ using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using TemplateProject.Bll;
+using TemplateProject.Bll.Contract.Bll.Interface;
 using TemplateProject.Bll.Contract.Dal;
 using TemplateProject.RegressionTest.WebApi.Helpers;
 using TemplateProject.Sl.WebApi.App_Start;
@@ -19,7 +20,7 @@ namespace TemplateProject.RegressionTest.WebApi.Product
     public class ProductsControllerTests
     {
         private ProductsController _controller;
-        private Mock<IProductRepository> _productRepository;
+        private Mock<IProductLogic> _productLogic;
         private Sl.WebApi.Model.Product _expectedProduct;
         private Bll.Contract.Bll.Model.Product _domainProduct;
 
@@ -35,15 +36,15 @@ namespace TemplateProject.RegressionTest.WebApi.Product
             _expectedProduct = ProductFactory.CreateProduct();
             _domainProduct = AutoMapper.Mapper.Map<Bll.Contract.Bll.Model.Product>(_expectedProduct);
            
-            _productRepository = new Mock<IProductRepository>();
-            _controller = new ProductsController(new ProductLogic(_productRepository.Object));
+            _productLogic = new Mock<IProductLogic>();
+            _controller = new ProductsController(_productLogic.Object);
         }
 
         #region GetProduct()
         [TestMethod]
         public async Task GetProduct()
         {
-            _productRepository.Setup(mock => mock.GetProduct(_domainProduct.Id)).ReturnsAsync(_domainProduct);
+            _productLogic.Setup(mock => mock.GetProduct(_domainProduct.Id)).ReturnsAsync(_domainProduct);
             var actualProduct = await _controller.GetProduct(_expectedProduct.Id);
             AssertProductsAreEqual(_expectedProduct, actualProduct);
         }
@@ -55,7 +56,7 @@ namespace TemplateProject.RegressionTest.WebApi.Product
         {
             var expectedProducts = ProductFactory.CreateProducts(3);
             var domainProducts = AutoMapper.Mapper.Map<List<Bll.Contract.Bll.Model.Product>>(expectedProducts);
-            _productRepository.Setup(mockRepo => mockRepo.GetAllProducts()).ReturnsAsync(domainProducts);
+            _productLogic.Setup(mockRepo => mockRepo.GetAllProducts()).ReturnsAsync(domainProducts);
             var actualProducts = await _controller.GetAllProducts();
             AssertProductsAreEqual(expectedProducts.ToList(), actualProducts.ToList());
         }
@@ -65,7 +66,7 @@ namespace TemplateProject.RegressionTest.WebApi.Product
         [TestMethod]
         public async Task UpdateProduct()
         {
-            _productRepository.Setup(mockRepo => mockRepo.UpdateProduct(It.IsNotNull<Bll.Contract.Bll.Model.Product>())).ReturnsAsync(_domainProduct);
+            _productLogic.Setup(mockRepo => mockRepo.UpdateProduct(It.IsNotNull<Bll.Contract.Bll.Model.Product>())).ReturnsAsync(_domainProduct);
             ModelStateValidator.AssertModelIsValid(_expectedProduct);
             var actualProduct = await _controller.UpdateProduct(_expectedProduct);
 
@@ -92,7 +93,7 @@ namespace TemplateProject.RegressionTest.WebApi.Product
         [TestMethod]
         public async Task CreateProduct()
         {
-            _productRepository.Setup(mockRepo => mockRepo.CreateProduct(It.IsNotNull<Bll.Contract.Bll.Model.Product>())).ReturnsAsync(_domainProduct);
+            _productLogic.Setup(mockRepo => mockRepo.CreateProduct(It.IsNotNull<Bll.Contract.Bll.Model.Product>())).ReturnsAsync(_domainProduct);
             ModelStateValidator.AssertModelIsValid(_expectedProduct);
             var actualProduct = await _controller.CreateProduct(_expectedProduct);
 
@@ -119,7 +120,7 @@ namespace TemplateProject.RegressionTest.WebApi.Product
         [TestMethod]
         public async Task DeleteProduct()
         {
-            _productRepository.Setup(mock => mock.DeleteProduct(_domainProduct.Id)).ReturnsAsync(_domainProduct);
+            _productLogic.Setup(mock => mock.DeleteProduct(_domainProduct.Id)).ReturnsAsync(_domainProduct);
             var actualProduct = await _controller.DeleteProduct(_expectedProduct.Id);
             AssertProductsAreEqual(_expectedProduct, actualProduct);
         }
