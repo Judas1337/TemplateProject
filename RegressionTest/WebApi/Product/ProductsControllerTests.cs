@@ -8,12 +8,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using TemplateProject.Bll;
 using TemplateProject.Bll.Contract.Dal;
-using TemplateProject.RegressionTest.Helpers;
+using TemplateProject.RegressionTest.WebApi.Helpers;
 using TemplateProject.Sl.WebApi.App_Start;
 using TemplateProject.Sl.WebApi.Controllers;
 
 
-namespace TemplateProject.RegressionTest.Product
+namespace TemplateProject.RegressionTest.WebApi.Product
 {
     [TestClass]
     public class ProductsControllerTests

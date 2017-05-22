@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateProject.RegressionTest", "RegressionTest\TemplateProject.RegressionTest.csproj", "{2B3EF51E-65E3-4763-BD88-882B847AEF7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateProject.RegressionTest.WebApi", "RegressionTest\WebApi\TemplateProject.RegressionTest.WebApi.csproj", "{2B3EF51E-65E3-4763-BD88-882B847AEF7A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateProject.Sl.WebApi", "Sl\WebApi\TemplateProject.Sl.WebApi.csproj", "{54C014CC-5F86-4E4B-B437-8F80BD5D2FE0}"
 EndProject
