@@ -67,6 +67,7 @@ namespace TemplateProject.Sl.WebApi.Controllers
         /// <returns>The product that was created</returns>
         /// <response code="200">OK</response>
         /// <response code="400">Bad request</response>
+        /// <response code="409">Conflict</response>
         /// <response code="500">Internal Server Error</response>
         [HttpPost]
         [Route("")]
