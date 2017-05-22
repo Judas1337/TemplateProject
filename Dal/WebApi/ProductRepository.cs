@@ -36,7 +36,7 @@ namespace TemplateProject.Dal.WebApi
             }
             catch (HttpOperationException exception) when (exception.Response.StatusCode == HttpStatusCode.NotFound)
             {
-                throw new NotFoundException(exception.Message);
+                throw new NotFoundException(exception.Response.Content);
             }
         }
 
@@ -49,7 +49,7 @@ namespace TemplateProject.Dal.WebApi
             }
             catch (HttpOperationException exception) when (exception.Response.StatusCode == HttpStatusCode.Conflict)
             {
-                throw new ConflictException(exception.Message);
+                throw new ConflictException(exception.Response.Content);
             }
         }
 
@@ -61,7 +61,7 @@ namespace TemplateProject.Dal.WebApi
             }
             catch (HttpOperationException exception) when (exception.Response.StatusCode == HttpStatusCode.NotFound)
             {
-                throw new NotFoundException(exception.Message);
+                throw new NotFoundException(exception.Response.Content);
             }
             return Task.FromResult(product);
         }
@@ -74,7 +74,7 @@ namespace TemplateProject.Dal.WebApi
             }
             catch (HttpOperationException exception) when (exception.Response.StatusCode == HttpStatusCode.NotFound)
             {
-                throw new NotFoundException(exception.Message);
+                throw new NotFoundException(exception.Response.Content);
             }
         }
 
