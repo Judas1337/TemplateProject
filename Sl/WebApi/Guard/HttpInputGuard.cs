@@ -15,7 +15,14 @@ namespace TemplateProject.Sl.WebApi.Guard
     {
         public static void ThrowBadRequestIfNull<TParam>(string parametername, TParam parameter)
         {
-            ThrowHttpResponseExceptionIf(parametername, parameter, HttpStatusCode.BadRequest, (param) => param == null);
+            if (parameter != null) return;
+
+            var response = new HttpResponseMessage(HttpStatusCode.BadRequest)
+            {
+                Content = new StringContent($"Parameter '{parametername}' with value '{parameter}' is not valid due to condition: {parametername} == null")
+            };
+
+            throw new HttpResponseException(response);
         }
 
         public static void ThrowBadRequestIfStringIsNullOrWhitespace(string parametername, string parameter)
