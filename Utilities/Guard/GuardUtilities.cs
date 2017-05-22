@@ -30,7 +30,20 @@ namespace TemplateProject.Utilities.Guard
         {
             var condition = paramInvalidator.Body.ToString();
             condition = condition.Replace(paramInvalidator.Parameters.First().Name, parametername);
+            return GenerateExceptionMessage(parametername, param, condition);
+        }
 
+
+        /// <summary>
+        /// Generates an exception message based on the provided parameters 
+        /// </summary>
+        /// <typeparam name="TParam">The type of the <paramref name="param"/></typeparam>
+        /// <param name="parametername">The name of the <paramref name="param"/> which is used to replace the actual value of <paramref name="param"/> and replace the value with its name</param>
+        /// <param name="param">The parameter being validated</param>
+        /// <param name="condition">The condition why there is an exception</param>
+        /// <returns></returns>
+        public static string GenerateExceptionMessage<TParam>(string parametername, TParam param, string condition)
+        {
             return $"Parameter '{parametername}' with value '{param}' is not valid due to condition: {condition}";
         }
     }
