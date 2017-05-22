@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
-using TemplateProject.Utilities.Exceptions;
+using TemplateProject.Bll.Contract.Bll.Model.Exceptions;
 
 namespace TemplateProject.Sl.WebApi.ExceptionHandler
 {

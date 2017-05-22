@@ -42,11 +42,6 @@
   <ItemGroup>
     <Compile Include="Concurrency\CorrelationIdProvider.cs" />
     <Compile Include="Concurrency\ICorrelationIdProvider.cs" />
-    <Compile Include="Exceptions\ConflictException.cs" />
-    <Compile Include="Exceptions\InputException.cs" />
-    <Compile Include="Exceptions\NotFoundException.cs" />
-    <Compile Include="Exceptions\SemanticException.cs" />
-    <Compile Include="Exceptions\UnauthorizedException.cs" />
     <Compile Include="Guard\GenericInputGuard.cs" />
     <Compile Include="Guard\GuardUtilities.cs" />
     <Compile Include="Guard\NetInputGuard.cs" />

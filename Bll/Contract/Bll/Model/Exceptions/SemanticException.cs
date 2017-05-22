@@ -1,4 +1,4 @@
-﻿namespace TemplateProject.Utilities.Exceptions
+﻿namespace TemplateProject.Bll.Contract.Bll.Model.Exceptions
 {
     public abstract class SemanticException : System.Exception
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TemplateProject.Utilities.Exceptions
+namespace TemplateProject.Bll.Contract.Bll.Model.Exceptions
 {
     public class NotFoundException : SemanticException
     {

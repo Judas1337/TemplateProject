@@ -41,6 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contract\Bll\Interface\IProductLogic.cs" />
+    <Compile Include="Contract\Bll\Model\Exceptions\ConflictException.cs" />
+    <Compile Include="Contract\Bll\Model\Exceptions\InputException.cs" />
+    <Compile Include="Contract\Bll\Model\Exceptions\NotFoundException.cs" />
+    <Compile Include="Contract\Bll\Model\Exceptions\SemanticException.cs" />
+    <Compile Include="Contract\Bll\Model\Exceptions\UnauthorizedException.cs" />
     <Compile Include="Contract\Bll\Model\Product.cs" />
     <Compile Include="Contract\Dal\IProductRepository.cs" />
     <Compile Include="ProductLogic.cs" />

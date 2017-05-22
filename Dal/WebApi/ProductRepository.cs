@@ -6,8 +6,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Rest;
 using TemplateProject.Bll.Contract.Bll.Model;
+using TemplateProject.Bll.Contract.Bll.Model.Exceptions;
 using TemplateProject.Bll.Contract.Dal;
-using TemplateProject.Utilities.Exceptions;
 using TemplateProject.Utilities.Guard;
 
 namespace TemplateProject.Dal.WebApi
