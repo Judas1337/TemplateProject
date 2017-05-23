@@ -32,7 +32,7 @@ namespace TemplateProject.Sl.WebApi.ExceptionHandler
 
             return base.HandleAsync(context, cancellationToken);
         }
-        
+
         private static string ExtractXCorrelationIdFromRequest(HttpRequestMessage request)
         {
             IEnumerable<string> correlationIds;
@@ -70,10 +70,21 @@ namespace TemplateProject.Sl.WebApi.ExceptionHandler
 
                 response.Headers.Add("X-Correlation-ID", new List<string> { CorrelationId });
                 response.RequestMessage = Request;
+
+                var timeAtResponse = DateTimeOffset.Now;
+                var timeTaken = GetTimeTakeForRequestInMilliseconds(Request.Headers.Date, timeAtResponse);
                 
-                Debug.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} [CorrelationId: {CorrelationId}] RESPONSE {response.StatusCode} {ResponseMessage}");
+                Debug.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} [CorrelationId: {CorrelationId}] RESPONSE {response.StatusCode} {timeTaken}ms {ResponseMessage}");
                 return Task.FromResult(response);
             }
+        }
+
+        private static string GetTimeTakeForRequestInMilliseconds(DateTimeOffset? requestAt, DateTimeOffset responseAt)
+        {
+            if (requestAt == null) return null;
+            var diff = responseAt - requestAt;
+            var result = (int) diff.Value.TotalMilliseconds;
+            return $"{result}";
         }
         #endregion
     }

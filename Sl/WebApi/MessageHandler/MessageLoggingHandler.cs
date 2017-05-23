@@ -21,13 +21,17 @@ namespace TemplateProject.Sl.WebApi.MessageHandler
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
+            var timeAtRequest = DateTimeOffset.Now;
             var requestContent = await HttpContentToString(request.Content);
-            Debug.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} [CorrelationId: {_correlationIdProvider.GetCorrelationId()}] REQUEST {request.Method} {request.RequestUri.OriginalString} {requestContent}");
+            request.Headers.Date = timeAtRequest;
+            Debug.WriteLine($"{timeAtRequest:yyyy-MM-dd HH:mm:ss.fff} [CorrelationId: {_correlationIdProvider.GetCorrelationId()}] REQUEST {request.Method} {request.RequestUri.OriginalString} {requestContent}");
 
             var response = await base.SendAsync(request, cancellationToken);
-
+           
             var responseContent = await HttpContentToString(response.Content);
-            Debug.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} [CorrelationId: {_correlationIdProvider.GetCorrelationId()}] RESPONSE {response.StatusCode} {responseContent}");
+            var timeAtResponse = DateTimeOffset.Now;
+            var timeTaken = GetTimeTakeForRequestInMilliseconds(timeAtRequest, timeAtResponse);
+            Debug.WriteLine($"{timeAtResponse:yyyy-MM-dd HH:mm:ss.fff} [CorrelationId: {_correlationIdProvider.GetCorrelationId()}] TimeTaken: {timeTaken}ms RESPONSE {response.StatusCode} {responseContent}");
 
             return response;
         }
@@ -40,6 +44,13 @@ namespace TemplateProject.Sl.WebApi.MessageHandler
             text = text.Replace(Environment.NewLine, "");
             text = text.Replace("\n", "");
             return text;
+        }
+
+        private static string GetTimeTakeForRequestInMilliseconds(DateTimeOffset requestAt, DateTimeOffset timeAtResponse)
+        {
+            var diff = timeAtResponse - requestAt;
+            var result = (int)diff.TotalMilliseconds;
+            return $"{result}";
         }
     }
 }
