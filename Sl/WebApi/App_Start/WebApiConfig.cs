@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
+using Newtonsoft.Json;
 using TemplateProject.Sl.WebApi.ExceptionHandler;
 using TemplateProject.Sl.WebApi.Filter;
 using TemplateProject.Sl.WebApi.MessageHandler;
@@ -23,6 +24,8 @@ namespace TemplateProject.Sl.WebApi.App_Start
             config.MapHttpAttributeRoutes();
             //Declare the project to return JSON instead of XML
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+            //If a null value exists, ignore value
+            config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
 
             var correlationIdValueProvider = CorrelationIdProvider.Instance;
            
