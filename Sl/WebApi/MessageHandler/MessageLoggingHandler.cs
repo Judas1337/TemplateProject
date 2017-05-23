@@ -31,7 +31,7 @@ namespace TemplateProject.Sl.WebApi.MessageHandler
             var responseContent = await HttpContentToString(response.Content);
             var timeAtResponse = DateTimeOffset.Now;
             var timeTaken = GetTimeTakeForRequestInMilliseconds(timeAtRequest, timeAtResponse);
-            Debug.WriteLine($"{timeAtResponse:yyyy-MM-dd HH:mm:ss.fff} [CorrelationId: {_correlationIdProvider.GetCorrelationId()}] TimeTaken: {timeTaken}ms RESPONSE {response.StatusCode} {responseContent}");
+            Debug.WriteLine($"{timeAtResponse:yyyy-MM-dd HH:mm:ss.fff} [CorrelationId: {_correlationIdProvider.GetCorrelationId()}] RESPONSE {response.StatusCode} {timeTaken}ms {responseContent}");
 
             return response;
         }
