@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using TemplateProject.Bll.Contract.Bll.Interface;
@@ -113,7 +114,7 @@ namespace TemplateProject.Sl.WebApi.Controllers
         /// <response code="404">Product with <paramref name="id"/> not found</response>
         /// <response code="500">Internal Server Error</response>
         [HttpDelete]
-        [Route("")]
+        [Route("{id}")]
         public async Task<Product> DeleteProduct(int id)
         {
             var domainModelProduct = await _productLogic.DeleteProduct(id);
