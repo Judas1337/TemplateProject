@@ -1,11 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using TemplateProject.Bll.Contract.Bll.Interface;
+using TemplateProject.Sl.Wcf.Attribute;
+using TemplateProject.Sl.Wcf.ExceptionHandler;
 using TemplateProject.Sl.Wcf.Model;
+using TemplateProject.Sl.Wcf.Model.Exceptions;
 
 namespace TemplateProject.Sl.Wcf
 {
     // NOTE: In order to launch WCF Test Client for testing this service, please select ProductService.svc or ProductService.svc.cs at the Solution Explorer and start debugging.
+    [ErrorHandling(typeof(ErrorHandler))]
     public class ProductService : IProductService
     {
         private readonly IProductLogic _productLogic;
@@ -21,8 +26,8 @@ namespace TemplateProject.Sl.Wcf
             var result = AutoMapper.Mapper.Map<IEnumerable<Product>>(domainModelProducts);
 
             return result;
-        }        
-
+        }
+       
         public async Task<Product> GetProduct(int id)
         {
             var domainModelProduct = await _productLogic.GetProduct(id);

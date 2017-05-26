@@ -82,9 +82,15 @@
   <ItemGroup>
     <Compile Include="App_Start\AutofacConfig.cs" />
     <Compile Include="App_Start\AutomapperConfig.cs" />
+    <Compile Include="Attribute\ErrorHandingAttribute.cs" />
+    <Compile Include="ExceptionHandler\ErrorHandler.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Model\Exceptions\Fault.cs" />
+    <Compile Include="Model\Exceptions\GenericFault.cs" />
+    <Compile Include="Model\Exceptions\InputFault.cs" />
+    <Compile Include="Model\Exceptions\NotFoundFault.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="ProductService.svc.cs">
       <DependentUpon>ProductService.svc</DependentUpon>
