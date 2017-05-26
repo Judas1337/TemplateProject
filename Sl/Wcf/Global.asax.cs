@@ -8,6 +8,7 @@ namespace TemplateProject.Sl.Wcf
         protected void Application_Start()
         {
             AutomapperConfig.RegisterMappings();
+            AutofacConfig.Register();
         }        
     }
 }
