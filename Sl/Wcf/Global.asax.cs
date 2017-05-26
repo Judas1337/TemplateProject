@@ -1,4 +1,5 @@
 ﻿using System.Web;
+using TemplateProject.Sl.Wcf.App_Start;
 
 namespace TemplateProject.Sl.Wcf
 {
@@ -6,7 +7,7 @@ namespace TemplateProject.Sl.Wcf
     {
         protected void Application_Start()
         {
-           
+            AutomapperConfig.RegisterMappings();
         }        
     }
 }
