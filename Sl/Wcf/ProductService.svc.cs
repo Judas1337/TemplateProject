@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using TemplateProject.Bll.Contract.Bll.Interface;
 using TemplateProject.Sl.Wcf.Model;
 
 namespace TemplateProject.Sl.Wcf
-{    
+{
     // NOTE: In order to launch WCF Test Client for testing this service, please select ProductService.svc or ProductService.svc.cs at the Solution Explorer and start debugging.
     public class ProductService : IProductService
     {
