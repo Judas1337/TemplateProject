@@ -74,8 +74,6 @@ namespace TemplateProject.Sl.WebApi.Controllers
         [Route("")]
         public async Task<Product> CreateProduct(Product product)
         {
-            HttpInputGuard.ThrowBadRequestIfNull(nameof(product), product);
-
             var domainModelProduct = AutoMapper.Mapper.Map<Bll.Contract.Bll.Model.Product>(product);
             domainModelProduct = await _productLogic.CreateProduct(domainModelProduct);
             var result = AutoMapper.Mapper.Map<Product>(domainModelProduct);
@@ -96,8 +94,6 @@ namespace TemplateProject.Sl.WebApi.Controllers
         [Route("")]
         public async Task<Product> UpdateProduct(Product product)
         {
-            HttpInputGuard.ThrowBadRequestIfNull(nameof(product), product);
-
             var domainModelProduct = AutoMapper.Mapper.Map<Bll.Contract.Bll.Model.Product>(product);
             domainModelProduct = await _productLogic.UpdateProduct(domainModelProduct);
             var result = AutoMapper.Mapper.Map<Product>(domainModelProduct);
