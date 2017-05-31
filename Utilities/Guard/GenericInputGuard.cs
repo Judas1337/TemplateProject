@@ -17,11 +17,14 @@ namespace TemplateProject.Utilities.Guard
         {
             ThrowExceptionIf<string, TException>(parametername, parameter, (param) => string.IsNullOrWhiteSpace(param));
         }
-
+        
+        ///<remarks>Doesn't use ThrowExceptionIf to avoid strange exception messages when dealing with complex parameter types.</remarks>
         public static void ThrowExceptionIfNull<TParam, TException>(string parametername, TParam parameter) 
             where TException : Exception
         {
-            ThrowExceptionIf<TParam, TException>(parametername, parameter, (param) => param == null);
+            if (!GuardUtilities.ParamIsInvalid(parameter, (param) => param == null)) return;
+            var exception = GuardUtilities.GenerateException<TParam, TException>(parametername, parameter, $"{parametername} == null");
+            throw exception;
         }
 
         public static void ThrowExceptionIfNotDefaultValue<TParam, TException>(string parametername, TParam parameter)
@@ -57,55 +60,8 @@ namespace TemplateProject.Utilities.Guard
             where TException : System.Exception 
         {
             if (!GuardUtilities.ParamIsInvalid(parameter, parameterValidator)) return;
-            var exception = GenerateException<TParam, TException>(parametername, parameter, parameterValidator);
+            var exception = GuardUtilities.GenerateException<TParam, TException>(parametername, parameter, parameterValidator);
             throw exception;
         }
-
-        #region Helper methods
-        /// <summary>
-        /// Generates an Exception of the specified <typeparamref name="TException"/> 
-        /// </summary>
-        /// <typeparam name="TException">The type of exception that is to be generated. </typeparam>
-        /// <typeparam name="TParam"></typeparam>
-        /// <param name="parameterName">The name of <paramref name="parameter"/></param>
-        /// <param name="parameter">The parameter under validation</param>
-        /// <param name="parameterValidator">The variable name of <paramref name="parameter"/></param>
-        /// <returns>The generated exception of type <typeparamref name="TException"/></returns>
-        private static TException GenerateException<TParam, TException>(string parameterName, TParam parameter, Expression<Func<TParam, bool>> parameterValidator) where TException : System.Exception
-        {
-            var exceptionconstructorWithMessageParameter = GetExceptionConstructorWithMessageParameter<TException>();
-
-            var exceptionMessage = GuardUtilities.GenerateExceptionMessage(parameterName, parameter, parameterValidator);
-            var exception = (TException)exceptionconstructorWithMessageParameter.Invoke(new object[] {exceptionMessage});
-
-            return exception;
-        }
-
-        /// <summary>
-        /// Tries to retrieve a constructor for exception subclass <typeparamref name="TException"/> that has one parameter called "message"
-        /// </summary>
-        /// <typeparam name="TException">A subclass of Exception which must obey Microsofts design guideliens</typeparam>
-        /// <returns>A constructor with a single parameter called "message"</returns>
-        private static ConstructorInfo GetExceptionConstructorWithMessageParameter<TException>() where TException : System.Exception
-        {
-            const string messageParameter = "message";
-
-            ConstructorInfo exceptionMessageConstructor = null;
-            foreach (var constructorInfo in typeof(TException).GetConstructors())
-            {
-                var parameters = constructorInfo.GetParameters();
-                if (parameters.Any() == false) continue;
-                if (parameters.Length == 1 && parameters.First().Name == messageParameter)
-                {
-                    exceptionMessageConstructor = constructorInfo;
-                }
-            }
-
-            if (exceptionMessageConstructor == null)
-                throw new NotSupportedException($"Failed to generate exception of type {typeof(TException).Name}. {typeof(TException).Name} does not have a constructor that accepts {messageParameter} as it's only parameter");
-
-            return exceptionMessageConstructor;
-        }
-        #endregion
     }
 }
