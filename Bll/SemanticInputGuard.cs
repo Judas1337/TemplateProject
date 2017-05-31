@@ -37,6 +37,16 @@ namespace TemplateProject.Bll
             GenericInputGuard.ThrowExceptionIfNotDefaultValue<TParam, InputException>(parametername, parameter);
         }
 
+        public static void ThrowInputExceptionIfMatchesRegex(string parametername, string parameter, string regex)
+        {
+            GenericInputGuard.ThrowExceptionIfMatchesRegex<InputException>(parametername, parameter, regex);
+        }
+
+        public static void ThrowInputExceptionIfNotMatchesRegex(string parametername, string parameter, string regex)
+        {
+            GenericInputGuard.ThrowExceptionIfNotMatchesRegex<InputException>(parametername, parameter, regex);
+        }
+
         public static void ThrowInputExceptionIf<TParam>(string parametername, TParam parameter, Expression<Func<TParam, bool>> parameterValidator)
         {
             GenericInputGuard.ThrowExceptionIf<TParam, InputException>(parametername, parameter, parameterValidator);
