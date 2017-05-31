@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace TemplateProject.Utilities.Guard
 {
@@ -17,8 +18,8 @@ namespace TemplateProject.Utilities.Guard
         {
             ThrowExceptionIf<string, TException>(parametername, parameter, (param) => string.IsNullOrWhiteSpace(param));
         }
-        
-        ///<remarks>Doesn't use ThrowExceptionIf to avoid strange exception messages when dealing with complex parameter types.</remarks>
+
+        ///<remarks>Doesn't use ThrowExceptionIf to avoid strange exception messages due to c# autogenereated types by compiler</remarks>
         public static void ThrowExceptionIfNull<TParam, TException>(string parametername, TParam parameter) 
             where TException : Exception
         {
@@ -39,6 +40,26 @@ namespace TemplateProject.Utilities.Guard
             where TParam : IEquatable<TParam>
         {
            ThrowExceptionIf<TParam, TException>(parametername, parameter, (param) => param.Equals(default(TParam)));
+        }
+
+        ///<remarks>Doesn't use ThrowExceptionIf to avoid strange exception messages due to c# autogenereated types by compiler</remarks>
+        public static void ThrowExceptionIfMatchesRegex<TException>(string parametername, string parameter, string regex)
+          where TException : Exception
+        {
+            if (!GuardUtilities.ParamIsInvalid(parameter, (param) => Regex.IsMatch(parameter, regex))) return;
+            var exception = GuardUtilities.GenerateException<string, TException>(parametername, parameter, $"Regex.isMatch({parametername}, regex) == true");
+
+            throw exception;
+        }
+
+        ///<remarks>Doesn't use ThrowExceptionIf to avoid strange exception messages due to c# autogenereated types by compiler</remarks>
+        public static void ThrowExceptionIfNotMatchesRegex<TException>(string parametername, string parameter, string regex)
+            where TException : Exception
+        {
+            if (!GuardUtilities.ParamIsInvalid(parameter, (param) => !Regex.IsMatch(parameter, regex))) return;
+            var exception = GuardUtilities.GenerateException<string, TException>(parametername, parameter, $"Regex.isMatch({parametername}, regex) != true");
+
+            throw exception;
         }
 
         /// <remarks>double is used as a parameter type since almost all numeric types(except decimal) can be implicitly converted to double</remarks>
