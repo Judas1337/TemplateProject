@@ -55,8 +55,6 @@ namespace TemplateProject.Sl.WebApi.Controllers
         [Route("{id}")]
         public async Task<Product> GetProduct(int id)
         {
-            HttpInputGuard.ThrowBadRequestIfNegativeValue(nameof(id), id);
-           
             var domainModelProduct = await _productLogic.GetProduct(id);
             var result = AutoMapper.Mapper.Map<Product>(domainModelProduct);
 
@@ -119,8 +117,6 @@ namespace TemplateProject.Sl.WebApi.Controllers
         [Route("{id}")]
         public async Task<Product> DeleteProduct(int id)
         {
-            HttpInputGuard.ThrowHttpResponseExceptionIf(nameof(id), id, HttpStatusCode.BadRequest, (param) => param < 0);
-
             var domainModelProduct = await _productLogic.DeleteProduct(id);
             var result = AutoMapper.Mapper.Map<Product>(domainModelProduct);
 
