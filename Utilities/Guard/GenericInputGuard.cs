@@ -47,7 +47,7 @@ namespace TemplateProject.Utilities.Guard
           where TException : Exception
         {
             if (!GuardUtilities.ParamIsInvalid(parameter, (param) => Regex.IsMatch(parameter, regex))) return;
-            var exception = GuardUtilities.GenerateException<string, TException>(parametername, parameter, $"Regex.isMatch({parametername}, regex) == true");
+            var exception = GuardUtilities.GenerateException<string, TException>(parametername, parameter, $"Regex.isMatch({parametername}, {regex}) == true");
 
             throw exception;
         }
@@ -57,7 +57,7 @@ namespace TemplateProject.Utilities.Guard
             where TException : Exception
         {
             if (!GuardUtilities.ParamIsInvalid(parameter, (param) => !Regex.IsMatch(parameter, regex))) return;
-            var exception = GuardUtilities.GenerateException<string, TException>(parametername, parameter, $"Regex.isMatch({parametername}, regex) != true");
+            var exception = GuardUtilities.GenerateException<string, TException>(parametername, parameter, $"Regex.isMatch({parametername}, {regex}) != true");
 
             throw exception;
         }
