@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using TemplateProject.Sl.Wcf.Model;
+﻿using TemplateProject.Sl.Wcf.Model;
 
 namespace TemplateProject.Sl.Wcf.App_Start
 {

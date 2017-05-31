@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.ServiceModel;
 using System.Threading.Tasks;
 using TemplateProject.Bll.Contract.Bll.Interface;
 using TemplateProject.Sl.Wcf.Attribute;
 using TemplateProject.Sl.Wcf.ExceptionHandler;
 using TemplateProject.Sl.Wcf.Model;
-using TemplateProject.Sl.Wcf.Model.Exceptions;
 
 namespace TemplateProject.Sl.Wcf
 {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
 using TemplateProject.Bll.Contract.Bll.Model.Exceptions;
 using TemplateProject.Sl.Wcf.Model.Exceptions;

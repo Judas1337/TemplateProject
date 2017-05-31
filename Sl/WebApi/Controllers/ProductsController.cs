@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using TemplateProject.Bll.Contract.Bll.Interface;
-using TemplateProject.Sl.WebApi.Guard;
 using TemplateProject.Sl.WebApi.Model;
 
 namespace TemplateProject.Sl.WebApi.Controllers

@@ -29,7 +29,7 @@ namespace TemplateProject.Sl.WebApi.App_Start
 
             var correlationIdValueProvider = CorrelationIdProvider.Instance;
            
-            RegisterFilters(config);
+            //RegisterFilters(config);
             RegisterServices(config);
             RegisterMessageHandlers(config, correlationIdValueProvider);
         }
