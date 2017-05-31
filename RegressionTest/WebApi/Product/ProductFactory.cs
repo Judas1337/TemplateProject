@@ -15,7 +15,7 @@ namespace TemplateProject.RegressionTest.WebApi.Product
             return products;
         }
 
-        public static Sl.WebApi.Model.Product CreateProduct(int id = 1, string name = "mockName", string category = "mockCategory", decimal price = 123)
+        public static Sl.WebApi.Model.Product CreateProduct(int id = 1, string name = "mockName", string category = "mockCategory", double price = 123)
         {
             return new Sl.WebApi.Model.Product
             {

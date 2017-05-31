@@ -6,7 +6,7 @@ namespace TemplateProject.Sl.WebApi.Model
     public class Product
     {
         [Required]
-        [Range(1, int.MaxValue)]
+        [Range(0, int.MaxValue)]
         public int Id { get; set; }
 
         [Required]
@@ -18,8 +18,8 @@ namespace TemplateProject.Sl.WebApi.Model
         public string Category { get; set; }
       
         [Required]
-        [Range(0.5, double.PositiveInfinity)]
-        public decimal Price { get; set; }
+        [Range(0, double.PositiveInfinity)]
+        public double Price { get; set; }
         
         [Required]
         public DateTimeOffset DateAdded { get; set; }

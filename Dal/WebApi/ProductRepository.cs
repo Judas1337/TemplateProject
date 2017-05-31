@@ -17,8 +17,8 @@ namespace TemplateProject.Dal.WebApi
         private Product[] _products = new Product[]
           {
             new Product { Id = 1, Name = "Tomato Soup", Category = "Groceries", Price = 1, DateAdded = new DateTime(2016,1,13)},
-            new Product { Id = 2, Name = "Yo-yo", Category = "Toys", Price = 3.75M, DateAdded = new DateTime(2015,12,1)},
-            new Product { Id = 3, Name = "Hammer", Category = "Hardware", Price = 16.99M,  DateAdded = new DateTime(2017,1,17)}
+            new Product { Id = 2, Name = "Yo-yo", Category = "Toys", Price = 3.75, DateAdded = new DateTime(2015,12,1)},
+            new Product { Id = 3, Name = "Hammer", Category = "Hardware", Price = 16.99,  DateAdded = new DateTime(2017,1,17)}
           };
 
         public Task<IEnumerable<Product>> GetAllProducts()
