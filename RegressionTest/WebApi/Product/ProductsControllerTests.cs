@@ -70,21 +70,6 @@ namespace TemplateProject.RegressionTest.WebApi.Product
 
             AssertProductsAreEqual(_expectedProduct, actualProduct);
         }
-
-        [TestMethod]
-        [ExpectedException(typeof(HttpResponseException))]
-        public async Task UpdateProductNullInput()
-        {
-            try
-            {
-                await _controller.CreateProduct(null);
-            }
-            catch (HttpResponseException exception)
-            {
-                Assert.AreEqual(HttpStatusCode.BadRequest, exception.Response.StatusCode, "Incorrect Httpstatuscode");
-                throw;
-            }
-        }
         #endregion
 
         #region CreateProduct()
@@ -96,21 +81,6 @@ namespace TemplateProject.RegressionTest.WebApi.Product
             var actualProduct = await _controller.CreateProduct(_expectedProduct);
 
             AssertProductsAreEqual(_expectedProduct, actualProduct);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(HttpResponseException))]
-        public async Task CreateProductNullInput()
-        {
-            try
-            {
-                await _controller.CreateProduct(null);
-            }
-            catch (HttpResponseException exception)
-            {
-                Assert.AreEqual(HttpStatusCode.BadRequest, exception.Response.StatusCode, "Incorrect Httpstatuscode");
-                throw;
-            }
         }
         #endregion
 
