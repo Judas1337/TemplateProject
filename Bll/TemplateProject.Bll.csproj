@@ -50,7 +50,13 @@
     <Compile Include="Contract\Dal\IProductRepository.cs" />
     <Compile Include="ProductLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SemanticInputGuard.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Utilities\TemplateProject.Utilities.csproj">
+      <Project>{694C1C59-F4AB-465E-9294-732B9D962AE7}</Project>
+      <Name>TemplateProject.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
