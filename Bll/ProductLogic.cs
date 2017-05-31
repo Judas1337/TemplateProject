@@ -28,11 +28,15 @@ namespace TemplateProject.Bll
 
         public async Task<Product> CreateProduct(Product product)
         {
+            SemanticInputGuard.ThrowInputExceptionIfNull(nameof(product), product);
+
             return await _productRepository.CreateProduct(product).ConfigureAwait(false);
         }
 
         public async Task<Product> UpdateProduct(Product product)
         {
+            SemanticInputGuard.ThrowInputExceptionIfNull(nameof(product), product);
+
             return await _productRepository.UpdateProduct(product).ConfigureAwait(false);
         }
 
