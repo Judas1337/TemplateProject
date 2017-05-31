@@ -28,14 +28,14 @@ namespace TemplateProject.Bll
 
         public async Task<Product> CreateProduct(Product product)
         {
-            SemanticInputGuard.ThrowInputExceptionIfNull(nameof(product), product);
+            ThrowInputExceptionIfInvalidProduct(product);
 
             return await _productRepository.CreateProduct(product).ConfigureAwait(false);
         }
 
         public async Task<Product> UpdateProduct(Product product)
         {
-            SemanticInputGuard.ThrowInputExceptionIfNull(nameof(product), product);
+            ThrowInputExceptionIfInvalidProduct(product);
 
             return await _productRepository.UpdateProduct(product).ConfigureAwait(false);
         }
@@ -44,5 +44,17 @@ namespace TemplateProject.Bll
         {
             return await _productRepository.DeleteProduct(id).ConfigureAwait(false);
         }
+
+        #region HelperMethods
+        private void ThrowInputExceptionIfInvalidProduct(Product product)
+        {
+            SemanticInputGuard.ThrowInputExceptionIfNull(nameof(product), product);
+            SemanticInputGuard.ThrowInputExceptionIfNegativeValue(nameof(product.Id), product.Id);
+            SemanticInputGuard.ThrowInputExceptionIfNotMatchesRegex(nameof(product.Name), product.Name, "^[a-zA-Z]+$");
+            SemanticInputGuard.ThrowInputExceptionIfNotMatchesRegex(nameof(product.Category), product.Category, "^[a-zA-Z]+$");
+            SemanticInputGuard.ThrowInputExceptionIfNegativeValue(nameof(product.Price), product.Price);
+            SemanticInputGuard.ThrowInputExceptionIfDefaultValue(nameof(product.DateAdded), product.DateAdded);
+        }
+        #endregion
     }
 }
