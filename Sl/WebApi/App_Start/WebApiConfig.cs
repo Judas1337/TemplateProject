@@ -28,8 +28,8 @@ namespace TemplateProject.Sl.WebApi.App_Start
             config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
 
             var correlationIdValueProvider = CorrelationIdProvider.Instance;
-           
-            //RegisterFilters(config);
+
+            RegisterFilters(config);
             RegisterServices(config);
             RegisterMessageHandlers(config, correlationIdValueProvider);
         }
