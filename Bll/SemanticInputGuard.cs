@@ -12,7 +12,7 @@ namespace TemplateProject.Bll
     {
         public static void ThrowInputExceptionIfNull<TParam>(string parametername, TParam parameter)
         {
-            if (parameter == null) throw new ArgumentNullException(parametername);
+            GenericInputGuard.ThrowExceptionIfNull<TParam, InputException>(parametername, parameter);
         }
 
         public static void ThrowInputExceptionIfStringIsNullOrWhitespace(string parametername, string parameter)
